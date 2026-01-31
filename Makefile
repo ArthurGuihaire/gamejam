@@ -1,8 +1,28 @@
-link_flags := -lraylib -L/usr/local/lib -lraylib -lglfw -lrt -lm -ldl
-compile_flags := -Wall -I/usr/local/include
+CXX := g++
+CXXFLAGS := -std=c++17 -O2 -Wall
 
-default: main.o
-	g++ main.o $(link_flags) -o main
+TARGET := game
+SRC := main.cpp
+OBJ := main.o
 
-%.o: %.c
-	g++ $(compile_flags) main.c -o main.o
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+	LIBS := -lraylib -lglfw -lrt -lm -ldl
+endif
+
+ifeq ($(UNAME_S),MINGW64_NT-*)
+	TARGET := game.exe
+	LIBS := -lraylib -lopengl32 -lgdi32 -lwinmm
+endif
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ)
+	$(CXX) $(OBJ) -o $@ $(LIBS)
+
+$(OBJ): $(SRC)
+	$(CXX) $(CXXFLAGS) -c $<
+
+clean:
+	rm -f $(OBJ) $(TARGET)
