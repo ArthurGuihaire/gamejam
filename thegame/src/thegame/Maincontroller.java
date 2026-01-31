@@ -39,6 +39,9 @@ public class Maincontroller extends Main{
 	@FXML
 	StackPane crosshair;
 	
+	@FXML
+	TextField cmdLine;
+	
 	Player payler;
 	
 	private Scene mainScene;
@@ -85,6 +88,7 @@ public class Maincontroller extends Main{
     		arenaPane.getChildren().add(en);
     		
     	});
+    	
     	
     	//gameLoop();
     	//setupKeyPressHandlers();
@@ -142,10 +146,10 @@ public class Maincontroller extends Main{
 	    	if (keyInput.contains("D")) {
 	    		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
 	    	}
-	    	//System.out.println(keyInput);
 	    	//System.out.println(xmove+", "+ymove);
 	    	analyseDirection();
     	}
+    	System.out.println(keyInput);
     	
     	arena.setOnMouseMoved(new EventHandler<MouseEvent>() {
     		@Override
@@ -226,7 +230,10 @@ public class Maincontroller extends Main{
             	addDirection(code);
                 keyInput.add(code);
             }
-            if (code.equals("CONTROL")) payler.moveMode = !payler.moveMode;
+            if (code.equals("CONTROL")) {
+            	payler.moveMode = !payler.moveMode;
+            	
+            }
         });
 
         this.mainScene.setOnKeyReleased((KeyEvent e) ->{
