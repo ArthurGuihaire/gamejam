@@ -17,18 +17,18 @@ public class Main extends Application{
 		System.out.println("hi");
 		launch(args);
 	}
-
+public static Scene s;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
-			FXMLLoader fl=new FXMLLoader(Main.class.getResource("/test.fxml"));
-			fl.setController(new Maincontroller());
+			FXMLLoader fl=new FXMLLoader(Main.class.getResource("/mainmenu.fxml"));
+			fl.setController(new MainMenucontroller());
 			Parent root=fl.load();
 			
-			Scene s=new Scene(root);
+			s=new Scene(root);
 			primaryStage.setScene(s);
-
+			
 			primaryStage.show();
 			primaryStage.setAlwaysOnTop(true);
 			primaryStage.setAlwaysOnTop(false);
@@ -38,6 +38,18 @@ public class Main extends Application{
 			
 			
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static void switchScene() {
+		FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));
+		newscene.setController(new Maincontroller());
+		try {
+			Parent newp=newscene.load();
+			s.setRoot(newp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
