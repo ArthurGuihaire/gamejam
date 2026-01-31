@@ -26,9 +26,6 @@ import javafx.scene.input.*;
 import javafx.scene.text.TextAlignment;
 
 public class Maincontroller extends Main{
-	
-	@FXML
-	Circle player,enemy;
 	@FXML
 	Rectangle arena;
 	@FXML
@@ -300,19 +297,31 @@ public class Maincontroller extends Main{
 				payler.current = candidate;
 			}
 		}
+		else if (sections[0].equals("magick")) {
+			if (payler.current == null) return;
+			
+			payler.current.setScaleX(0.6);
+			payler.current.setScaleY(0.6);
+
+			payler.current.damage -= 10;
+		}
+		else if
 	}
+	
 
 	public void die(Enemy e) {
 		double direction= (Math.random()*90);
 		System.out.println(direction);
 		direction=Math.toRadians(direction);
 		
+		final int amount = 60;
 		GlassShard gs1=new GlassShard();
-		gs1.setLayoutX(e.getLayoutX()); gs1.setLayoutY(e.getLayoutY());
+		gs1.setLayoutX(e.getLayoutX() + amount); gs1.setLayoutY(e.getLayoutY() + amount);
 		GlassShard gs2=new GlassShard();
-		gs2.setLayoutX(e.getLayoutX()); gs2.setLayoutY(e.getLayoutY());
+		gs2.setLayoutX(e.getLayoutX() + amount); gs2.setLayoutY(e.getLayoutY() + amount);
 		GlassShard gs3=new GlassShard();
-		gs3.setLayoutX(e.getLayoutX()); gs3.setLayoutY(e.getLayoutY());
+		gs3.setLayoutX(e.getLayoutX() + amount); gs3.setLayoutY(e.getLayoutY() + amount);
+		
 		Platform.runLater(() -> arenaPane.getChildren().addAll(gs1,gs2,gs3));
 		
 		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
@@ -371,7 +380,6 @@ public class Maincontroller extends Main{
 				if (gs.isDead())
 					arenaPane.getChildren().remove(gs);
 			}
-			
 		}
 	}
 	
