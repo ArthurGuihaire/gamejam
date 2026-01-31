@@ -32,21 +32,32 @@ public class Maincontroller extends Main{
 	@FXML
 	Pane arenaPane;
 	@FXML
-	BorderPane bp;
-	@FXML
 	Button btnButton;
 	
 	Player payler;
+	
 	private Scene mainScene;
 	private Sounds soundPlayer = new Sounds();
 	private AnimationTimer gameloop;
+	
+	public static int arenaLeft;
+	public static int arenaTop;
+	
 
+	int xmove=0;
+	int ymove=0;
+	
+	
     ArrayList<String> keyInput = new ArrayList<>();
+    
+    
     
     @FXML
     public void initialize() {
+    	arenaLeft=(int)arena.getLayoutX()-685;
+    	arenaTop=(int)arena.getLayoutY()-385;
 
-    	mainScene=bp.getScene();
+    	mainScene=arena.getScene();
     	System.out.println(mainScene);
     	System.out.println();
 //    	System.out.println(player);
@@ -70,7 +81,7 @@ public class Maincontroller extends Main{
     }
     
     public void startGame() {
-		mainScene=bp.getScene();
+		mainScene=arena.getScene();
 
     	initPlayer();		
 		setupKeyPressHandlers();
@@ -81,9 +92,9 @@ public class Maincontroller extends Main{
     public void initPlayer() {
     	payler=new Player();
     	
-    	payler.setTranslateX(50);
-    	payler.setTranslateY(50);
     	arenaPane.getChildren().add(payler);
+    	payler.setTranslateX(arenaLeft+100);
+    	payler.setTranslateY(arenaTop+100);
     	payler.setVisible(true);
     	
     	
@@ -103,35 +114,71 @@ public class Maincontroller extends Main{
     
     private void update() {
     	mainScene=this.btnButton.getScene();
+    	
     	if (keyInput.contains("W")) {
-    		payler.moveUp();
+    		if (payler.getBoundsInParent().getMinY()>arena.getLayoutY())payler.moveUp();
+    		
     	}
     	if (keyInput.contains("A")) {
-    		payler.moveLeft();
+    		if (payler.getBoundsInParent().getMinX()>arena.getLayoutX())payler.moveLeft();
     	}
     	if (keyInput.contains("S")) {
-    		payler.moveDown();
+    		if (payler.getBoundsInParent().getMaxY()<arena.getHeight()+arena.getLayoutY())payler.moveDown();
     	}
     	if (keyInput.contains("D")) {
-    		payler.moveRight();
+    		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
     	}
     	System.out.println(keyInput);
+    	System.out.println(xmove+", "+ymove);
     	
     }
+    
+    private void removeDirection(String key) {
+    	switch (key) {
+    	case "W": ymove+=1; break;
+    	case "A": xmove+=1; break;
+    	case "S": ymove-=1; break;
+    	case "D": xmove-=1; break;
+    	
+    	}
+    }
+    private void addDirection(String key) {
+    	switch (key) {
+    	case "W": ymove-=1; break;
+    	case "A": xmove-=1; break;
+    	case "S": ymove+=1; break;
+    	case "D": xmove+=1; break;
+    	
+    	}
+    }
+    private void analyseDirection() {
+    	if (ymove==1&&xmove==0) payler.setImage(null);
+    	if (ymove==1&&xmove==1) payler.setImage(null);
+    	if (ymove==0&&xmove==1) payler.setImage(null);
+    	if (ymove==-1&&xmove==1) payler.setImage(null);
+    	if (ymove==-1&&xmove==0) payler.setImage(null);
+    	if (ymove==-1&&xmove==-1) payler.setImage(null);
+    	if (ymove==0&&xmove==-1) payler.setImage(null);
+    	if (ymove==1&&xmove==-1) payler.setImage(null);
+    	
+    	
+    }
+    
     
     private void setupKeyPressHandlers() {
     	
         this.mainScene.setOnKeyPressed((KeyEvent e) ->{
             String code = e.getCode().toString();
             if (!keyInput.contains(code)) {
-            	
+            	addDirection(code);
                 keyInput.add(code);
+                
             }
         });
 
         this.mainScene.setOnKeyReleased((KeyEvent e) ->{
             String code = e.getCode().toString();
-            
+            removeDirection(code);
             keyInput.remove(code);
         });
     }

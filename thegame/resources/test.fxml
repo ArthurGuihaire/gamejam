@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="885.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <Pane fx:id="arenaPane" prefHeight="586.0" prefWidth="857.0" BorderPane.alignment="CENTER">
-         <children>
-            <Rectangle fx:id="arena" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="384.0" layoutX="79.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="707.0" />
-            <Circle fx:id="player" fill="#1fff29" layoutX="205.0" layoutY="281.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="enemy" fill="#ff1f1f" layoutX="665.0" layoutY="321.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button fx:id="btnButton" layoutX="274.0" layoutY="56.0" mnemonicParsing="false" text="Button" />
-         </children>
-      </Pane>
-   </center>
-</BorderPane>
+<Pane fx:id="arenaPane" prefHeight="574.0" prefWidth="885.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="topblack" arcHeight="5.0" arcWidth="5.0" height="80.0" stroke="BLACK" strokeType="INSIDE" width="885.0" />
+      <Rectangle fx:id="arena" arcHeight="5.0" arcWidth="5.0" fill="#00ffe733" height="384.0" layoutX="79.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="707.0" />
+      <Circle fx:id="player" fill="#1fff29" layoutX="205.0" layoutY="281.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="enemy" fill="#ff1f1f" layoutX="665.0" layoutY="321.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="btnButton" layoutX="274.0" layoutY="56.0" mnemonicParsing="false" text="Button" />
+   </children>
+</Pane>
