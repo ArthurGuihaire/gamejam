@@ -229,7 +229,50 @@ public class Maincontroller extends Main{
     	//mainScene=player.getScene();
     }
     
-    
+	public void useCommand(String command) {
+		String[] sections = command.split(" ");
+		if (sections[0].equals("rm")) {
+			if (payler.current == null) return;
+			if (sections[1].equals("rf")) {
+				//remove recursive force!!!
+			}
+			else {
+				payler.current.health -= Player.RM_DAMAGE;
+				if (payler.current.health <= 0) {
+					die(payler.current);
+					payler.current = null;
+				}
+			}
+		}
+		
+		else if (sections[0].equals("cd")) {
+			if (sections[1].equals("-")) {
+				payler.current = payler.previous;
+				payler.previous = null;
+			}
+			else {
+				Enemy candidate = null;
+				double mouseX = 400.0;
+				double mouseY = 400.0;
+				for (Node n : arenaPane.getChildren()) {
+					double minDistanceSquared = Double.MAX_VALUE;
+					if (n instanceof Enemy emy) {
+						double x = emy.getLayoutX();
+						double y = emy.getLayoutY();
+						
+						double distanceSquared = (x-mouseX) * (x-mouseX) + (y-mouseY) * (y-mouseY);
+						if (distanceSquared < minDistanceSquared) {
+							minDistanceSquared = distanceSquared;
+							candidate = emy;
+						}
+					}
+				}
+				
+				payler.previous = payler.current;
+				payler.current = candidate;
+			}
+		}
+	}
 
 	public void die(Enemy e) {
 		double direction= (Math.random()*90);
