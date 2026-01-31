@@ -144,8 +144,9 @@ public class Maincontroller extends Main{
 	    		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
 	    	}
 	    	//System.out.println(xmove+", "+ymove);
-	    	analyseDirection();
     	}
+
+    	analyseDirection();
     	System.out.println(keyInput);
     	
     	arena.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -305,7 +306,7 @@ public class Maincontroller extends Main{
 
 			payler.current.damage -= 10;
 		}
-		else if
+		
 	}
 	
 
