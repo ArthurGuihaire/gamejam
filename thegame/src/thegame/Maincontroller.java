@@ -6,6 +6,7 @@ import thegame.Main;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -34,6 +35,9 @@ public class Maincontroller extends Main{
 	Pane arenaPane;
 	@FXML
 	Button btnButton,btnEnemy;
+	
+	@FXML
+	StackPane crosshair;
 	
 	Player payler;
 	
@@ -143,6 +147,23 @@ public class Maincontroller extends Main{
 	    	analyseDirection();
     	}
     	
+    	arena.setOnMouseMoved(new EventHandler<MouseEvent>() {
+    		@Override
+    		public void handle (MouseEvent mouse) {
+    			crosshair.setLayoutX(mouse.getSceneX()-25);
+    			crosshair.setLayoutY(mouse.getSceneY()-25);
+    		}
+    		
+    	});
+    	crosshair.setOnMouseMoved(new EventHandler<MouseEvent>() {
+    		@Override
+    		public void handle (MouseEvent mouse) {
+    			if (mouse.getSceneX()>arena.getLayoutX()&&mouse.getSceneY()>arena.getLayoutY()&&mouse.getSceneY()<arena.getHeight()+arena.getLayoutY()&&mouse.getSceneX()<arena.getWidth()+arena.getLayoutX())
+    			{	crosshair.setLayoutX(mouse.getSceneX()-25);
+    			crosshair.setLayoutY(mouse.getSceneY()-25);}
+    		}
+    		
+    	});
     	enemyCollision();
     }
     
