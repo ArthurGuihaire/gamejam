@@ -11,6 +11,7 @@
       <Rectangle fx:id="arena" arcHeight="5.0" arcWidth="5.0" fill="#00ffe733" height="384.0" layoutX="79.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="707.0" />
       <Circle fx:id="player" fill="#1fff29" layoutX="205.0" layoutY="281.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="enemy" fill="#ff1f1f" layoutX="665.0" layoutY="321.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btnButton" layoutX="274.0" layoutY="56.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="btnButton" layoutX="274.0" layoutY="56.0" mnemonicParsing="false" text="start" />
+      <Button fx:id="btnEnemy" layoutX="650.0" layoutY="509.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="enemy spawn" />
    </children>
 </Pane>

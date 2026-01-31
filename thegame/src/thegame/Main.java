@@ -26,7 +26,7 @@ public static Scene s;
 			fl.setController(new MainMenucontroller());
 			Parent root=fl.load();
 			
-			s=new Scene(root);
+			s=new Scene(root,1800,900);
 			primaryStage.setScene(s);
 			
 			primaryStage.show();

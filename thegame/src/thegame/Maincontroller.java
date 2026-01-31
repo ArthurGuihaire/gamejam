@@ -32,7 +32,7 @@ public class Maincontroller extends Main{
 	@FXML
 	Pane arenaPane;
 	@FXML
-	Button btnButton;
+	Button btnButton,btnEnemy;
 	
 	Player payler;
 	
@@ -73,6 +73,12 @@ public class Maincontroller extends Main{
     		mainScene=btnButton.getScene();	
     		setScene(btnButton.getScene());
     		soundPlayer.playSound(0);
+    	});
+    	
+    	btnEnemy.setOnAction((event)->{
+    		Enemy en=new Enemy();
+    		arenaPane.getChildren().add(en);
+    		
     	});
     	
     	//gameLoop();
@@ -131,7 +137,7 @@ public class Maincontroller extends Main{
     		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
     	}
     	System.out.println(keyInput);
-    	System.out.println(xmove+", "+ymove);
+    	//System.out.println(xmove+", "+ymove);
     	
     }
     
