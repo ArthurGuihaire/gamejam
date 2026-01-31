@@ -2,6 +2,7 @@ package thegame;
 
 import java.util.ArrayList;
 
+import thegame.Main;
 import javafx.animation.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -14,13 +15,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.input.*;
 import javafx.scene.text.TextAlignment;
 
-public class Maincontroller {
+public class Maincontroller extends Main{
 	
 	@FXML
 	Circle player,enemy;
@@ -31,7 +34,7 @@ public class Maincontroller {
 	@FXML
 	BorderPane bp;
 	@FXML
-	private Button btnButton;
+	Button btnButton;
 	
 	private Scene mainScene;
 
@@ -44,7 +47,11 @@ public class Maincontroller {
     	System.out.println(player);
     	System.out.println(arena);
     	System.out.println(arenaPane);
+    	System.out.println(btnButton.getId());
     	System.out.println(btnButton);
+    	btnButton.setOnAction((event)->{
+    		System.out.println("hello");
+    	});
     	//mainScene=player.getScene();
     	//setupKeyPressHandlers();
     }
