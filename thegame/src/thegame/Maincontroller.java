@@ -104,8 +104,8 @@ public class Maincontroller extends Main{
     	payler=new Player();
     	
     	arenaPane.getChildren().add(payler);
-    	payler.setTranslateX(arenaLeft+100);
-    	payler.setTranslateY(arenaTop+100);
+    	payler.setTranslateX(arenaLeft+1000);
+    	payler.setTranslateY(arenaTop+900);
     	payler.setVisible(true);
     	payler.setScaleX(1);
     	payler.setScaleY(1);
