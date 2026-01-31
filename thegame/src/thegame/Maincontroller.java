@@ -179,6 +179,7 @@ public class Maincontroller extends Main{
     
     private void enemyCollision() {
     	arenaPane.getChildren().forEach(this::playerCollision);
+		removeDeadPeople();
     }
     
     private void playerCollision(Node n) {
@@ -187,8 +188,8 @@ public class Maincontroller extends Main{
     		for (Node en : arenaPane.getChildren()) {
 				if (en instanceof Enemy emy) elist.add(emy);
 			}
-    		for (Node e : elist) {
-				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&e instanceof Enemy f&&!f.isDead()) {
+    		for (Enemy e : elist) {
+				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&(!e.isDead())) {
 					die((Enemy)e);
 					System.out.println("die");
 				}
@@ -241,7 +242,7 @@ public class Maincontroller extends Main{
 		gs2.setLayoutX(e.getBoundsInParent().getCenterX()); gs2.setLayoutY(e.getBoundsInParent().getCenterY());
 		GlassShard gs3=new GlassShard();
 		gs3.setLayoutX(e.getBoundsInParent().getCenterX()); gs3.setLayoutY(e.getBoundsInParent().getCenterY());
-		arenaPane.getChildren().addAll(gs1,gs2,gs3);
+		Platform.runLater(() -> arenaPane.getChildren().addAll(gs1,gs2,gs3));
 		
 		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
 		RotateTransition rt1=new RotateTransition(Duration.seconds(0.5), gs1); rt1.setByAngle(360);
@@ -283,14 +284,13 @@ public class Maincontroller extends Main{
 	}
 	
 	public void removeDeadPeople() {
-		for (Node n : arenaPane.getChildren()) {
+		List<Node> nodes = new ArrayList<>(arenaPane.getChildren());
+		for (Node n : nodes) {
 			if (n instanceof Enemy e) {
 				if (e.isDead())
 				arenaPane.getChildren().remove(e);
 			}
-			
 		}
-		
 	}
 	
 
