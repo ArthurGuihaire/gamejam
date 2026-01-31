@@ -54,11 +54,11 @@ public class Enemy extends ImageView {
 		GlassShard() {
 			int type=(int) Math.floor(Math.random()*5+1);
 			switch (type) {
-			case 1: this.setImage(new Image(getClass().getResource("/images/glass-shard-1.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
-			case 2: this.setImage(new Image(getClass().getResource("/images/glass-shard-2.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
-			case 3: this.setImage(new Image(getClass().getResource("/images/glass-shard-3.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
-			case 4: this.setImage(new Image(getClass().getResource("/images/glass-shard-3.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
-			case 5: this.setImage(new Image(getClass().getResource("/images/glass-shard-3.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 1: this.setImage(new Image(getClass().getResource("/images/shard-1.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 2: this.setImage(new Image(getClass().getResource("/images/shard-2.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 3: this.setImage(new Image(getClass().getResource("/images/shard-3.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 4: this.setImage(new Image(getClass().getResource("/images/shard-4.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 5: this.setImage(new Image(getClass().getResource("/images/shard-5.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
 			default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
 			}
 		}
