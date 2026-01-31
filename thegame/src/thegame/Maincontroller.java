@@ -81,8 +81,8 @@ public class Maincontroller extends Main{
     public void initPlayer() {
     	payler=new Player();
     	
-    	payler.setTranslateX(100);
-    	payler.setTranslateY(300);
+    	payler.setTranslateX(50);
+    	payler.setTranslateY(50);
     	arenaPane.getChildren().add(payler);
     	payler.setVisible(true);
     	
