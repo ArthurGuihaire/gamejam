@@ -120,28 +120,28 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
-    	mainScene=this.btnButton.getScene();
-    	analyseDirection();
+    	//mainScene=this.btnButton.getScene();
+    	//payler.moveMode = !(keyInput.contains("CONTROL"));
     	
-    	if (keyInput.contains("W")) {
-    		if (payler.getBoundsInParent().getMinY()>arena.getLayoutY())payler.moveUp();
+    	if (payler.moveMode) {
+	    	if (keyInput.contains("W")) {
+	    		if (payler.getBoundsInParent().getMinY()>arena.getLayoutY())payler.moveUp();
+	    	}
+	    	if (keyInput.contains("A")) {
+	    		if (payler.getBoundsInParent().getMinX()>arena.getLayoutX())payler.moveLeft();
+	    	}
+	    	if (keyInput.contains("S")) {
+	    		if (payler.getBoundsInParent().getMaxY()<arena.getHeight()+arena.getLayoutY())payler.moveDown();
+	    	}
+	    	if (keyInput.contains("D")) {
+	    		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
+	    	}
+	    	//System.out.println(keyInput);
+	    	//System.out.println(xmove+", "+ymove);
+	    	analyseDirection();
     	}
-    	if (keyInput.contains("A")) {
-    		if (payler.getBoundsInParent().getMinX()>arena.getLayoutX())payler.moveLeft();
-    	}
-    	if (keyInput.contains("S")) {
-    		if (payler.getBoundsInParent().getMaxY()<arena.getHeight()+arena.getLayoutY())payler.moveDown();
-    	}
-    	if (keyInput.contains("D")) {
-    		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
-    	}
-    	//System.out.println(keyInput);
-    	//System.out.println(xmove+", "+ymove);
-    	
     	
     	enemyCollision();
-    	
-    	
     }
     
     private void removeDirection(String key) {
@@ -201,8 +201,8 @@ public class Maincontroller extends Main{
             if (!keyInput.contains(code)) {
             	addDirection(code);
                 keyInput.add(code);
-                
             }
+            if (code.equals("CONTROL")) payler.moveMode = !payler.moveMode;
         });
 
         this.mainScene.setOnKeyReleased((KeyEvent e) ->{
