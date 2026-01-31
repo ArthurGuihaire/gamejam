@@ -2,5 +2,6 @@ main
 *.o
 *.exe
 .classpath
+thegame/.classpath
 .vscode
 bin
