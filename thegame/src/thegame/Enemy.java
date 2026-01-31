@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Enemy extends ImageView {
-	int health;
+	int health = 100;
 	boolean dead=false;
 	
 	public boolean isDead() {
@@ -25,11 +25,5 @@ public class Enemy extends ImageView {
 		case 3: this.setImage(new Image(getClass().getResource("/images/glass-pane-3.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
 		default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
 		}
-		
-		
 	}
-	
-	
 }
-
-
