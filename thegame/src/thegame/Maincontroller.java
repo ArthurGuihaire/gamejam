@@ -181,9 +181,13 @@ public class Maincontroller extends Main{
     
     private void playerCollision(Node n) {
     	if (n instanceof Player) {
-    		for (Node e : arenaPane.getChildren()) {
-				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&!(e instanceof Player)&&(e instanceof Enemy)) {
-					((Enemy) e).die();
+    		ArrayList<Enemy> elist=new ArrayList<Enemy>();
+    		for (Node en : arenaPane.getChildren()) {
+				if (en instanceof Enemy emy) elist.add(emy);
+			}
+    		for (Node e : elist) {
+				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&e instanceof Enemy) {
+					die((Enemy)e);
 					System.out.println("die");
 				}
 				
@@ -225,4 +229,66 @@ public class Maincontroller extends Main{
 //    	System.out.println(btnButton);
     	//mainScene=player.getScene();
     }
+    
+    
+
+	public void die(Enemy e) {
+		double direction= (Math.random()*90);
+		direction=Math.toRadians(direction);
+		
+		GlassShard gs1=new GlassShard();
+		gs1.setLayoutX(e.getBoundsInParent().getCenterX()); gs1.setLayoutY(e.getBoundsInParent().getCenterY());
+		GlassShard gs2=new GlassShard();
+		gs2.setLayoutX(e.getBoundsInParent().getCenterX()); gs2.setLayoutY(e.getBoundsInParent().getCenterY());
+		GlassShard gs3=new GlassShard();
+		gs3.setLayoutX(e.getBoundsInParent().getCenterX()); gs3.setLayoutY(e.getBoundsInParent().getCenterY());
+		arenaPane.getChildren().addAll(gs1,gs2,gs3);
+		
+		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
+		tt1.setByX(Math.cos(direction)*25);
+		tt1.setByY(Math.sin(direction)*25);
+		direction=Math.toDegrees(direction);
+		direction+=120;
+		direction=Math.toRadians(direction);
+		
+		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
+		tt1.setByX(Math.cos(direction)*100);
+		tt1.setByY(Math.sin(direction)*100);
+		direction=Math.toDegrees(direction);
+		direction+=120;
+		direction=Math.toRadians(direction);
+		
+		
+		TranslateTransition tt3=new TranslateTransition(Duration.seconds(0.5), gs3);
+		tt1.setByX(Math.cos(direction)*100);
+		tt1.setByY(Math.sin(direction)*100);
+		
+		e.setVisible(false);
+		arenaPane.getChildren().remove(e);
+		
+		tt1.play();tt2.play();tt3.play();
+		
+		
+		Maincontroller.soundPlayer.playSound(1);
+	}
+	
+
+	private class GlassShard extends ImageView {
+		
+		GlassShard() {
+			int type=(int) Math.floor(Math.random()*5+1);
+			switch (type) {
+			case 1: this.setImage(new Image(getClass().getResource("/images/shard-1.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 2: this.setImage(new Image(getClass().getResource("/images/shard-2.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 3: this.setImage(new Image(getClass().getResource("/images/shard-3.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 4: this.setImage(new Image(getClass().getResource("/images/shard-4.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			case 5: this.setImage(new Image(getClass().getResource("/images/shard-5.png").toExternalForm())); this.setScaleX(0.2); this.setScaleY(0.2); break;
+			default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
+			}
+		}
+		
+	}
+	
+    
+    
 }
