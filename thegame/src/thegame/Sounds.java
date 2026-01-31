@@ -8,6 +8,7 @@ public class Sounds {
 	private ArrayList<AudioClip> clips = new ArrayList<AudioClip>();
 	public Sounds() {
 		this.load("/sounds/output.wav");
+		this.load("/sounds/glass-break.wav");
 	}
 	
 	private void load(String soundFilePath) {
@@ -17,11 +18,5 @@ public class Sounds {
 	
 	public void playSound(int index) {
 		clips.get(index).play();
-	}
-	
-	public static void playSound(String soundFile) {
-		Media media = new Media(Sounds.class.getResource(soundFile).toExternalForm());
-		MediaPlayer player = new MediaPlayer(media);
-		player.play();
 	}
 }
