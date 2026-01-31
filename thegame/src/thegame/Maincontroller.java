@@ -37,7 +37,7 @@ public class Maincontroller extends Main{
 	Player payler;
 	
 	private Scene mainScene;
-	private Sounds soundPlayer = new Sounds();
+	public static Sounds soundPlayer = new Sounds();
 	private AnimationTimer gameloop;
 	
 	public static int arenaLeft;
@@ -125,7 +125,6 @@ public class Maincontroller extends Main{
     	
     	if (keyInput.contains("W")) {
     		if (payler.getBoundsInParent().getMinY()>arena.getLayoutY())payler.moveUp();
-    		
     	}
     	if (keyInput.contains("A")) {
     		if (payler.getBoundsInParent().getMinX()>arena.getLayoutX())payler.moveLeft();

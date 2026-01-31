@@ -35,8 +35,9 @@ public class Enemy extends ImageView {
 		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
 		tt1.setByX(Math.cos(direction)*25);
 		tt1.setByY(Math.sin(direction)*25);
-		direction+=120;
 		direction=Math.toDegrees(direction);
+		direction+=120;
+		direction=Math.toRadians(direction);
 		
 		
 		GlassShard gs3=new GlassShard();
@@ -44,6 +45,7 @@ public class Enemy extends ImageView {
 		tt1.setByX(Math.cos(direction)*25);
 		tt1.setByY(Math.sin(direction)*25);
 		
+		Maincontroller.soundPlayer.playSound(1);
 	}
 	
 
