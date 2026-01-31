@@ -12,7 +12,7 @@ public class Player extends ImageView {
 	
 	Player(){
 		this.health=100;
-		this.setImage(new Image(this.getClass().getResource("/testplayer.png").toExternalForm()));
+		this.setImage(new Image(this.getClass().getResource("/images/purple-laser.png").toExternalForm()));
 		this.setScaleX(0.1);
 		this.setScaleY(0.1);
 	}
