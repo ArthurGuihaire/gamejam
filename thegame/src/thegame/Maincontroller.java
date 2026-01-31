@@ -104,8 +104,8 @@ public class Maincontroller extends Main{
     	payler=new Player();
     	
     	arenaPane.getChildren().add(payler);
-    	payler.setTranslateX(arenaLeft+100);
-    	payler.setTranslateY(arenaTop+100);
+    	payler.setTranslateX(arenaLeft+1000);
+    	payler.setTranslateY(arenaTop+900);
     	payler.setVisible(true);
     	payler.setScaleX(1);
     	payler.setScaleY(1);
@@ -301,9 +301,9 @@ public class Maincontroller extends Main{
 		direction=Math.toRadians(direction);
 		
 		GlassShard gs1=new GlassShard();
-		gs1.setLayoutX(e.getBoundsInParent().getCenterX()); gs1.setLayoutY(e.getBoundsInParent().getCenterY());
+		gs1.setLayoutX(e.getBoundsInParent().getMinX()); gs1.setLayoutY(e.getBoundsInParent().getMinY());
 		GlassShard gs2=new GlassShard();
-		gs2.setLayoutX(e.getBoundsInParent().getCenterX()); gs2.setLayoutY(e.getBoundsInParent().getCenterY());
+		gs2.setLayoutX(e.getBoundsInParent().getMinX()); gs2.setLayoutY(e.getBoundsInParent().getMinY());
 		GlassShard gs3=new GlassShard();
 		gs3.setLayoutX(e.getBoundsInParent().getCenterX()); gs3.setLayoutY(e.getBoundsInParent().getCenterY());
 		Platform.runLater(() -> arenaPane.getChildren().addAll(gs1,gs2,gs3));
