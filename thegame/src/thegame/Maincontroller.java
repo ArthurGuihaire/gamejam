@@ -136,8 +136,12 @@ public class Maincontroller extends Main{
     	if (keyInput.contains("D")) {
     		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
     	}
-    	System.out.println(keyInput);
+    	//System.out.println(keyInput);
     	//System.out.println(xmove+", "+ymove);
+    	
+    	
+    	enemyCollision();
+    	
     	
     }
     
@@ -172,6 +176,24 @@ public class Maincontroller extends Main{
     	
     }
     
+    private void enemyCollision() {
+    	arenaPane.getChildren().forEach(this::playerCollision);
+    }
+    
+    private void playerCollision(Node n) {
+    	if (n instanceof Player) {
+    		for (Node e : arenaPane.getChildren()) {
+				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&!(e instanceof Player)&&(e instanceof Enemy)) {
+					((Enemy) e).die();
+					System.out.println("die");
+				}
+				
+				
+			}
+    	}
+    	
+    	
+    }
     
     private void setupKeyPressHandlers() {
     	
