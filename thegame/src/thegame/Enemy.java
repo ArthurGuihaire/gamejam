@@ -7,6 +7,16 @@ import javafx.util.Duration;
 
 public class Enemy extends ImageView {
 	int health;
+	boolean dead=false;
+	
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+
 	Enemy() {
 		int type=(int) Math.floor(Math.random()*3+1);
 		switch (type) {

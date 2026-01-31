@@ -121,8 +121,14 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
+<<<<<<< HEAD
     	//mainScene=this.btnButton.getScene();
     	//payler.moveMode = !(keyInput.contains("CONTROL"));
+=======
+    	mainScene=this.btnButton.getScene();
+    	analyseDirection();
+    	removeDeadPeople();
+>>>>>>> dc4cc383f4e25d785792270b3a40d4f89433730e
     	
     	if (payler.moveMode) {
 	    	if (keyInput.contains("W")) {
@@ -187,7 +193,7 @@ public class Maincontroller extends Main{
 				if (en instanceof Enemy emy) elist.add(emy);
 			}
     		for (Node e : elist) {
-				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&e instanceof Enemy) {
+				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&e instanceof Enemy f&&!f.isDead()) {
 					die((Enemy)e);
 					System.out.println("die");
 				}
@@ -231,6 +237,7 @@ public class Maincontroller extends Main{
 
 	public void die(Enemy e) {
 		double direction= (Math.random()*90);
+		System.out.println(direction);
 		direction=Math.toRadians(direction);
 		
 		GlassShard gs1=new GlassShard();
@@ -242,31 +249,53 @@ public class Maincontroller extends Main{
 		arenaPane.getChildren().addAll(gs1,gs2,gs3);
 		
 		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
-		tt1.setByX(Math.cos(direction)*25);
-		tt1.setByY(Math.sin(direction)*25);
-		direction=Math.toDegrees(direction);
-		direction+=120;
-		direction=Math.toRadians(direction);
-		
-		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
+		RotateTransition rt1=new RotateTransition(Duration.seconds(0.5), gs1); rt1.setByAngle(360);
 		tt1.setByX(Math.cos(direction)*100);
 		tt1.setByY(Math.sin(direction)*100);
 		direction=Math.toDegrees(direction);
 		direction+=120;
+		System.out.println(direction);
+		direction=Math.toRadians(direction);
+		
+		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
+		RotateTransition rt2=new RotateTransition(Duration.seconds(0.5), gs2); rt2.setByAngle(360);
+		tt2.setByX(Math.cos(direction)*100);
+		tt2.setByY(Math.sin(direction)*100);
+		direction=Math.toDegrees(direction);
+		direction+=120;
+		System.out.println(direction);
 		direction=Math.toRadians(direction);
 		
 		
 		TranslateTransition tt3=new TranslateTransition(Duration.seconds(0.5), gs3);
-		tt1.setByX(Math.cos(direction)*100);
-		tt1.setByY(Math.sin(direction)*100);
+		RotateTransition rt3=new RotateTransition(Duration.seconds(0.5), gs3); rt3.setByAngle(360);
+		tt3.setByX(Math.cos(direction)*100);
+		tt3.setByY(Math.sin(direction)*100);
+		
+		tt1.play();
+		tt2.play();
+		tt3.play();
+		rt1.playFromStart();
+		rt2.play();
+		rt3.play();
 		
 		e.setVisible(false);
-		arenaPane.getChildren().remove(e);
+		e.setDead(true);
 		
-		tt1.play();tt2.play();tt3.play();
 		
 		
 		Maincontroller.soundPlayer.playSound(1);
+	}
+	
+	public void removeDeadPeople() {
+		for (Node n : arenaPane.getChildren()) {
+			if (n instanceof Enemy e) {
+				if (e.isDead())
+				arenaPane.getChildren().remove(e);
+			}
+			
+		}
+		
 	}
 	
 
