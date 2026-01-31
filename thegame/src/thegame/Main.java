@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -22,10 +23,15 @@ public class Main extends Application{
 		try {
 			
 			FXMLLoader fl=new FXMLLoader(Main.class.getResource("/test.fxml"));
-			fl.setController(new Maincontroller());
-			Parent root=fl.load();
-			
+			Maincontroller mc=new Maincontroller();
+			fl.setController(mc);
+			Pane root=fl.load();
 			Scene s=new Scene(root);
+
+			mc.setScene(s);
+			
+			System.out.println(s);
+			
 			primaryStage.setScene(s);
 			
 			primaryStage.show();
