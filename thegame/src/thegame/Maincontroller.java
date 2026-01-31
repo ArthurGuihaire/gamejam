@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import thegame.Main;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -190,12 +191,8 @@ public class Maincontroller extends Main{
 					die((Enemy)e);
 					System.out.println("die");
 				}
-				
-				
 			}
     	}
-    	
-    	
     }
     
     private void setupKeyPressHandlers() {
