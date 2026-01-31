@@ -38,11 +38,8 @@ public class Maincontroller extends Main{
 	
 	Player payler;
 	private Scene mainScene;
-<<<<<<< HEAD
 	private Sounds soundPlayer = new Sounds();
-=======
 	private AnimationTimer gameloop;
->>>>>>> da3436981403bc0159c48962de4eae8265f35208
 
     ArrayList<String> keyInput = new ArrayList<>();
     
