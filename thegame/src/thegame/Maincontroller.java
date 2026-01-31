@@ -301,11 +301,11 @@ public class Maincontroller extends Main{
 		direction=Math.toRadians(direction);
 		
 		GlassShard gs1=new GlassShard();
-		gs1.setLayoutX(e.getBoundsInParent().getCenterX()); gs1.setLayoutY(e.getBoundsInParent().getCenterY());
+		gs1.setLayoutX(e.getLayoutX()); gs1.setLayoutY(e.getLayoutY());
 		GlassShard gs2=new GlassShard();
-		gs2.setLayoutX(e.getBoundsInParent().getCenterX()); gs2.setLayoutY(e.getBoundsInParent().getCenterY());
+		gs2.setLayoutX(e.getLayoutX()); gs2.setLayoutY(e.getLayoutY());
 		GlassShard gs3=new GlassShard();
-		gs3.setLayoutX(e.getBoundsInParent().getCenterX()); gs3.setLayoutY(e.getBoundsInParent().getCenterY());
+		gs3.setLayoutX(e.getLayoutX()); gs3.setLayoutY(e.getLayoutY());
 		Platform.runLater(() -> arenaPane.getChildren().addAll(gs1,gs2,gs3));
 		
 		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
