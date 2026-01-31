@@ -37,6 +37,7 @@ public class Maincontroller extends Main{
 	Button btnButton;
 	
 	private Scene mainScene;
+	private Sounds soundPlayer = new Sounds();
 
     ArrayList<String> keyInput = new ArrayList<>();
     
@@ -50,7 +51,8 @@ public class Maincontroller extends Main{
     	System.out.println(btnButton.getId());
     	System.out.println(btnButton);
     	btnButton.setOnAction((event)->{
-    		System.out.println("hello");
+    		//Sounds.playSound("/output.wav");
+    		soundPlayer.playSound(0);
     	});
     	//mainScene=player.getScene();
     	//setupKeyPressHandlers();
