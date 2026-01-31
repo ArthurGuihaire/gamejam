@@ -5,6 +5,92 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx-swt.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.base.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.controls.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.fxml.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.graphics.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.media.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.swing.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/javafx.web.jar" sourcepath="C:/Users/dariu/Downloads/openjfx-21.0.9_windows-x64_bin-sdk/javafx-sdk-21.0.9/lib/src.zip">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="accessible" pattern="javafx/*"/>
+			<accessrule kind="discouraged" pattern="com/sun/*"/>
+			<accessrule kind="discouraged" pattern="netscape/javascript/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/dariu/.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_3.8.0.202204150904.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
