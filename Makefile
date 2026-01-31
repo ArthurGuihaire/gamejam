@@ -11,7 +11,7 @@ ifeq ($(UNAME_S),Linux)
 	LIBS := -lraylib -lglfw -lrt -lm -ldl
 endif
 
-ifeq ($(UNAME_S),MINGW64_NT-*)
+ifneq (,$(findstring MINGW64,$(UNAME_S)))
 	TARGET := game.exe
 	LIBS := -lraylib -lopengl32 -lgdi32 -lwinmm
 endif
