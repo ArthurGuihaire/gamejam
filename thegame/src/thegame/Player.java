@@ -10,7 +10,8 @@ public class Player extends ImageView{
 	Player(){
 		
 		this.setImage(new Image(this.getClass().getResource("/testplayer.png").toExternalForm()));
-		
+		this.setScaleX(0.1);
+		this.setScaleY(0.1);
 	}
 	
 	public void moveRight() {
