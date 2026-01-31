@@ -3,9 +3,9 @@ package thegame;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
-public class Player extends ImageView{
-	
+public class Player extends ImageView {
 	int health;
+	public boolean moveMode = true;
 	
 	Player(){
 		this.health=100;
@@ -31,5 +31,9 @@ public class Player extends ImageView{
 		
 	}
 	
-	
+	public void useCommand(String command) {
+		if (command.startsWith("rm")) {
+			
+		}
+	}
 }

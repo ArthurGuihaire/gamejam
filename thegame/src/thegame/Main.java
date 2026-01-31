@@ -21,7 +21,6 @@ public static Scene s;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
 			FXMLLoader fl=new FXMLLoader(Main.class.getResource("/mainmenu.fxml"));
 			fl.setController(new MainMenucontroller());
 			Parent root=fl.load();
@@ -32,10 +31,6 @@ public static Scene s;
 			primaryStage.show();
 			primaryStage.setAlwaysOnTop(true);
 			primaryStage.setAlwaysOnTop(false);
-			
-			
-			
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

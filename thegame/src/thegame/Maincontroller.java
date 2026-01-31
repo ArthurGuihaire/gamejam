@@ -121,14 +121,9 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
-<<<<<<< HEAD
-    	//mainScene=this.btnButton.getScene();
-    	//payler.moveMode = !(keyInput.contains("CONTROL"));
-=======
     	mainScene=this.btnButton.getScene();
     	analyseDirection();
     	removeDeadPeople();
->>>>>>> dc4cc383f4e25d785792270b3a40d4f89433730e
     	
     	if (payler.moveMode) {
 	    	if (keyInput.contains("W")) {
