@@ -267,6 +267,12 @@ public class Maincontroller extends Main{
 		tt3.setByX(Math.cos(direction)*100);
 		tt3.setByY(Math.sin(direction)*100);
 		
+		tt1.setOnFinished((event)->{
+			gs1.setDead(true);
+			gs2.setDead(true);
+			gs3.setDead(true);
+		});
+		
 		tt1.play();
 		tt2.play();
 		tt3.play();
@@ -288,6 +294,10 @@ public class Maincontroller extends Main{
 				if (e.isDead())
 				arenaPane.getChildren().remove(e);
 			}
+			else if (n instanceof GlassShard gs) {
+				if (gs.isDead())
+					arenaPane.getChildren().remove(gs);
+			}
 			
 		}
 		
@@ -295,7 +305,19 @@ public class Maincontroller extends Main{
 	
 
 	private class GlassShard extends ImageView {
+		boolean dead=false;
 		
+		
+		public boolean isDead() {
+			return dead;
+		}
+
+
+		public void setDead(boolean dead) {
+			this.dead = dead;
+		}
+
+
 		GlassShard() {
 			int type=(int) Math.floor(Math.random()*5+1);
 			switch (type) {
