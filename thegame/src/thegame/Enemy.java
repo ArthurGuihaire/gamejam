@@ -7,6 +7,7 @@ import javafx.util.Duration;
 
 public class Enemy extends ImageView {
 	int health = 100;
+	int damage = 30;
 	boolean dead=false;
 	
 	public boolean isDead() {
