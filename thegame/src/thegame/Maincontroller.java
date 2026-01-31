@@ -96,7 +96,8 @@ public class Maincontroller extends Main{
     	payler.setTranslateX(arenaLeft+100);
     	payler.setTranslateY(arenaTop+100);
     	payler.setVisible(true);
-    	
+    	payler.setScaleX(1);
+    	payler.setScaleY(1);
     	
     }
     
@@ -114,6 +115,7 @@ public class Maincontroller extends Main{
     
     private void update() {
     	mainScene=this.btnButton.getScene();
+    	analyseDirection();
     	
     	if (keyInput.contains("W")) {
     		if (payler.getBoundsInParent().getMinY()>arena.getLayoutY())payler.moveUp();
@@ -152,14 +154,14 @@ public class Maincontroller extends Main{
     	}
     }
     private void analyseDirection() {
-    	if (ymove==1&&xmove==0) payler.setImage(null);
-    	if (ymove==1&&xmove==1) payler.setImage(null);
-    	if (ymove==0&&xmove==1) payler.setImage(null);
-    	if (ymove==-1&&xmove==1) payler.setImage(null);
-    	if (ymove==-1&&xmove==0) payler.setImage(null);
-    	if (ymove==-1&&xmove==-1) payler.setImage(null);
-    	if (ymove==0&&xmove==-1) payler.setImage(null);
-    	if (ymove==1&&xmove==-1) payler.setImage(null);
+    	if (ymove==1&&xmove==0) payler.setImage(new Image(this.getClass().getResource("/images/tux-down.png").toExternalForm()));
+    	if (ymove==1&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-down-right.png").toExternalForm()));
+    	if (ymove==0&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-right.png").toExternalForm()));
+    	if (ymove==-1&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-up-right.png").toExternalForm()));
+    	if (ymove==-1&&xmove==0) payler.setImage(new Image(this.getClass().getResource("/images/tux-up.png").toExternalForm()));
+    	if (ymove==-1&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-up-left.png").toExternalForm()));
+    	if (ymove==0&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-left.png").toExternalForm()));
+    	if (ymove==1&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-down-left.png").toExternalForm()));
     	
     	
     }
