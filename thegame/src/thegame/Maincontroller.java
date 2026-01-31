@@ -188,7 +188,7 @@ public class Maincontroller extends Main{
     private void analyseDirection() {
     	if (ymove==1&&xmove==0) payler.setImage(new Image(this.getClass().getResource("/images/tux-down.png").toExternalForm()));
     	if (ymove==1&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-down-right.png").toExternalForm()));
-    	if (ymove==0&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-right.png").toExternalForm()));
+    	if (ymove==0&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/purple-laser.png").toExternalForm()));
     	if (ymove==-1&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-up-right.png").toExternalForm()));
     	if (ymove==-1&&xmove==0) payler.setImage(new Image(this.getClass().getResource("/images/tux-up.png").toExternalForm()));
     	if (ymove==-1&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-up-left.png").toExternalForm()));
