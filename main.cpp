@@ -6,6 +6,7 @@ int main() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
+
         EndDrawing();
     }
 }
