@@ -3,6 +3,7 @@ package thegame;
 import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Enemy extends ImageView {
 	int health;
@@ -19,7 +20,29 @@ public class Enemy extends ImageView {
 	}
 	
 	public void die() {
+		double direction= (Math.random()*90);
+		direction=Math.toRadians(direction);
 		
+		GlassShard gs1=new GlassShard();
+		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
+		tt1.setByX(Math.cos(direction)*25);
+		tt1.setByY(Math.sin(direction)*25);
+		direction=Math.toDegrees(direction);
+		direction+=120;
+		direction=Math.toRadians(direction);
+		
+		GlassShard gs2=new GlassShard();
+		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
+		tt1.setByX(Math.cos(direction)*25);
+		tt1.setByY(Math.sin(direction)*25);
+		direction+=120;
+		direction=Math.toDegrees(direction);
+		
+		
+		GlassShard gs3=new GlassShard();
+		TranslateTransition tt3=new TranslateTransition(Duration.seconds(0.5), gs3);
+		tt1.setByX(Math.cos(direction)*25);
+		tt1.setByY(Math.sin(direction)*25);
 		
 	}
 	
