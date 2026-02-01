@@ -2,9 +2,12 @@ package thegame;
 
 import java.util.LinkedList;
 
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Projectile extends ImageView {
 	
@@ -26,11 +29,15 @@ public class Projectile extends ImageView {
 		switch (cmd.toLowerCase().trim()) {
 		case "shred":
 			this.setImage(new Image(getClass().getResource("/images/sawblade.png").toExternalForm()));
-			System.out.println("SHREDDING"); projectilespeed=0.15;
+			RotateTransition rt=new RotateTransition(Duration.seconds(10),this); 
+			rt.setInterpolator(Interpolator.LINEAR);
+			rt.setByAngle(360*20);
+			rt.play();
+			System.out.println("SHREDDING"); projectilespeed=0.7;
 			break;
 		case "magick":
 			System.out.println("MAGICK");
-			projectilespeed=0.2;
+			projectilespeed=2;
 			break;
 		}
 
@@ -40,8 +47,8 @@ public class Projectile extends ImageView {
 
 
 	public void move() {
-		this.setLayoutX(this.getLayoutX() + dx * 10);
-		this.setLayoutY(this.getLayoutY() + dy * 10);
+		this.setLayoutX(this.getLayoutX() + dx * 10*projectilespeed);
+		this.setLayoutY(this.getLayoutY() + dy * 10*projectilespeed);
 		
 		
 	}

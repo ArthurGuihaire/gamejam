@@ -133,8 +133,10 @@ public class Maincontroller extends Main{
     	
     }
     public void LevelUP() {		
+    	System.out.println("current level:"+currentlevel);
     	if (enemiesleft!=0) return;
     	if (currentlevel==0) {
+    		gameloop.stop();
     		currentlevel++;
     		enemiesleft=currentlevel+2;
     		for (int i=0;i<enemiesleft;i++) {
@@ -142,7 +144,11 @@ public class Maincontroller extends Main{
     			arenaPane.getChildren().add(e);
     			System.out.println("new enemy!");
     		}
-    	}else if (enemiesleft==0){
+    		
+    		gameloop.start();
+    	}else if (enemiesleft==0&&currentlevel>0){
+    		gameloop.stop();
+    		System.out.println("stop");
     	currentlevel++;
     	enemiesleft=currentlevel+2;
     	txtCompleted.setVisible(true);
@@ -152,31 +158,35 @@ public class Maincontroller extends Main{
     		al.add(n);
     		if (n instanceof Enemy || n instanceof Projectile) {
     			Platform.runLater(() -> al.remove(n));
-    		}
+    		}	
     	}
     	arenaPane.getChildren().clear();
     	arenaPane.getChildren().addAll(al);
-    	    	
-    	try {
-    		Thread.sleep(3000);
-    	}
-    	catch (Exception e) {
-    		e.printStackTrace();
-    	}
-    	
-		for (int i=0;i<enemiesleft;i++) {
 
-	    	int pos=15;
-			Enemy e=new Enemy();
-			arenaPane.getChildren().add(e);
-			System.out.println("newer enemy");
-			pos+=15;
-		}
-		txtCompleted.setVisible(false);
-		gameloop.start();
+    	txtCompleted.setVisible(true);
+    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
+    	
+    	tt.setOnFinished((event)->{
+    		System.out.println("finsihed tineinbe");
+
+    		txtCompleted.setVisible(false);
+    		generateEnemies();
+    		gameloop.start();
+    	});
+    	tt.playFromStart();
+    	
     }}
-    
-    
+    private void generateEnemies() {
+    int pos=15;
+	for (int i=0;i<enemiesleft;i++) {
+
+		Enemy e=new Enemy();
+		arenaPane.getChildren().add(e);
+		e.setLayoutX(e.getLayoutX()+pos);
+		System.out.println("newer enemy");
+		pos+=30;
+	}
+    }
     private void gameLoop() { 
     	gameloop=new AnimationTimer() {
 			@Override
