@@ -548,19 +548,20 @@ public class Tutorialcontroller extends Main{
 						break;
 					}
 					case ("magick"): {
-						if (player.current == null) return;
-						if (mana.getWidth()>0.1*maxMana) {
+						if (player.current == null) {
+							cmdLine.setText("Error: target is null, try using cd first");
+							break;
+						}
+						
 						player.current.setScaleX(0.35);
 						player.current.setScaleY(0.35);
 			
 						player.current.damage -= 10;
-						Projectile p = new Projectile("magick", player.current.getLayoutX()- 110, player.current.getLayoutY()-200,player);
+						Projectile p = new Projectile("magick", player.current.getLayoutX()- 40, player.current.getLayoutY()-80,player);
 						arenaPane.getChildren().add(p);
 
-						p.setLayoutX(player.getLayoutX()+100);
-						p.setLayoutY(player.getLayoutY()+100);}
-
-						mana.setWidth(mana.getWidth() - 0.1 * maxMana);
+						p.setLayoutX(player.getLayoutX()+30);
+						p.setLayoutY(player.getLayoutY()+100);
 						break;
 					}
 					case ("shred"): {
