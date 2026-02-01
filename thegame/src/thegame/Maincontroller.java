@@ -302,8 +302,7 @@ clearProjectiles();
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
 						kill(e);
 						p.pierced++;
-						
-						p.treeDie(arenaPane);
+							
 					}
 				}
 			}
@@ -520,13 +519,10 @@ clearProjectiles();
 		if (n instanceof Projectile p) {
 			p.setDead(true);
 				arenaPane.getChildren().remove(p);
+				enemiesleft--;
 		}else if (n instanceof Enemy e) {
 			e.setDead(true);
 				die(e);
-		}
-	}
-
-				enemiesleft--;
 		}
 	}
 	public void die(Enemy e) {
