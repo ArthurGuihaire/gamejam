@@ -9,6 +9,7 @@ public class Player extends ImageView {
 	Enemy current = null;
 	Enemy previous = null;
 	public boolean moveMode = true;
+	double speedBoost = 1.0;
 	
 	Player(){
 		this.health=100;

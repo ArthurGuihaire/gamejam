@@ -52,6 +52,8 @@ public class Maincontroller extends Main{
 	int xmove=0;
 	int ymove=0;
 	
+	private int boostFrames = 0;
+	private boolean boost = false;
 	
     ArrayList<String> keyInput = new ArrayList<>();
     
@@ -145,6 +147,11 @@ public class Maincontroller extends Main{
     private void update() {
     	mainScene=this.btnButton.getScene();
     	removeDeadPeople();
+    	
+    	if (boost && boostFrames-- <= 0) {
+    		boost = false;
+    		player.speedBoost = 1.0;
+    	}
     	
     	if (player.moveMode) {
 	    	if (keyInput.contains("W")) {
@@ -329,6 +336,11 @@ public class Maincontroller extends Main{
 				Projectile p = new Projectile("shred");
 				break;
 			}
+			case ("java"): {
+				boost = true;
+				boostFrames = 300;
+				player.speedBoost = 1.5;
+			}
 		}
 	}
 	
@@ -337,7 +349,7 @@ public class Maincontroller extends Main{
 		double direction= (Math.random()*120);
 		System.out.println(direction);
 		direction=Math.toRadians(direction);
-		
+
 		final int amount = 60;
 		GlassShard gs1=new GlassShard();
 		gs1.setLayoutX(e.getLayoutX() + amount); gs1.setLayoutY(e.getLayoutY() + amount);
@@ -397,7 +409,7 @@ public class Maincontroller extends Main{
 	}
 	
 	public void removeDeadPeople() {
-		List<Node> nodes = new ArrayList<>(arenaPane.getChildren());
+		ArrayList<Node> nodes = new ArrayList<>(arenaPane.getChildren());
 		for (Node n : nodes) {
 			if (n instanceof Enemy e) {
 				if (e.isDead())
