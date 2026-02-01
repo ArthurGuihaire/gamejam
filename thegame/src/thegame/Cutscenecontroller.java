@@ -30,8 +30,8 @@ public class Cutscenecontroller extends Main {
 		runaway
 		.setOnFinished((event)->{
 
-			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));
-			newscene.setController(new Maincontroller());
+			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/tutorial.fxml"));
+			newscene.setController(new Tutorialcontroller());
 			try {
 				Parent newp=newscene.load();
 				s.setRoot(newp);

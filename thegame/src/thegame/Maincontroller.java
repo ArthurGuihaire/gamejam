@@ -626,7 +626,7 @@ public class Maincontroller extends Main{
 	}
 
 
-	private class GlassShard extends ImageView {
+	public class GlassShard extends ImageView {
 		boolean dead=false;
 		
 		
