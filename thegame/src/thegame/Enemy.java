@@ -35,9 +35,6 @@ public class Enemy extends ImageView {
 		double ex = this.getLayoutX();
 		double ey = this.getLayoutY();
 		
-		System.out.println(px);
-		System.out.println(py);
-		
 		double dx = px - ex;
 		double dy = py - ey;
 		
