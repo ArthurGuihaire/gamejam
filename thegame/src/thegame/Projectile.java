@@ -42,5 +42,7 @@ public class Projectile extends ImageView {
 	public void move() {
 		this.setLayoutX(this.getLayoutX() + dx * 10);
 		this.setLayoutY(this.getLayoutY() + dy * 10);
+		
+		
 	}
 }
