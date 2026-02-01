@@ -326,7 +326,8 @@ public class Maincontroller extends Main{
 					player.previous = player.current;
 					player.current = candidate;
 				}
-			} break;
+				break;
+			}
 			case ("magick"): {
 				if (player.current == null) return;
 				
@@ -335,14 +336,19 @@ public class Maincontroller extends Main{
 	
 				player.current.damage -= 10;
 				Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY());
-			} break;
+				arenaPane.getChildren().add(p);
+				break;
+			}
 			case ("shred"): {
 				if (player.current != null) {
 					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY());
+					p.setLayoutX(player.getLayoutX());
 					arenaPane.getChildren().add(p);
 				}
 				else {
-					Projectile p = new Projectile("shred", 1000, 1000);
+					Projectile p = new Projectile("shred", crosshair.getLayoutX(), crosshair.getLayoutY());
+					p.setLayoutY(player.getLayoutY());
+					arenaPane.getChildren().add(p);
 				}
 				break;
 			}
