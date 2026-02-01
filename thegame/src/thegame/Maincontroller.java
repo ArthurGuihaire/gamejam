@@ -168,7 +168,7 @@ public class Maincontroller extends Main{
     	arenaPane.getChildren().addAll(al);
 
     	txtCompleted.setVisible(true);
-
+clearProjectiles();
     	gameloop.stop();
     	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
     	
@@ -296,7 +296,8 @@ public class Maincontroller extends Main{
 		
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
-						die(e);
+						die(e); 
+						if (p.type.equals("magick")) Platform.runLater(()->arenaPane.getChildren().remove(p));
 						enemiesleft--;	
 							
 					}
@@ -308,7 +309,7 @@ public class Maincontroller extends Main{
     private void clearProjectiles() {
     	for (Node n : arenaPane.getChildren()) {
     		if (n instanceof Projectile p) {
-    			arenaPane.getChildren().remove(p);
+    			Platform.runLater(()->arenaPane.getChildren().remove(p));
     		}
 			
 		}
@@ -442,8 +443,11 @@ public class Maincontroller extends Main{
 				player.current.setScaleY(0.35);
 	
 				player.current.damage -= 10;
-				//Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY(),player);
-				//arenaPane.getChildren().add(p);
+				Projectile p = new Projectile("magick", player.current.getLayoutX()- 110, player.current.getLayoutY()-200,player);
+				arenaPane.getChildren().add(p);
+
+				p.setLayoutX(player.getLayoutX()+100);
+				p.setLayoutY(player.getLayoutY()+100);
 				break;
 			}
 			case ("shred"): {
@@ -461,6 +465,10 @@ public class Maincontroller extends Main{
 				}
 				break;
 			}
+			case "": 
+				break;
+			
+			
 			case ("java"): {
 				boost = true;
 				boostFrames = 1000;
