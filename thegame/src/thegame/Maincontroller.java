@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +19,7 @@ import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.nio.channels.Pipe.SourceChannel;
 import java.util.*;
 import javafx.geometry.Pos;
@@ -186,7 +188,7 @@ public class Maincontroller extends Main{
 	    	else {
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
-		    		//generateEnemies();
+		    		generateEnemies();
 		    		gameloop.start();
 		    	});
 		    	tt.playFromStart();
@@ -361,6 +363,16 @@ public class Maincontroller extends Main{
     	btnButton.fire();
     	System.out.println("DIEEE");
     	//Platform.runLater(() -> nodes.add(player));
+    	FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));
+		newscene.setController(new Maincontroller());
+		try {
+			Parent newp=newscene.load();
+			s.setRoot(newp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     }
     
     private void setupKeyPressHandlers() {
