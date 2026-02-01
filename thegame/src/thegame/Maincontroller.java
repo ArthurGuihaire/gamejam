@@ -432,7 +432,7 @@ public class Maincontroller extends Main{
 			}
 			case ("java"): {
 				boost = true;
-				boostFrames = 300;
+				boostFrames = 1000;
 				player.speedBoost = 1.5;
 				break;
 			}
