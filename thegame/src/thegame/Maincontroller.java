@@ -49,6 +49,8 @@ public class Maincontroller extends Main{
 	
 	Player player;
 	
+	static Main main;
+	
 	private Scene mainScene;
 	public static Sounds soundPlayer = new Sounds();
 	private AnimationTimer gameloop;
@@ -140,7 +142,7 @@ public class Maincontroller extends Main{
     	 
     	
     }
-    public void LevelUP() {		
+    public void LevelUP() {
     	//System.out.println("current level:"+currentlevel);
     	if (enemiesleft!=0) return;
     	if (currentlevel==0) {
@@ -154,42 +156,42 @@ public class Maincontroller extends Main{
     			//System.out.println("new enemy!");
 
     		}    		gameloop.start();
-    	}else if (enemiesleft<=0&&currentlevel>0){
+    	}
+    	else if (enemiesleft<=0&&currentlevel>0){
     		gameloop.stop();
     		//System.out.println("stop");
-    	currentlevel++;
-    	enemiesleft=currentlevel+2;
-    	txtCompleted.setVisible(true);
-  
-    	ObservableList<Node> al= arenaPane.getChildren();
-    	
-    	for (Node n : al) {
-    		if (n instanceof Enemy) {
-    			Platform.runLater(() -> al.remove(n));
-    		}
-    		if (n instanceof Projectile proj) {
-    			Platform.runLater(() -> {
-    				proj.treeDie(arenaPane);
-    				al.remove(n);
-    			});
-    		}
-    	}
-
-    	txtCompleted.setVisible(true);
-    	clearProjectiles();
-    	gameloop.stop();
-    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
-    	
-    	tt.setOnFinished((event)->{
-    		//System.out.println("finsihed tineinbe");
-
-    		txtCompleted.setVisible(false);
-    		generateEnemies();
-    		gameloop.start();
-    	});
-    	tt.playFromStart();
-    	
-    }
+	    	currentlevel++;
+	    	enemiesleft=currentlevel+2;
+	  
+	    	ObservableList<Node> al= arenaPane.getChildren();
+	    	
+	    	for (Node n : al) {
+	    		if (n instanceof Enemy) {
+	    			Platform.runLater(() -> al.remove(n));
+	    		}
+	    		if (n instanceof Projectile proj) {
+	    			Platform.runLater(() -> {
+	    				proj.treeDie(arenaPane);
+	    				al.remove(n);
+	    			});
+	    		}
+	    	}
+	
+	    	txtCompleted.setVisible(true);    	clearProjectiles();
+	    	gameloop.stop();
+	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
+	    	if (currentlevel > 5) {
+	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
+	    	}
+	    	else {
+		    	tt.setOnFinished((event)->{
+		    		txtCompleted.setVisible(false);
+		    		//generateEnemies();
+		    		gameloop.start();
+		    	});
+		    	tt.playFromStart();
+	    	}
+	    }
     }
     
     private void generateEnemies() {
@@ -355,8 +357,10 @@ public class Maincontroller extends Main{
     	
     	Platform.runLater(() -> nodes.remove(player));
     	gameloop.stop();
+    	initialize();
     	btnButton.fire();
     	System.out.println("DIEEE");
+    	//Platform.runLater(() -> nodes.add(player));
     }
     
     private void setupKeyPressHandlers() {
@@ -409,7 +413,11 @@ public class Maincontroller extends Main{
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
 				if (player.current == null) return;
-				if (sections.length > 1 && sections[1].equals("-rf") && this.mana.getWidth() >= maxMana * 0.98) {
+				if (sections.length > 1 && sections[1].equals("-rf") && currentlevel > 3) {
+					if (this.mana.getWidth() < maxMana * 0.98) {
+						cmdLine.setText("Error: not enough mana");
+						break;
+					}
 					for (Node n : arenaPane.getChildren()) {
 						if (n instanceof Enemy e) {
 							ScaleTransition s = new ScaleTransition(Duration.seconds(1.0), e);
@@ -431,7 +439,7 @@ public class Maincontroller extends Main{
 					}
 				}
 				
-				mana.setWidth(mana.getWidth() + 10);
+				mana.setWidth(mana.getWidth() + 50);
 			}
 			break;
 			case ("cd"): {
@@ -463,13 +471,16 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("magick"): {
-				if (player.current == null) return;
+				if (player.current == null) {
+					cmdLine.setText("Error: target is null, try using cd first");
+					break;
+				}
 				
 				player.current.setScaleX(0.35);
 				player.current.setScaleY(0.35);
 	
 				player.current.damage -= 10;
-				Projectile p = new Projectile("magick", player.current.getLayoutX()- 110, player.current.getLayoutY()-200,player);
+				Projectile p = new Projectile("magick", player.current.getLayoutX()- 110, player.current.getLayoutY()-80,player);
 				arenaPane.getChildren().add(p);
 
 				p.setLayoutX(player.getLayoutX()+100);
@@ -477,41 +488,54 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("shred"): {
-				if (mana.getWidth() > 0.32 * maxMana) {
-					if (player.current != null) {
-						Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
-						if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
-						arenaPane.getChildren().add(p);
-						p.setLayoutX(player.getLayoutX()-30);
-						p.setLayoutY(player.getLayoutY()+15);
+				if (currentlevel > 1) {
+					if (mana.getWidth() > 0.32 * maxMana) {
+						if (player.current != null) {
+							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
+							if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
+							arenaPane.getChildren().add(p);
+							p.setLayoutX(player.getLayoutX()-30);
+							p.setLayoutY(player.getLayoutY()+15);
+						}
+						else {
+							Projectile p = new Projectile("shred", crosshair.getLayoutX() - 130, crosshair.getLayoutY() - 200, player);
+							if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
+							p.setLayoutX(player.getLayoutX()-30);
+							p.setLayoutY(player.getLayoutY()+15);
+							arenaPane.getChildren().add(p);
+						}
+						
+						
+						mana.setWidth(mana.getWidth() - 0.32 * maxMana);
 					}
 					else {
-						Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
-						if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
-						p.setLayoutX(player.getLayoutX()-30);
-						p.setLayoutY(player.getLayoutY()+15);
-						arenaPane.getChildren().add(p);
+						cmdLine.setText("Error: not enough mana");
 					}
-					
-					
-					mana.setWidth(mana.getWidth() - 0.32 * maxMana);
 				}
 				break;
 			}
 			case ("tree"): {
-				if (mana.getWidth() > 0.12 * maxMana && player.current != null) {
-					Projectile p = new Projectile("tree", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
-					arenaPane.getChildren().add(p);
-					p.setLayoutX(player.getLayoutX()-30);
-					p.setLayoutY(player.getLayoutY()+15);
+				if (mana.getWidth() < 0.12 * maxMana) {
+					cmdLine.setText("Error: not enough mana");
+					break;
 				}
+				if (player.current == null) {
+					cmdLine.setText("Error: target is null, try using cd first");
+					break;
+				}
+				Projectile p = new Projectile("tree", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
+				arenaPane.getChildren().add(p);
+				p.setLayoutX(player.getLayoutX()-30);
+				p.setLayoutY(player.getLayoutY()+15);
 				break;
 			}
 			case ("java"): {
-				boost = true;
-				boostFrames = 1000;
-				player.speedBoost = 1.5;
-				break;
+				if (currentlevel > 2) {
+					boost = true;
+					boostFrames = 1000;
+					player.speedBoost = 1.5;
+					break;
+				}
 			}
 			case ("null"):{
 				mana.setWidth(maxMana);
@@ -540,11 +564,11 @@ public class Maincontroller extends Main{
 		
 		if (n instanceof Projectile p) {
 			p.setDead(true);
-				Platform.runLater(()->arenaPane.getChildren().remove(p));
+			Platform.runLater(()->arenaPane.getChildren().remove(p));
 		}else if (n instanceof Enemy e) {
 			e.setDead(true);
-				die(e);
-				enemiesleft--;
+			die(e);
+			enemiesleft--;
 		}
 	}
 	public void die(Enemy e) {

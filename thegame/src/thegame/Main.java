@@ -12,18 +12,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("hi");
 		launch(args);
 	}
-public static Scene s;
+	public static Scene s;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader fl=new FXMLLoader(Main.class.getResource("/mainmenu.fxml"));
 			fl.setController(new MainMenucontroller());
 			Parent root=fl.load();
+			Maincontroller.main = this;
 			
 			s=new Scene(root,1800,900);
 			primaryStage.setScene(s);
@@ -37,6 +39,7 @@ public static Scene s;
 		}
 		
 	}
+	
 	public static void switchScene() {
 		FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/openingcutscene.fxml"));
 		newscene.setController(new Cutscenecontroller());

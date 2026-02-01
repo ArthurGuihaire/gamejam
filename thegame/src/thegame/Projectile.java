@@ -73,7 +73,6 @@ public class Projectile extends ImageView {
 			maxtime=300;
 			break;
 		}
-
 		
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
 		if (dx < 0) this.setRotate(this.getRotate() + 180);
@@ -91,8 +90,8 @@ public class Projectile extends ImageView {
 					double dist = dx*dx+dy*dy;
 					
 					if (dist < 100000) {
-						emy.speed = 0.2;
-						emy.speedTimer = 600;
+						emy.speed = 0.0;
+						emy.speedTimer = 60000000;
 					}
 				}
 			}

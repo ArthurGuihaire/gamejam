@@ -27,11 +27,10 @@ public class Cutscenecontroller extends Main {
 
 		TranslateTransition comelinux=new TranslateTransition(Duration.seconds(3.5), archlinux);
 		comelinux.setByX(3500);
-		runaway
-		.setOnFinished((event)->{
+		runaway.setOnFinished((event)->{
 
-			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));
-			newscene.setController(new Maincontroller());
+			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/openingcutscene.fxml"));
+			newscene.setController(new Cutscenecontroller());
 			try {
 				Parent newp=newscene.load();
 				s.setRoot(newp);
@@ -51,6 +50,4 @@ public class Cutscenecontroller extends Main {
 
 		ts.play();
 	}
-	
-
 }
