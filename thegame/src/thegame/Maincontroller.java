@@ -514,6 +514,7 @@ public class Maincontroller extends Main{
 			gs1.setDead(true);
 			gs2.setDead(true);
 			gs3.setDead(true);
+			removeDeadPeople();
 		});
 		
 		tt1.play();
@@ -544,7 +545,7 @@ public class Maincontroller extends Main{
 			}
 		}
 	}
-	
+
 
 	private class GlassShard extends ImageView {
 		boolean dead=false;
