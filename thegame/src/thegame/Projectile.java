@@ -28,6 +28,8 @@ public class Projectile extends ImageView {
 			projectilespeed=0.2;
 			break;
 		}
+
+		this.setRotate(Math.toDegrees(Math.atan(xDestination-this.getLayoutX())));
 	}
 	
 	
@@ -39,7 +41,6 @@ public class Projectile extends ImageView {
 		this.setLayoutY(this.getLayoutY() + (yDestination - this.getLayoutY()) / distance);
 		
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
-		
 	}
 	
 }
