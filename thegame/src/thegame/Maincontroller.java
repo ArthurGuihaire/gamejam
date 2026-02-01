@@ -245,6 +245,9 @@ public class Maincontroller extends Main{
             	String currentcmd=cmdLine.getText();
             	cmdLine.clear();
             	this.useCommand(currentcmd);
+            	
+            	xmove=0;
+            	ymove=0;
             }
             keyInput.remove(code);
         });
@@ -282,7 +285,7 @@ public class Maincontroller extends Main{
 			}
 			
 			case ("cd"): {
-				if (sections[1].equals("-")) {
+				if (sections.length > 1 && sections[1].equals("-")) {
 					player.current = player.previous;
 					player.previous = null;
 				}
