@@ -39,7 +39,7 @@ public class Maincontroller extends Main{
 	@FXML
 	TextField cmdLine;
 	
-	Player payler;
+	Player player;
 	
 	private Scene mainScene;
 	public static Sounds soundPlayer = new Sounds();
@@ -102,14 +102,14 @@ public class Maincontroller extends Main{
     }
     
     public void initPlayer() {
-    	payler=new Player();
+    	player=new Player();
     	
-    	arenaPane.getChildren().add(payler);
-    	payler.setTranslateX(arenaLeft+1000);
-    	payler.setTranslateY(arenaTop+900);
-    	payler.setVisible(true);
-    	payler.setScaleX(1);
-    	payler.setScaleY(1);
+    	arenaPane.getChildren().add(player);
+    	player.setTranslateX(arenaLeft+1000);
+    	player.setTranslateY(arenaTop+900);
+    	player.setVisible(true);
+    	player.setScaleX(1);
+    	player.setScaleY(1);
     	
     }
     
@@ -130,18 +130,18 @@ public class Maincontroller extends Main{
     	analyseDirection();
     	removeDeadPeople();
     	
-    	if (payler.moveMode) {
+    	if (player.moveMode) {
 	    	if (keyInput.contains("W")) {
-	    		if (payler.getBoundsInParent().getMinY()>arena.getLayoutY())payler.moveUp();
+	    		if (player.getBoundsInParent().getMinY()>arena.getLayoutY())player.moveUp();
 	    	}
 	    	if (keyInput.contains("A")) {
-	    		if (payler.getBoundsInParent().getMinX()>arena.getLayoutX())payler.moveLeft();
+	    		if (player.getBoundsInParent().getMinX()>arena.getLayoutX())player.moveLeft();
 	    	}
 	    	if (keyInput.contains("S")) {
-	    		if (payler.getBoundsInParent().getMaxY()<arena.getHeight()+arena.getLayoutY())payler.moveDown();
+	    		if (player.getBoundsInParent().getMaxY()<arena.getHeight()+arena.getLayoutY())player.moveDown();
 	    	}
 	    	if (keyInput.contains("D")) {
-	    		if (payler.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())payler.moveRight();
+	    		if (player.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())player.moveRight();
 	    	}
 	    	//System.out.println(xmove+", "+ymove);
     	}
@@ -188,14 +188,14 @@ public class Maincontroller extends Main{
     	}
     }
     private void analyseDirection() {
-    	if (ymove==1&&xmove==0) payler.setImage(new Image(this.getClass().getResource("/images/tux-down.png").toExternalForm()));
-    	if (ymove==1&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-down-right.png").toExternalForm()));
-    	if (ymove==0&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/purple-laser.png").toExternalForm()));
-    	if (ymove==-1&&xmove==1) payler.setImage(new Image(this.getClass().getResource("/images/tux-up-right.png").toExternalForm()));
-    	if (ymove==-1&&xmove==0) payler.setImage(new Image(this.getClass().getResource("/images/tux-up.png").toExternalForm()));
-    	if (ymove==-1&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-up-left.png").toExternalForm()));
-    	if (ymove==0&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-left.png").toExternalForm()));
-    	if (ymove==1&&xmove==-1) payler.setImage(new Image(this.getClass().getResource("/images/tux-down-left.png").toExternalForm()));
+    	if (ymove==1&&xmove==0) player.setImage(new Image(this.getClass().getResource("/images/tux-down.png").toExternalForm()));
+    	if (ymove==1&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/tux-down-right.png").toExternalForm()));
+    	if (ymove==0&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/purple-laser.png").toExternalForm()));
+    	if (ymove==-1&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/tux-up-right.png").toExternalForm()));
+    	if (ymove==-1&&xmove==0) player.setImage(new Image(this.getClass().getResource("/images/tux-up.png").toExternalForm()));
+    	if (ymove==-1&&xmove==-1) player.setImage(new Image(this.getClass().getResource("/images/tux-up-left.png").toExternalForm()));
+    	if (ymove==0&&xmove==-1) player.setImage(new Image(this.getClass().getResource("/images/tux-left.png").toExternalForm()));
+    	if (ymove==1&&xmove==-1) player.setImage(new Image(this.getClass().getResource("/images/tux-down-left.png").toExternalForm()));
     	
     	
     }
@@ -229,7 +229,7 @@ public class Maincontroller extends Main{
                 keyInput.add(code);
             }
             if (code.equals("CONTROL")) {
-            	payler.moveMode = !payler.moveMode;
+            	player.moveMode = !player.moveMode;
             	
             }
         });
@@ -258,23 +258,23 @@ public class Maincontroller extends Main{
 	public void useCommand(String command) {
 		String[] sections = command.split(" ");
 		if (sections[0].equals("rm")) {
-			if (payler.current == null) return;
+			if (player.current == null) return;
 			if (sections[1].equals("rf")) {
 				//remove recursive force!!!
 			}
 			else {
-				payler.current.health -= Player.RM_DAMAGE;
-				if (payler.current.health <= 0) {
-					die(payler.current);
-					payler.current = null;
+				player.current.health -= Player.RM_DAMAGE;
+				if (player.current.health <= 0) {
+					die(player.current);
+					player.current = null;
 				}
 			}
 		}
 		
 		else if (sections[0].equals("cd")) {
 			if (sections[1].equals("-")) {
-				payler.current = payler.previous;
-				payler.previous = null;
+				player.current = player.previous;
+				player.previous = null;
 			}
 			else {
 				Enemy candidate = null;
@@ -294,24 +294,24 @@ public class Maincontroller extends Main{
 					}
 				}
 				
-				payler.previous = payler.current;
-				payler.current = candidate;
+				player.previous = player.current;
+				player.current = candidate;
 			}
 		}
 		else if (sections[0].equals("magick")) {
-			if (payler.current == null) return;
+			if (player.current == null) return;
 			
-			payler.current.setScaleX(0.6);
-			payler.current.setScaleY(0.6);
+			player.current.setScaleX(0.6);
+			player.current.setScaleY(0.6);
 
-			payler.current.damage -= 10;
+			player.current.damage -= 10;
 		}
 		
 	}
 	
 
 	public void die(Enemy e) {
-		double direction= (Math.random()*90);
+		double direction= (Math.random()*120);
 		System.out.println(direction);
 		direction=Math.toRadians(direction);
 		
@@ -410,9 +410,5 @@ public class Maincontroller extends Main{
 			default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
 			}
 		}
-		
 	}
-	
-    
-    
 }
