@@ -148,23 +148,30 @@ public class Maincontroller extends Main{
     	enemiesleft=currentlevel+2;
     	txtCompleted.setVisible(true);
     	gameloop.stop();
-    	TranslateTransition wait=new TranslateTransition(Duration.seconds(3));
-    	wait.setOnFinished((event)->{
-    		for (int i=0;i<enemiesleft;i++) {
-
-    	    	int pos=15;
-    			Enemy e=new Enemy();
-    			arenaPane.getChildren().add(e);
-    			System.out.println("newer enemy");
-    			pos+=15;
+    	
+    	for (Node n : arenaPane.getChildren()) {
+    		if (n instanceof Enemy || n instanceof Projectile) {
+    			Platform.runLater(() -> arenaPane.getChildren().remove(n));
     		}
-    		txtCompleted.setVisible(false);
-    		gameloop.start();
-    	});
-    	wait.playFromStart();
+    	}
+    	    	
+    	try {
+    		Thread.sleep(3000);
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+    	}
     	
-    	
-    			
+		for (int i=0;i<enemiesleft;i++) {
+
+	    	int pos=15;
+			Enemy e=new Enemy();
+			arenaPane.getChildren().add(e);
+			System.out.println("newer enemy");
+			pos+=15;
+		}
+		txtCompleted.setVisible(false);
+		gameloop.start();
     }}
     
     
