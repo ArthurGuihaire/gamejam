@@ -41,6 +41,8 @@ public class Projectile extends ImageView {
 		this.setLayoutY(this.getLayoutY() + (yDestination - this.getLayoutY()) / distance);
 		
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
+		
+		if (dx > 0) this.setRotate(this.getRotate() + 180);
 	}
 	
 }
