@@ -332,7 +332,10 @@ public class Maincontroller extends Main{
 							p.treeDie(arenaPane);
 						else {
 							if (e instanceof Boss b) {
-								b.health-=100; if (b.health<=0) kill(b);}else
+								b.health-=100; if (b.health<=0) kill(b);
+								kill(p);
+							}
+							else
 							kill(e);
 							p.pierced++;
 							if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p));
