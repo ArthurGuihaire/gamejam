@@ -268,7 +268,7 @@ public class Maincontroller extends Main{
     		}
     	}
 
-    	System.out.println(keyInput);
+    	//System.out.println(keyInput);
     	
     	enemyCollision();
     	projectileCollision();
