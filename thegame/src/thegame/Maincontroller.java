@@ -253,6 +253,7 @@ clearProjectiles();
     	enemyCollision();
     	projectileCollision();
     	LevelUP();
+    	updateProjectileTimers();
     	
     	//mana.setScaleX(mana.getScaleX()+0.001);
     	if (mana.getWidth() < maxMana)
@@ -301,10 +302,12 @@ clearProjectiles();
     	for (Node idk : arenaPane.getChildren()) {
 			if (idk instanceof Projectile p) {
 				for (Node node : pls) {
-					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
+					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e&&!p.isDead()) {
 						kill(e);
 						p.pierced++;
-							
+						if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p))
+						;
+						p.treeDie(arenaPane);
 					}
 				}
 			}
@@ -411,14 +414,14 @@ clearProjectiles();
 				else {
 					player.current.health -= Player.RM_DAMAGE * 100;
 					if (player.current.health <= 0) {
-						die(player.current);
+						kill(player.current);
 						player.current = null;
 					}
 				}
 				
 				mana.setWidth(mana.getWidth() + 10);
 			}
-			
+			break;
 			case ("cd"): {
 				if (sections.length > 1 && sections[1].equals("-")) {
 					player.current = player.previous;
@@ -521,7 +524,7 @@ clearProjectiles();
 		
 		if (n instanceof Projectile p) {
 			p.setDead(true);
-				arenaPane.getChildren().remove(p);
+				Platform.runLater(()->arenaPane.getChildren().remove(p));
 				enemiesleft--;
 		}else if (n instanceof Enemy e) {
 			e.setDead(true);
