@@ -42,7 +42,7 @@ public class Maincontroller extends Main{
 	TextField cmdLine;
 	
 	@FXML
-	Text txtCompleted;
+	Text txtCompleted,txtLevel;
 	
 	@FXML
 	Rectangle mana;
@@ -150,6 +150,7 @@ public class Maincontroller extends Main{
     	if (currentlevel==0) {
     		gameloop.stop();
     		currentlevel++;
+    		txtLevel.setText("Level "+currentlevel);
     		enemiesleft=currentlevel+2;
     		for (int i=0;i<enemiesleft;i++) {
     			Enemy e=new Enemy();
@@ -190,6 +191,7 @@ public class Maincontroller extends Main{
 		    		txtCompleted.setVisible(false);
 		    		generateEnemies();
 		    		gameloop.start();
+		    		txtLevel.setText("Level "+currentlevel);
 		    	});
 		    	tt.playFromStart();
 	    	}
