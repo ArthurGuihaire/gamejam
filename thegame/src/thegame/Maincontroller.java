@@ -62,6 +62,7 @@ public class Maincontroller extends Main{
     	arenaLeft=(int)arena.getLayoutX()-685;
     	arenaTop=(int)arena.getLayoutY()-385;
 
+    	mainScene=this.btnButton.getScene();
     	mainScene=arena.getScene();
     	System.out.println(mainScene);
     	System.out.println();
@@ -142,7 +143,6 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
-    	mainScene=this.btnButton.getScene();
     	analyseDirection();
     	removeDeadPeople();
     	
@@ -326,7 +326,8 @@ public class Maincontroller extends Main{
 		Platform.runLater(() -> arenaPane.getChildren().addAll(gs1,gs2,gs3));
 		
 		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
-		RotateTransition rt1=new RotateTransition(Duration.seconds(0.5), gs1); rt1.setByAngle(360);
+		tt1.setInterpolator(Interpolator.EASE_IN);
+		RotateTransition rt1=new RotateTransition(Duration.seconds(0.5), gs1); rt1.setByAngle(720);
 		tt1.setByX(Math.cos(direction)*100);
 		tt1.setByY(Math.sin(direction)*100);
 		direction=Math.toDegrees(direction);
@@ -335,7 +336,8 @@ public class Maincontroller extends Main{
 		direction=Math.toRadians(direction);
 		
 		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
-		RotateTransition rt2=new RotateTransition(Duration.seconds(0.5), gs2); rt2.setByAngle(360);
+		tt2.setInterpolator(Interpolator.EASE_IN);
+		RotateTransition rt2=new RotateTransition(Duration.seconds(0.5), gs2); rt2.setByAngle(720);
 		tt2.setByX(Math.cos(direction)*100);
 		tt2.setByY(Math.sin(direction)*100);
 		direction=Math.toDegrees(direction);
@@ -345,7 +347,8 @@ public class Maincontroller extends Main{
 		
 		
 		TranslateTransition tt3=new TranslateTransition(Duration.seconds(0.5), gs3);
-		RotateTransition rt3=new RotateTransition(Duration.seconds(0.5), gs3); rt3.setByAngle(360);
+		tt3.setInterpolator(Interpolator.EASE_IN);
+		RotateTransition rt3=new RotateTransition(Duration.seconds(0.5), gs3); rt3.setByAngle(720);
 		tt3.setByX(Math.cos(direction)*100);
 		tt3.setByY(Math.sin(direction)*100);
 		
