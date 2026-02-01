@@ -259,7 +259,7 @@ public class Maincontroller extends Main{
     	
     	//mana.setScaleX(mana.getScaleX()+0.001);
     	if (mana.getWidth() < maxMana)
-    		mana.setWidth(mana.getWidth() + 0.03);
+    		mana.setWidth(mana.getWidth() + 0.07);
     }
     
     private void removeDirection(String key) {
@@ -494,7 +494,6 @@ public class Maincontroller extends Main{
 					arenaPane.getChildren().add(p);
 					p.setLayoutX(player.getLayoutX()-30);
 					p.setLayoutY(player.getLayoutY()+15);
-					p.treeNumber = 1;
 				}
 				break;
 			}
