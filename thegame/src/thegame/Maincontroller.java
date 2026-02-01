@@ -65,8 +65,6 @@ public class Maincontroller extends Main{
     
     @FXML
     public void initialize() {
-    	//arenaLeft=(int)arena.getLayoutX()-685;
-    	//arenaTop=(int)arena.getLayoutY()-385;
     	arenaLeft=(int)arena.getLayoutX();
     	arenaTop=(int)arena.getLayoutY();
     	cmdLine.setDisable(true);
@@ -129,13 +127,13 @@ public class Maincontroller extends Main{
     	//player.setTranslateX(arenaLeft+1000);
     	//player.setTranslateY(arenaTop+900);
     	player.setLayoutX(player.getLayoutX() + 1000);
-    	player.setLayoutY(player.getLayoutY() + 900);
+    	player.setLayoutY(player.getLayoutY() + 400);
     	player.setVisible(true);
     	player.setScaleX(1);
     	player.setScaleY(1);
     	
     }
-    public void LevelUP() {
+    public void LevelUP() {		
     	if (enemiesleft!=0) return;
     	if (currentlevel==0) {
     		currentlevel++;
@@ -155,8 +153,6 @@ public class Maincontroller extends Main{
 
     	    	int pos=15;
     			Enemy e=new Enemy();
-    			e.setLayoutX(arenaLeft+pos);
-    			e.setLayoutY(arenaTop);
     			arenaPane.getChildren().add(e);
     			pos+=15;
     		}
@@ -165,7 +161,7 @@ public class Maincontroller extends Main{
     	});
     	wait.play();
     	
-    	
+    			
     }}
     
     

@@ -17,7 +17,7 @@ public class Projectile extends ImageView {
 	 */
 	Projectile(String cmd/*,LinkedList<ImageView> X*/,double x, double y,Node owner){
 		dx = x - owner.getLayoutX() + owner.getBoundsInParent().getWidth();
-		dy = y - owner.getLayoutY() + owner.getBoundsInParent().getHeight();		
+		dy = y - owner.getLayoutY() + owner.getBoundsInParent().getHeight();
 		double distance = Math.sqrt(dx*dx+dy*dy);
 		
 		dx /= distance;
