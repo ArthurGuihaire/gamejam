@@ -429,7 +429,7 @@ public class Maincontroller extends Main{
 			case ("rm"): {
 				if (player.current == null) return;
 				if (sections.length > 1 && sections[1].equals("-rf") && currentlevel > 3) {
-					if (this.mana.getWidth() < maxMana * 0.98) {
+					if (this.mana.getWidth() < maxMana * 0.95) {
 						cmdLine.setText("Error: not enough mana");
 						break;
 					}
@@ -511,14 +511,14 @@ public class Maincontroller extends Main{
 					if (mana.getWidth() > 0.32 * maxMana) {
 						if (player.current != null) {
 							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
-							if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
+							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999; mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}
 							arenaPane.getChildren().add(p);
 							p.setLayoutX(player.getLayoutX()-30);
 							p.setLayoutY(player.getLayoutY()+15);
 						}
 						else {
 							Projectile p = new Projectile("shred", crosshair.getLayoutX() - 130, crosshair.getLayoutY() - 200, player);
-							if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
+							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999; mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}
 							p.setLayoutX(player.getLayoutX()-30);
 							p.setLayoutY(player.getLayoutY()+15);
 							arenaPane.getChildren().add(p);
