@@ -6,7 +6,8 @@ public class Boss extends Enemy {
 	
 	
 	Boss(){
-		
+		speed = 0.6;
+		defaultSpeed = 0.6;
 		damage=100;
 		health=500;
 
