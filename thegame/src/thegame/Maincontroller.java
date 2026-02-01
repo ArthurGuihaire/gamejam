@@ -412,8 +412,19 @@ public class Maincontroller extends Main{
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
 				if (player.current == null) return;
-				if (sections.length > 1 && sections[1].equals("rf")) {
-					//remove recursive force!!!
+				if (sections.length > 1 && sections[1].equals("-rf") && this.mana.getWidth() >= maxMana * 0.98) {
+					for (Node n : arenaPane.getChildren()) {
+						if (n instanceof Enemy e) {
+							ScaleTransition s = new ScaleTransition(Duration.seconds(1.0), e);
+							s.setToX(0.0);
+							s.setToY(0.0);
+							s.setOnFinished((event) -> {
+								this.kill(n);
+							});
+							s.playFromStart();
+						}
+					}
+					this.mana.setWidth(this.mana.getWidth() - 0.95 * maxMana);
 				}
 				else {
 					player.current.health -= Player.RM_DAMAGE * 100;

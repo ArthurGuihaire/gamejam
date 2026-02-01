@@ -91,12 +91,15 @@ public class Projectile extends ImageView {
 					double dist = dx*dx+dy*dy;
 					
 					if (dist < 100000) {
-						emy.speed = 0.0;
+						emy.speed = 0.2;
 						emy.speedTimer = 600;
 					}
 				}
 			}
 		}
+		
+		this.setDead(true);
+		Platform.runLater(()->arenaPane.getChildren().remove(this));
 	}
 	
 	public void setDead(boolean b) {
