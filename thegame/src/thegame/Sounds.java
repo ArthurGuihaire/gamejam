@@ -9,6 +9,10 @@ public class Sounds {
 	public Sounds() {
 		this.load("/sounds/output.wav");
 		this.load("/sounds/glass-break.wav");
+		this.load("/sounds/shred1.wav");
+		this.load("/sounds/shred2.wav");
+		this.load("/sounds/shred3.wav");
+		
 	}
 	
 	private void load(String soundFilePath) {

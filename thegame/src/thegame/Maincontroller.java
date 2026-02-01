@@ -504,6 +504,8 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("null"):{
+				mana.setWidth(maxMana);
+				
 				player.current=null;
 				player.previous=null;
 				break;
