@@ -564,7 +564,7 @@ public class Maincontroller extends Main{
 					boost = true;
 					boostFrames = 1000;
 					player.speedBoost = 1.5;
-					manaRegen = 1.2/100;
+					manaRegen = 1.2/10;
 					break;
 				}
 			}
