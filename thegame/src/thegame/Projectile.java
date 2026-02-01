@@ -8,16 +8,15 @@ import javafx.scene.image.ImageView;
 public class Projectile extends ImageView {
 	
 	double projectilespeed;
-	double xDestination;
-	double yDestination;
+	private double dx, dy;
 	
 	/**
 	 * Creates a new Projectile object. Projectiles are fired from commands, so 
 	 * @param cmd the command that will be firing the Projectile.
 	 */
 	Projectile(String cmd/*,LinkedList<ImageView> X*/,double x, double y){
-		this.xDestination=x;
-		this.yDestination=y;
+		double dx = x - this.getLayoutX();
+		double dy = y - this.getLayoutY();
 		switch (cmd.toLowerCase().trim()) {
 		case "shred":
 			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
@@ -29,19 +28,15 @@ public class Projectile extends ImageView {
 			break;
 		}
 
-		this.setRotate(Math.toDegrees(Math.atan(xDestination-this.getLayoutX())));
+		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
+		if (dx > 0) this.setRotate(this.getRotate() + 180);
 	}
 	
 	
 	public void move() {
-		double dx = xDestination - this.getLayoutX();
-		double dy = yDestination - this.getLayoutY();
 		double distance = Math.sqrt(dx*dx+dy*dy);
-		this.setLayoutX(this.getLayoutX() + (xDestination - this.getLayoutX()) / distance);
-		this.setLayoutY(this.getLayoutY() + (yDestination - this.getLayoutY()) / distance);
 		
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
-		
 		if (dx > 0) this.setRotate(this.getRotate() + 180);
 	}
 	
