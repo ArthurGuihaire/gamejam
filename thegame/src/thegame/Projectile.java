@@ -15,7 +15,6 @@ public class Projectile extends ImageView {
 	double projectilespeed;
 	private double dx, dy;
 	
-	private boolean isTree;
 	public int treeNumber;
 	
 	/**
@@ -48,9 +47,9 @@ public class Projectile extends ImageView {
 			projectilespeed=2;
 			break;
 		case "tree":
-			System.out.println("TREE");
-			this.isTree = true;
+			this.type = "tree";
 			this.setImage(new Image(getClass().getResource("/images/sawblade.png").toExternalForm()));
+			System.out.println("TREE");
 			break;
 		}
 
@@ -60,7 +59,7 @@ public class Projectile extends ImageView {
 	}
 
 	public void treeDie() {
-		if (isTree && treeNumber < 3) {
+		if (type.equals("tree") && treeNumber < 3) {
 			System.out.println("TREE DIE");
 		}
 	}
