@@ -147,6 +147,7 @@ public class Maincontroller extends Main{
     		enemiesleft=currentlevel+2;
     		for (int i=0;i<enemiesleft;i++) {
     			Enemy e=new Enemy();
+    			e.setLayoutY(e.getLayoutY() + Math.random() * 500);
     			arenaPane.getChildren().add(e);
     			//System.out.println("new enemy!");
 
@@ -193,7 +194,8 @@ clearProjectiles();
     int pos=15;
 	for (int i=0;i<enemiesleft;i++) {
 
-		Enemy e=new Enemy();
+		Enemy e=new Enemy();    			
+		e.setLayoutY(e.getLayoutY() + Math.random() * 500);
 		arenaPane.getChildren().add(e);
 		e.setLayoutX(e.getLayoutX()+pos);
 		System.out.println("newer enemy");
@@ -523,8 +525,6 @@ clearProjectiles();
 		}else if (n instanceof Enemy e) {
 			e.setDead(true);
 				die(e);
-		}
-	}
 
 				enemiesleft--;
 		}
