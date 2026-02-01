@@ -81,6 +81,7 @@ public class Maincontroller extends Main{
     		mainScene=btnButton.getScene();	
     		setScene(btnButton.getScene());
     		soundPlayer.playSound(0);
+    		btnButton.setDisable(true);
     	});
     	
     	btnEnemy.setOnAction((event)->{
