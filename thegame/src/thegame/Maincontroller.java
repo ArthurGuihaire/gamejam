@@ -63,6 +63,7 @@ public class Maincontroller extends Main{
     public void initialize() {
     	arenaLeft=(int)arena.getLayoutX()-685;
     	arenaTop=(int)arena.getLayoutY()-385;
+    	cmdLine.setDisable(true);
 
     	mainScene=this.btnButton.getScene();
     	mainScene=arena.getScene();
@@ -81,6 +82,7 @@ public class Maincontroller extends Main{
     		mainScene=btnButton.getScene();	
     		setScene(btnButton.getScene());
     		soundPlayer.playSound(0);
+    		btnButton.setDisable(true);
     	});
     	
     	btnEnemy.setOnAction((event)->{
@@ -256,7 +258,6 @@ public class Maincontroller extends Main{
             	player.moveMode=true;
             	cmdLine.clear();
             	this.useCommand(currentcmd);
-            	
             	xmove=0;
             	ymove=0;
             	cmdLine.setDisable(true);
