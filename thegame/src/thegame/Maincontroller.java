@@ -159,6 +159,9 @@ public class Maincontroller extends Main{
 	    	if (keyInput.contains("D")) {
 	    		if (player.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())player.moveRight();
 	    	}
+
+	    	analyseDirection();
+	    	System.out.println(xmove+", "+ymove);
     	}
     	
     	for (Node n : arenaPane.getChildren()) {
@@ -167,8 +170,7 @@ public class Maincontroller extends Main{
     		}
     	}
 
-    	analyseDirection();
-    	//System.out.println(keyInput);
+    	System.out.println(keyInput);
     	
     	enemyCollision();
     }
@@ -233,8 +235,9 @@ public class Maincontroller extends Main{
                 keyInput.add(code);
             }
             if (code.equals("CONTROL")) {
-            	player.moveMode = !player.moveMode;
+            	player.moveMode =false;
             	cmdLine.setDisable(false);
+            	cmdLine.requestFocus();
             }
         });
 
@@ -243,11 +246,13 @@ public class Maincontroller extends Main{
             removeDirection(code);
             if (code.equals("ENTER")) {
             	String currentcmd=cmdLine.getText();
+            	player.moveMode=true;
             	cmdLine.clear();
             	this.useCommand(currentcmd);
             	
             	xmove=0;
             	ymove=0;
+            	cmdLine.setDisable(true);
             }
             keyInput.remove(code);
         });
