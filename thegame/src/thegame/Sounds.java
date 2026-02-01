@@ -18,6 +18,7 @@ public class Sounds {
 		this.load("/sounds/remove-rf-2.wav");
 		this.load("/sounds/shred-force.wav");
 		this.load("/sounds/remove.wav");
+		this.load("/sounds/chmod.wav");
 		
 	}
 	

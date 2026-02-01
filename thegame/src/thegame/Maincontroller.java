@@ -70,6 +70,7 @@ public class Maincontroller extends Main{
 	private int boostFrames = 0;
 	private boolean boost = false;
 	private boolean freeze=false;
+	private boolean admin=false;
 	
     ArrayList<String> keyInput = new ArrayList<>();
     
@@ -282,6 +283,7 @@ public class Maincontroller extends Main{
     	projectileCollision();
     	LevelUP();
     	updateProjectileTimers();
+    	if (admin) mana.setWidth(maxMana);
     	
     	//mana.setScaleX(mana.getScaleX()+0.001);
     	if (mana.getWidth() < maxMana)
@@ -441,7 +443,7 @@ public class Maincontroller extends Main{
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
 				if (player.current == null) return;
-				if (sections.length > 1 && sections[1].equals("-rf") && currentlevel > 3) {
+				if (sections.length > 1 && sections[1].equals("-rf") &&( currentlevel > 3||admin)) {
 					if (this.mana.getWidth() < maxMana * 0.95) {
 						cmdLine.setText("Error: not enough mana");
 						break;
@@ -522,7 +524,7 @@ public class Maincontroller extends Main{
 				break;	
 			}
 			case ("shred"): {
-				if (currentlevel > 1) {
+				if (currentlevel > 1||admin) {
 					if (mana.getWidth() > 0.32 * maxMana) {
 						if (player.current != null) {
 							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
@@ -574,7 +576,7 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("java"): {
-				if (currentlevel > 2) {
+				if (currentlevel > 2||admin) {
 					boost = true;
 					boostFrames = 1000;
 					player.speedBoost = 1.5;
@@ -583,6 +585,10 @@ public class Maincontroller extends Main{
 
 				break;
 			}
+			case "chmod":
+			admin=!admin;
+			
+			break;
 			case "ice":
 			case ("freeze"):{
 				this.freeze=!this.freeze;
