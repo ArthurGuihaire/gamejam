@@ -79,10 +79,6 @@ public class Projectile extends ImageView {
 	}
 
 	public void treeDie(Pane arenaPane) {
-		double minDistance1 = Double.MAX_VALUE;
-		double minDistance2 = Double.MAX_VALUE;
-
-		
 		if (type.equals("tree")) {
 			System.out.println("TREE DIE");
 			
