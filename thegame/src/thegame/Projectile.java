@@ -31,11 +31,11 @@ public class Projectile extends ImageView {
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
 		if (dx > 0) this.setRotate(this.getRotate() + 180);
 	}
-	
-	
+
+
 	public void move() {
 		double distance = Math.sqrt(dx*dx+dy*dy);
-		
+
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
 		if (dx > 0) this.setRotate(this.getRotate() + 180);
 	}

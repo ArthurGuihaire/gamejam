@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import thegame.Main;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,17 +68,8 @@ public class Maincontroller extends Main{
 
     	mainScene=this.btnButton.getScene();
     	mainScene=arena.getScene();
-    	System.out.println(mainScene);
-    	System.out.println();
-//    	System.out.println(player);
-//    	System.out.println(arena);
-//    	System.out.println(arenaPane);
-//    	System.out.println(btnButton.getId());
-//    	System.out.println(btnButton);
     	
     	btnButton.setOnAction((event)->{
-    		System.out.println("hello");
-    		System.out.println(mainScene);
     		startGame();				
     		mainScene=btnButton.getScene();	
     		setScene(btnButton.getScene());
@@ -170,7 +162,7 @@ public class Maincontroller extends Main{
 	    	}
 
 	    	analyseDirection();
-	    	System.out.println(xmove+", "+ymove);
+	    	//System.out.println(xmove+", "+ymove);
     	}
     	
     	for (Node n : arenaPane.getChildren()) {
@@ -182,7 +174,7 @@ public class Maincontroller extends Main{
     		}
     	}
 
-    	System.out.println(keyInput);
+    	//System.out.println(keyInput);
     	
     	enemyCollision();
     }
@@ -231,11 +223,28 @@ public class Maincontroller extends Main{
 			}
     		for (Enemy e : elist) {
 				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&(!e.isDead())) {
-					die((Enemy)e);
-					System.out.println("die");
+					//die((Enemy)e);
+					//System.out.println("die");
+					playerDie();
 				}
 			}
     	}
+    }
+    
+    private void playerDie() {
+    	ObservableList<Node> nodes = arenaPane.getChildren();
+    	int i = 0;
+    	for (Node n : nodes) {
+    		if (n instanceof Enemy e) {
+    			e.setDead(true);
+    		}
+    		i++;
+    	}
+    	
+    	Platform.runLater(() -> nodes.remove(player));
+    	
+    	btnButton.fire();
+    	System.out.println("DIEEE");
     }
     
     private void setupKeyPressHandlers() {
@@ -343,6 +352,7 @@ public class Maincontroller extends Main{
 				if (player.current != null) {
 					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY());
 					p.setLayoutX(player.getLayoutX());
+					p.setLayoutY(player.getLayoutY());
 					arenaPane.getChildren().add(p);
 				}
 				else {
@@ -383,7 +393,7 @@ public class Maincontroller extends Main{
 		tt1.setByY(Math.sin(direction)*100);
 		direction=Math.toDegrees(direction);
 		direction+=120;
-		System.out.println(direction);
+		//System.out.println(direction);
 		direction=Math.toRadians(direction);
 		
 		TranslateTransition tt2=new TranslateTransition(Duration.seconds(0.5), gs2);
@@ -393,7 +403,7 @@ public class Maincontroller extends Main{
 		tt2.setByY(Math.sin(direction)*100);
 		direction=Math.toDegrees(direction);
 		direction+=120;
-		System.out.println(direction);
+		//System.out.println(direction);
 		direction=Math.toRadians(direction);
 		
 		
