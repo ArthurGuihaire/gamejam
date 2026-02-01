@@ -457,7 +457,6 @@ public class Maincontroller extends Main{
 							s.setToY(0.0);
 							s.setOnFinished((event) -> {
 								this.kill(n);
-								this.kill(n);
 							});
 							s.playFromStart();
 						}
