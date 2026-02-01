@@ -135,17 +135,31 @@ public class Maincontroller extends Main{
     }
     public void LevelUP() {
     	if (enemiesleft!=0) return;
+    	int pos=15;
+    	if (currentlevel==0) {
+    		currentlevel++;
+    		enemiesleft=currentlevel+2;
+    		for (int i=0;i<enemiesleft;i++) {
+    			Enemy e=new Enemy();
+    			arenaPane.getChildren().add(e);
+    		}
+    	}else if (enemiesleft==0){
     	currentlevel++;
     	enemiesleft=currentlevel+2;
     	gameloop.stop();
     	txtCompleted.setVisible(true);
     	TranslateTransition wait=new TranslateTransition(Duration.seconds(4));
     	wait.setOnFinished((event)->{
-    		
+    		gameloop.start();
+    		for (int i=0;i<enemiesleft;i++) {
+    			Enemy e=new Enemy();
+    			arenaPane.getChildren().add(e);
+    		}
     	});
+    	wait.play();
     	
     	
-    }
+    }}
     
     
     private void gameLoop() { 
@@ -198,6 +212,7 @@ public class Maincontroller extends Main{
     	
     	enemyCollision();
     	projectileCollision();
+    	LevelUP();
     }
     
     private void removeDirection(String key) {
@@ -245,6 +260,7 @@ public class Maincontroller extends Main{
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
 						die(e);
+						enemiesleft--;
 							
 					}
 				}
