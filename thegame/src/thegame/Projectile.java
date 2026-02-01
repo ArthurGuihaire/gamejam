@@ -25,7 +25,7 @@ public class Projectile extends ImageView {
 
 		switch (cmd.toLowerCase().trim()) {
 		case "shred":
-			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
+			this.setImage(new Image(getClass().getResource("/images/sawblade.png").toExternalForm()));
 			System.out.println("SHREDDING"); projectilespeed=0.15;
 			break;
 		case "magick":
