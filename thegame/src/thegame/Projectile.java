@@ -16,8 +16,8 @@ public class Projectile extends ImageView {
 	 * @param cmd the command that will be firing the Projectile.
 	 */
 	Projectile(String cmd/*,LinkedList<ImageView> X*/,double x, double y,Node owner){
-		dx = x - owner.getLayoutX();
-		dy = y - owner.getLayoutY();		
+		dx = x - owner.getLayoutX() + owner.getBoundsInParent().getWidth();
+		dy = y - owner.getLayoutY() + owner.getBoundsInParent().getHeight();		
 		double distance = Math.sqrt(dx*dx+dy*dy);
 		
 		dx /= distance;
@@ -34,7 +34,7 @@ public class Projectile extends ImageView {
 			break;
 		}
 
-		this.setRotate(Math.toDegrees(Math.atan(y / x)));
+		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
 		if (dx < 0) this.setRotate(this.getRotate() + 180);
 	}
 
@@ -43,5 +43,4 @@ public class Projectile extends ImageView {
 		this.setLayoutX(this.getLayoutX() + dx);
 		this.setLayoutY(this.getLayoutY() + dy);
 	}
-	
 }
