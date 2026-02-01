@@ -518,7 +518,7 @@ public class Maincontroller extends Main{
 
 				p.setLayoutX(player.getLayoutX()+100);
 				p.setLayoutY(player.getLayoutY()+100);
-				break;
+				break;	
 			}
 			case ("shred"): {
 				if (currentlevel > 1) {
@@ -582,6 +582,7 @@ public class Maincontroller extends Main{
 
 				break;
 			}
+			case "ice":
 			case ("freeze"):{
 				this.freeze=!this.freeze;
 				break;
