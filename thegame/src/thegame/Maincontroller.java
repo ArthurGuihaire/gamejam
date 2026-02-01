@@ -86,7 +86,23 @@ public class Maincontroller extends Main{
     		
     	});
     	
-    	
+    	arena.setOnMouseMoved(new EventHandler<MouseEvent>() {
+    		@Override
+    		public void handle (MouseEvent mouse) {
+    			crosshair.setLayoutX(mouse.getSceneX()-25);
+    			crosshair.setLayoutY(mouse.getSceneY()-25);
+    		}
+    		
+    	});
+    	crosshair.setOnMouseMoved(new EventHandler<MouseEvent>() {
+    		@Override
+    		public void handle (MouseEvent mouse) {
+    			if (mouse.getSceneX()>arena.getLayoutX()&&mouse.getSceneY()>arena.getLayoutY()&&mouse.getSceneY()<arena.getHeight()+arena.getLayoutY()&&mouse.getSceneX()<arena.getWidth()+arena.getLayoutX())
+    			{	crosshair.setLayoutX(mouse.getSceneX()-25);
+    			crosshair.setLayoutY(mouse.getSceneY()-25);}
+    		}
+    		
+    	});
     	//gameLoop();
     	//setupKeyPressHandlers();
     	
@@ -149,23 +165,7 @@ public class Maincontroller extends Main{
     	analyseDirection();
     	System.out.println(keyInput);
     	
-    	arena.setOnMouseMoved(new EventHandler<MouseEvent>() {
-    		@Override
-    		public void handle (MouseEvent mouse) {
-    			crosshair.setLayoutX(mouse.getSceneX()-25);
-    			crosshair.setLayoutY(mouse.getSceneY()-25);
-    		}
-    		
-    	});
-    	crosshair.setOnMouseMoved(new EventHandler<MouseEvent>() {
-    		@Override
-    		public void handle (MouseEvent mouse) {
-    			if (mouse.getSceneX()>arena.getLayoutX()&&mouse.getSceneY()>arena.getLayoutY()&&mouse.getSceneY()<arena.getHeight()+arena.getLayoutY()&&mouse.getSceneX()<arena.getWidth()+arena.getLayoutX())
-    			{	crosshair.setLayoutX(mouse.getSceneX()-25);
-    			crosshair.setLayoutY(mouse.getSceneY()-25);}
-    		}
-    		
-    	});
+    	
     	enemyCollision();
     }
     
