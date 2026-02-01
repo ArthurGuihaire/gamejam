@@ -341,7 +341,7 @@ public class Maincontroller extends Main{
 				if (n.getBoundsInParent().intersects(e.getBoundsInParent())&&(!e.isDead())) {
 					//die((Enemy)e);
 					//System.out.println("die");
-					playerDie();
+					Platform.runLater(() -> playerDie());
 				}
 			}
     	}
