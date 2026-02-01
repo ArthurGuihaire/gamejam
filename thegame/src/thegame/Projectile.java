@@ -45,6 +45,9 @@ public class Projectile extends ImageView {
 			rt.play();
 			System.out.println("SHREDDING");
 			
+			int sound=(int)(Math.random()*3+3-1);
+			Maincontroller.soundPlayer.playSound(sound);
+			
 			projectilespeed=0.7;
 			maxtime=240;
 			maxpierce=3;

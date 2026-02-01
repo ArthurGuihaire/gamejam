@@ -494,7 +494,6 @@ public class Maincontroller extends Main{
 					arenaPane.getChildren().add(p);
 					p.setLayoutX(player.getLayoutX()-30);
 					p.setLayoutY(player.getLayoutY()+15);
-					p.treeNumber = 1;
 				}
 				break;
 			}
@@ -505,6 +504,8 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("null"):{
+				mana.setWidth(maxMana);
+				
 				player.current=null;
 				player.previous=null;
 				break;
