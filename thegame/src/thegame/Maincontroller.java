@@ -300,9 +300,9 @@ clearProjectiles();
 			if (idk instanceof Projectile p) {
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
-						die(e);
-						if (p.type.equals("magick")) Platform.runLater(()->arenaPane.getChildren().remove(p));
-							enemiesleft--;
+						kill(e);
+						p.pierced++;
+							
 					}
 				}
 			}
@@ -318,6 +318,9 @@ clearProjectiles();
 			
 		}
     }
+    
+   
+    
     private void playerCollision(Node n) {
     	if (n instanceof Player) {
     		ArrayList<Enemy> elist=new ArrayList<Enemy>();
@@ -498,6 +501,27 @@ clearProjectiles();
 		}
 	}
 	
+	public void updateProjectileTimers() {
+		ArrayList<Projectile> al=new ArrayList<Projectile>();
+		for (Node projectile : arenaPane.getChildren()) {
+			if (projectile instanceof Projectile p){
+			p.timeexisting+=1;
+			if (p.timeexisting>p.maxtime) kill(p);
+			else
+			if (p.pierced>=p.maxpierce) kill(p);
+			
+			}
+		}			
+	}
+	
+	public void kill(Node n) {
+		
+		if (n instanceof Projectile p) {
+			p.setDead(true);
+				arenaPane.getChildren().remove(p);
+		}else if (n instanceof Enemy e) {
+			e.setDead(true);
+				die(e);
 
 	public void die(Enemy e) {
 		double direction= (Math.random()*120);
@@ -556,7 +580,7 @@ clearProjectiles();
 		rt3.play();
 		
 		e.setVisible(false);
-		e.setDead(true);
+		kill(e);
 		
 		
 		

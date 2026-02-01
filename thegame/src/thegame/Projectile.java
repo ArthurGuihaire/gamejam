@@ -14,11 +14,12 @@ import javafx.util.Duration;
 public class Projectile extends ImageView {
 	
 	String type="";
-	double projectilespeed;
+	double projectilespeed=0;
 	private double dx, dy;
 	double timeexisting=0;
 	int maxtime;
 	
+	int pierced=0;
 	int maxpierce;
 	boolean dead=false;
 	
@@ -44,21 +45,27 @@ public class Projectile extends ImageView {
 			rt.setInterpolator(Interpolator.LINEAR);
 			rt.setByAngle(360*20);
 			rt.play();
-			System.out.println("SHREDDING"); projectilespeed=0.7;
+			System.out.println("SHREDDING");
+			
+			projectilespeed=0.7;
 			maxtime=240;
+			maxpierce=3;
 			break;
 			
 		case "magick":
 			this.type="magick";
 			this.setImage(new Image(getClass().getResource("/images/fireball.png").toExternalForm()));
 			System.out.println("MAGICK");
+			
 			projectilespeed=2;
 			maxtime=180;
+			maxpierce=1;
 			break;
 		case "tree":
 			this.type = "tree";
 			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
 			System.out.println("TREE");
+			
 			maxtime=300;
 			break;
 		}
