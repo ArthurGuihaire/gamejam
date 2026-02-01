@@ -354,7 +354,7 @@ public class Maincontroller extends Main{
     	}
     	
     	Platform.runLater(() -> nodes.remove(player));
-    	
+    	gameloop.stop();
     	btnButton.fire();
     	System.out.println("DIEEE");
     }
