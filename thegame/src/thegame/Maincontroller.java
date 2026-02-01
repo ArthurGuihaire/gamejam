@@ -488,6 +488,7 @@ clearProjectiles();
 					p.setLayoutY(player.getLayoutY()+15);
 					p.treeNumber = 1;
 				}
+				break;
 			}
 			case ("java"): {
 				boost = true;

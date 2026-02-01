@@ -64,6 +64,8 @@ public class Projectile extends ImageView {
 		case "tree":
 			this.type = "tree";
 			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
+			this.setScaleX(0.1);
+			this.setScaleY(0.1);
 			System.out.println("TREE");
 			
 			maxtime=300;
