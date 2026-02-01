@@ -21,10 +21,28 @@ public class Enemy extends ImageView {
 	Enemy() {
 		int type=(int) Math.floor(Math.random()*3+1);
 		switch (type) {
-		case 1: this.setImage(new Image(getClass().getResource("/images/glass-pane-1.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
-		case 2: this.setImage(new Image(getClass().getResource("/images/glass-pane-2.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
-		case 3: this.setImage(new Image(getClass().getResource("/images/glass-pane-3.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
-		default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
+			case 1: this.setImage(new Image(getClass().getResource("/images/glass-pane-1.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
+			case 2: this.setImage(new Image(getClass().getResource("/images/glass-pane-2.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
+			case 3: this.setImage(new Image(getClass().getResource("/images/glass-pane-3.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
+			default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
 		}
+	}
+	
+	public void moveTowards(Player p) {
+		double px = p.getLayoutX()+400;
+		double py = p.getLayoutY()+600;
+		
+		double ex = this.getLayoutX();
+		double ey = this.getLayoutY();
+		
+		System.out.println(px);
+		System.out.println(py);
+		
+		double dx = px - ex;
+		double dy = py - ey;
+		
+		double distance = Math.sqrt(dx*dx+dy*dy);
+		this.setLayoutX(ex + dx / distance);
+		this.setLayoutY(ey + dy / distance);
 	}
 }
