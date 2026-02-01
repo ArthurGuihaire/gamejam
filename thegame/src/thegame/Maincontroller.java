@@ -388,7 +388,7 @@ public class Maincontroller extends Main{
             	String currentcmd=cmdLine.getText();
             	player.moveMode=true;
             	cmdLine.clear();
-            	if (code.equals("ENTER"))
+            	if (code.equals("ENTER")) // it must truly be enter to submit the code, escape just exits
             	this.useCommand(currentcmd);
             	xmove=0;
             	ymove=0;
