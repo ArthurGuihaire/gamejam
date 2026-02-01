@@ -394,12 +394,12 @@ public class Maincontroller extends Main{
 			case ("magick"): {
 				if (player.current == null) return;
 				
-				player.current.setScaleX(0.6);
-				player.current.setScaleY(0.6);
+				player.current.setScaleX(0.35);
+				player.current.setScaleY(0.35);
 	
 				player.current.damage -= 10;
-				Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY(),player);
-				arenaPane.getChildren().add(p);
+				//Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY(),player);
+				//arenaPane.getChildren().add(p);
 				break;
 			}
 			case ("shred"): {
@@ -407,12 +407,12 @@ public class Maincontroller extends Main{
 					Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
 					arenaPane.getChildren().add(p);
 					p.setLayoutX(player.getLayoutX()-30);
-					p.setLayoutY(player.getLayoutY()+14);
+					p.setLayoutY(player.getLayoutY()+15);
 				}
 				else {
 					Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
 					p.setLayoutX(player.getLayoutX()-30);
-					p.setLayoutY(player.getLayoutY()+14);
+					p.setLayoutY(player.getLayoutY()+15);
 					arenaPane.getChildren().add(p);
 				}
 				break;
@@ -434,7 +434,7 @@ public class Maincontroller extends Main{
 
 	public void die(Enemy e) {
 		double direction= (Math.random()*120);
-		System.out.println(direction);
+		//System.out.println(direction);
 		direction=Math.toRadians(direction);
 
 		final int amount = 60;
