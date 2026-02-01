@@ -64,9 +64,9 @@ public class Projectile extends ImageView {
 			break;
 		case "tree":
 			this.type = "tree";
-			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
-			this.setScaleX(0.1);
-			this.setScaleY(0.1);
+			this.setImage(new Image(getClass().getResource("/images/fireball.png").toExternalForm()));
+			this.setScaleX(1.0);
+			this.setScaleY(1.0);
 			System.out.println("TREE");
 			
 			maxtime=300;
@@ -79,10 +79,6 @@ public class Projectile extends ImageView {
 	}
 
 	public void treeDie(Pane arenaPane) {
-		double minDistance1 = Double.MAX_VALUE;
-		double minDistance2 = Double.MAX_VALUE;
-
-		
 		if (type.equals("tree")) {
 			System.out.println("TREE DIE");
 			

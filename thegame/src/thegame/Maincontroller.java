@@ -307,8 +307,7 @@ public class Maincontroller extends Main{
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e&&!p.isDead()) {
 						kill(e);
 						p.pierced++;
-						if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p))
-						;
+						if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p));
 						p.treeDie(arenaPane);
 					}
 				}
