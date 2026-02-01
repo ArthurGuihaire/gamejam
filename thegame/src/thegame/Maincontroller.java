@@ -98,6 +98,7 @@ public class Maincontroller extends Main{
     		crosshair.toFront();
     		
     	});
+    	btnEnemy.setFocusTraversable(false);
     	
     	arena.setOnMouseMoved(new EventHandler<MouseEvent>() {
     		@Override
@@ -553,7 +554,7 @@ public class Maincontroller extends Main{
 					boost = true;
 					boostFrames = 1000;
 					player.speedBoost = 1.5;
-					manaRegen = 1.2;
+					manaRegen = 1.2/100;
 					break;
 				}
 			}
