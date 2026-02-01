@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
@@ -148,12 +147,15 @@ public class Maincontroller extends Main{
     	enemiesleft=currentlevel+2;
     	txtCompleted.setVisible(true);
     	gameloop.stop();
-    	
+    	ArrayList<Node> al= new ArrayList<Node>();
     	for (Node n : arenaPane.getChildren()) {
+    		al.add(n);
     		if (n instanceof Enemy || n instanceof Projectile) {
-    			Platform.runLater(() -> arenaPane.getChildren().remove(n));
+    			Platform.runLater(() -> al.remove(n));
     		}
     	}
+    	arenaPane.getChildren().clear();
+    	arenaPane.getChildren().addAll(al);
     	    	
     	try {
     		Thread.sleep(3000);
