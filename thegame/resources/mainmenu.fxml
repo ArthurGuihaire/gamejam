@@ -22,7 +22,7 @@
       </ImageView>
       <Button fx:id="btnStart" layoutX="776.0" layoutY="233.0" mnemonicParsing="false" prefHeight="106.0" prefWidth="200.0" text="start button" visible="false" />
       <Ellipse fx:id="circleBelly" fill="#1f93ff00" layoutX="870.0" layoutY="698.0" radiusX="149.0" radiusY="154.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-      <Text layoutX="517.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LINUX COMMANDS SHRED" wrappingWidth="732.8034057617188">
+      <Text layoutX="521.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LINUX COMMANDS SHRED" wrappingWidth="786.1366577148438">
          <font>
             <Font size="60.0" />
          </font>
