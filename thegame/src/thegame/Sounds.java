@@ -14,8 +14,8 @@ public class Sounds {
 		this.load("/sounds/shred3.wav");
 		this.load("/sounds/magick.wav");
 		this.load("/sounds/tree.wav");
-		this.load("/sounds/remove-rf1.wav");
-		this.load("/sounds/remove-rf2.wav");
+		this.load("/sounds/remove-rf-1.wav");
+		this.load("/sounds/remove-rf-2.wav");
 		
 	}
 	
