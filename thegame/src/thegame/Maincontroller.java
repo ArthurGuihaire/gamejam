@@ -74,7 +74,7 @@ public class Maincontroller extends Main{
     	cmdLine.setDisable(true);
     	txtCompleted.setVisible(false);
     	
-    	mana.setWidth(0);
+    	mana.setWidth(maxMana);
 
     	mainScene=this.btnButton.getScene();
     	mainScene=arena.getScene();
@@ -161,9 +161,15 @@ public class Maincontroller extends Main{
     	ObservableList<Node> al= arenaPane.getChildren();
     	
     	for (Node n : al) {
-    		if (n instanceof Enemy || n instanceof Projectile) {
+    		if (n instanceof Enemy) {
     			Platform.runLater(() -> al.remove(n));
-    		}	
+    		}
+    		if (n instanceof Projectile proj) {
+    			Platform.runLater(() -> {
+    				proj.treeDie(arenaPane);
+    				al.remove(n);
+    			});
+    		}
     	}
 
     	txtCompleted.setVisible(true);
@@ -292,7 +298,6 @@ clearProjectiles();
     	pls.addAll(arenaPane.getChildren());
     	for (Node idk : arenaPane.getChildren()) {
 			if (idk instanceof Projectile p) {
-		
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
 						die(e); 
@@ -308,6 +313,7 @@ clearProjectiles();
     private void clearProjectiles() {
     	for (Node n : arenaPane.getChildren()) {
     		if (n instanceof Projectile p) {
+    			p.treeDie(arenaPane);
     			Platform.runLater(()->arenaPane.getChildren().remove(p));
     		}
 			
