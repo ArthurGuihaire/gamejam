@@ -42,6 +42,11 @@ public class Maincontroller extends Main{
 	@FXML
 	Text txtCompleted;
 	
+	@FXML
+	Rectangle mana;
+	
+	final int maxMana = 454;
+	
 	Player player;
 	
 	private Scene mainScene;
@@ -69,6 +74,7 @@ public class Maincontroller extends Main{
     	cmdLine.setDisable(true);
     	txtCompleted.setVisible(false);
     	
+    	mana.setWidth(0);
 
     	mainScene=this.btnButton.getScene();
     	mainScene=arena.getScene();
@@ -241,7 +247,9 @@ public class Maincontroller extends Main{
     	projectileCollision();
     	LevelUP();
     	
-    
+    	//mana.setScaleX(mana.getScaleX()+0.001);
+    	if (mana.getWidth() < this.maxMana)
+    		mana.setWidth(mana.getWidth() + 1);
     }
     
     private void removeDirection(String key) {
