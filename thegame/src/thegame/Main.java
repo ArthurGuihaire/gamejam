@@ -18,6 +18,7 @@ public class Main extends Application{
 		System.out.println("hi");
 		launch(args);
 	}
+	public static boolean linuxmode=false;
 	public static Scene s;
 	@Override
 	public void start(Stage primaryStage) {

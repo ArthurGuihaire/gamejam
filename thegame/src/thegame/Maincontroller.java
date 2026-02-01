@@ -212,10 +212,19 @@ public class Maincontroller extends Main{
 	}
     }
     private void gameLoop() { 
+    	if(Main.linuxmode) {
+    		gameloop=new AnimationTimer() {
+    			
+    			@Override
+    			public void handle(long arg0) {
+    				update();
+    				update();
+    			}
+    		};
+    	}else
     	gameloop=new AnimationTimer() {
 			@Override
 			public void handle(long args) {
-		        update();
 		        update();
 			}
 		}; 

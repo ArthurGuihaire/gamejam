@@ -32,5 +32,6 @@
             <Font size="30.0" />
          </font>
       </Text>
+      <Ellipse fx:id="linuxmode" fill="#1f93ff00" layoutX="1517.0" layoutY="421.0" radiusX="152.0" radiusY="63.0" rotate="15.4" stroke="TRANSPARENT" strokeType="INSIDE" />
    </children>
 </Pane>
