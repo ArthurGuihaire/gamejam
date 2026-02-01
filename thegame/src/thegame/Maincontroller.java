@@ -148,13 +148,15 @@ public class Maincontroller extends Main{
     	enemiesleft=currentlevel+2;
     	gameloop.stop();
     	txtCompleted.setVisible(true);
-    	TranslateTransition wait=new TranslateTransition(Duration.seconds(4));
+    	TranslateTransition wait=new TranslateTransition(Duration.seconds(3));
     	wait.setOnFinished((event)->{
-    		gameloop.start();
     		for (int i=0;i<enemiesleft;i++) {
     			Enemy e=new Enemy();
     			arenaPane.getChildren().add(e);
+    			
     		}
+    		txtCompleted.setVisible(false);
+    		gameloop.start();
     	});
     	wait.play();
     	
@@ -260,13 +262,18 @@ public class Maincontroller extends Main{
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
 						die(e);
-						enemiesleft--;
+						enemiesleft--;	
 							
 					}
 				}
 			}
 		}
     	
+    }
+    private void clearProjectiles() {
+    	for (Node string : keyInput) {
+			
+		}
     }
     
     private void playerCollision(Node n) {
