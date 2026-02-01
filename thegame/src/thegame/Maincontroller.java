@@ -151,7 +151,6 @@ public class Maincontroller extends Main{
     	currentlevel++;
     	enemiesleft=currentlevel+2;
     	txtCompleted.setVisible(true);
-    	gameloop.stop();
     	ArrayList<Node> al= new ArrayList<Node>();
     	for (Node n : arenaPane.getChildren()) {
     		al.add(n);
@@ -163,6 +162,8 @@ public class Maincontroller extends Main{
     	arenaPane.getChildren().addAll(al);
 
     	txtCompleted.setVisible(true);
+
+    	gameloop.stop();
     	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
     	
     	tt.setOnFinished((event)->{
