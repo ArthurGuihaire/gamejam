@@ -85,6 +85,7 @@ public class Maincontroller extends Main{
     	btnEnemy.setOnAction((event)->{
     		Enemy en=new Enemy();
     		arenaPane.getChildren().add(en);
+    		crosshair.toFront();
     		
     	});
     	
@@ -404,6 +405,12 @@ public class Maincontroller extends Main{
 				boost = true;
 				boostFrames = 300;
 				player.speedBoost = 1.5;
+				break;
+			}
+			case ("null"):{
+				player.current=null;
+				player.previous=null;
+				break;
 			}
 		}
 	}
