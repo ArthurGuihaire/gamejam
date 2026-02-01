@@ -182,7 +182,7 @@ public class Maincontroller extends Main{
 	    	txtCompleted.setVisible(true);    	clearProjectiles();
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
-	    	if (currentlevel > 6) {
+	    	if (currentlevel > 8) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
 	    	}
 	    	else {
