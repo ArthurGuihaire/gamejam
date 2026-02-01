@@ -451,6 +451,7 @@ public class Maincontroller extends Main{
 					
 					soundPlayer.playSound(sound);
 					for (Node n : arenaPane.getChildren()) {
+						if (n instanceof Boss b) continue;
 						if (n instanceof Enemy e) {
 							ScaleTransition s = new ScaleTransition(Duration.seconds(1.0), e);
 							s.setToX(0.0);
@@ -464,7 +465,7 @@ public class Maincontroller extends Main{
 					this.mana.setWidth(this.mana.getWidth() - 0.95 * maxMana);
 				}
 				else {
-					player.current.health -= Player.RM_DAMAGE * 100;
+					player.current.health -= 100;
 					soundPlayer.playSound(10);
 					if (player.current.health <= 0) {
 						kill(player.current);

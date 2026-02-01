@@ -509,7 +509,7 @@ public class Tutorialcontroller extends Main{
 							this.mana.setWidth(this.mana.getWidth() - 0.95 * maxMana);
 						}
 						else {
-							player.current.health -= Player.RM_DAMAGE * 100;
+							player.current.health -= 100;
 							if (player.current.health <= 0) {
 								kill(player.current);
 								player.current = null;

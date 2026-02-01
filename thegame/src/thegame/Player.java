@@ -4,7 +4,6 @@ import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
 public class Player extends ImageView {
-	public static final int RM_DAMAGE = 20;
 	int health;
 	Enemy current = null;
 	Enemy previous = null;
