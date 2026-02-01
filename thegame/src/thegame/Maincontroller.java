@@ -65,8 +65,10 @@ public class Maincontroller extends Main{
     
     @FXML
     public void initialize() {
-    	arenaLeft=(int)arena.getLayoutX()-685;
-    	arenaTop=(int)arena.getLayoutY()-385;
+    	//arenaLeft=(int)arena.getLayoutX()-685;
+    	//arenaTop=(int)arena.getLayoutY()-385;
+    	arenaLeft=(int)arena.getLayoutX();
+    	arenaTop=(int)arena.getLayoutY();
     	cmdLine.setDisable(true);
     	txtCompleted.setVisible(false);
     	
