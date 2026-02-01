@@ -58,6 +58,8 @@ public class Projectile extends ImageView {
 			this.setImage(new Image(getClass().getResource("/images/fireball.png").toExternalForm()));
 			System.out.println("MAGICK");
 			
+			Maincontroller.soundPlayer.playSound(5);
+			
 			projectilespeed=2;
 			maxtime=180;
 			maxpierce=1;

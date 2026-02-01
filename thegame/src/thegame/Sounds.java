@@ -12,6 +12,7 @@ public class Sounds {
 		this.load("/sounds/shred1.wav");
 		this.load("/sounds/shred2.wav");
 		this.load("/sounds/shred3.wav");
+		this.load("/sounds/magick.wav");
 		
 	}
 	
