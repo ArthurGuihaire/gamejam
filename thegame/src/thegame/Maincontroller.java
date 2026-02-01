@@ -127,6 +127,9 @@ public class Maincontroller extends Main{
     
     public void initPlayer() {
     	player=new Player();
+
+    	player.setScaleX(0.4);
+    	player.setScaleY(0.4);
     	
     	arenaPane.getChildren().add(player);
     	//player.setTranslateX(arenaLeft+1000);
@@ -134,8 +137,7 @@ public class Maincontroller extends Main{
     	player.setLayoutX(player.getLayoutX() + 1000);
     	player.setLayoutY(player.getLayoutY() + 400);
     	player.setVisible(true);
-    	player.setScaleX(1);
-    	player.setScaleY(1);
+    	 
     	
     }
     public void LevelUP() {		
@@ -152,7 +154,7 @@ public class Maincontroller extends Main{
     			//System.out.println("new enemy!");
 
     		}    		gameloop.start();
-    	}else if (enemiesleft==0&&currentlevel>0){
+    	}else if (enemiesleft<=0&&currentlevel>0){
     		gameloop.stop();
     		//System.out.println("stop");
     	currentlevel++;
@@ -174,7 +176,7 @@ public class Maincontroller extends Main{
     	}
 
     	txtCompleted.setVisible(true);
-clearProjectiles();
+    	clearProjectiles();
     	gameloop.stop();
     	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
     	
@@ -318,7 +320,7 @@ clearProjectiles();
     	for (Node n : arenaPane.getChildren()) {
     		if (n instanceof Projectile p) {
     			p.treeDie(arenaPane);
-    			Platform.runLater(()->arenaPane.getChildren().remove(p));
+    			Platform.runLater(()->kill(p));
     		}
 			
 		}
@@ -468,16 +470,19 @@ clearProjectiles();
 				if (mana.getWidth() > 0.2 * maxMana) {
 					if (player.current != null) {
 						Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
+						if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
 						arenaPane.getChildren().add(p);
 						p.setLayoutX(player.getLayoutX()-30);
 						p.setLayoutY(player.getLayoutY()+15);
 					}
 					else {
 						Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
+						if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
 						p.setLayoutX(player.getLayoutX()-30);
 						p.setLayoutY(player.getLayoutY()+15);
 						arenaPane.getChildren().add(p);
 					}
+					
 					
 					mana.setWidth(mana.getWidth() - 0.2 * maxMana);
 				}
@@ -525,11 +530,9 @@ clearProjectiles();
 		if (n instanceof Projectile p) {
 			p.setDead(true);
 				Platform.runLater(()->arenaPane.getChildren().remove(p));
-				enemiesleft--;
 		}else if (n instanceof Enemy e) {
 			e.setDead(true);
 				die(e);
-
 				enemiesleft--;
 		}
 	}
