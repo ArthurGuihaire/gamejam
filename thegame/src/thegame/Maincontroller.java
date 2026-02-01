@@ -324,11 +324,8 @@ public class Maincontroller extends Main{
     			p.treeDie(arenaPane);
     			Platform.runLater(()->kill(p));
     		}
-			
 		}
     }
-    
-   
     
     private void playerCollision(Node n) {
     	if (n instanceof Player) {
@@ -480,7 +477,7 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("shred"): {
-				if (mana.getWidth() > 0.2 * maxMana) {
+				if (mana.getWidth() > 0.32 * maxMana) {
 					if (player.current != null) {
 						Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
 						if (sections.length>1&&sections[1].equals("-f"))p.pierced=-999;
@@ -497,7 +494,7 @@ public class Maincontroller extends Main{
 					}
 					
 					
-					mana.setWidth(mana.getWidth() - 0.2 * maxMana);
+					mana.setWidth(mana.getWidth() - 0.32 * maxMana);
 				}
 				break;
 			}
