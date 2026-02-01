@@ -416,7 +416,8 @@ public class Maincontroller extends Main{
 					if (this.mana.getWidth() < maxMana * 0.98) {
 						cmdLine.setText("Error: not enough mana");
 						break;
-					}int sound=(int)(Math.random()*2+7);
+					}
+					int sound=(int)(Math.random()*2+7);
 					Maincontroller.soundPlayer.playSound(sound);
 					
 					soundPlayer.playSound(sound);
@@ -439,9 +440,9 @@ public class Maincontroller extends Main{
 						kill(player.current);
 						player.current = null;
 					}
+					
+					mana.setWidth(mana.getWidth() + 50);
 				}
-				
-				mana.setWidth(mana.getWidth() + 50);
 			}
 			break;
 			case ("cd"): {
