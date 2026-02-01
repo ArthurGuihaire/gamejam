@@ -143,7 +143,7 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
-    	analyseDirection();
+    	mainScene=this.btnButton.getScene();
     	removeDeadPeople();
     	
     	if (player.moveMode) {
@@ -159,12 +159,16 @@ public class Maincontroller extends Main{
 	    	if (keyInput.contains("D")) {
 	    		if (player.getBoundsInParent().getMaxX()<arena.getWidth()+arena.getLayoutX())player.moveRight();
 	    	}
-	    	//System.out.println(xmove+", "+ymove);
+    	}
+    	
+    	for (Node n : arenaPane.getChildren()) {
+    		if (n instanceof Enemy e) {
+    			e.moveTowards(player);
+    		}
     	}
 
     	analyseDirection();
     	System.out.println(keyInput);
-    	
     	
     	enemyCollision();
     }
