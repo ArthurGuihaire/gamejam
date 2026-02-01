@@ -215,6 +215,7 @@ public class Maincontroller extends Main{
 			@Override
 			public void handle(long args) {
 		        update();
+		        update();
 			}
 		}; 
 		gameloop.start();
@@ -256,7 +257,7 @@ public class Maincontroller extends Main{
     		}
     	}
 
-    	//System.out.println(keyInput);
+    	System.out.println(keyInput);
     	
     	enemyCollision();
     	projectileCollision();
@@ -382,10 +383,12 @@ public class Maincontroller extends Main{
         this.mainScene.setOnKeyReleased((KeyEvent e) ->{
             String code = e.getCode().toString();
             removeDirection(code);
-            if (code.equals("ENTER")) {
+            
+            if (code.equals("ENTER")||code.equals("ESCAPE")) {
             	String currentcmd=cmdLine.getText();
             	player.moveMode=true;
             	cmdLine.clear();
+            	if (code.equals("ENTER"))
             	this.useCommand(currentcmd);
             	xmove=0;
             	ymove=0;

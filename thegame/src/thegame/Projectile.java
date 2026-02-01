@@ -62,7 +62,8 @@ public class Projectile extends ImageView {
 			
 			projectilespeed=2;
 			maxtime=180;
-			maxpierce=2;
+			maxpierce=2
+					;
 			break;
 		case "tree":
 			this.projectilespeed = 0.5;
