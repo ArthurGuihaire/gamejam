@@ -587,7 +587,12 @@ public class Maincontroller extends Main{
 			}
 			case "chmod":
 			admin=!admin;
+
+			if (admin)
+			mana.setFill(Paint.valueOf("d04aff"));
+			else mana.setFill(Paint.valueOf("1fc8ff"));
 			
+			soundPlayer.playSound(11);
 			break;
 			case "ice":
 			case ("freeze"):{
