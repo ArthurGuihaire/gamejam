@@ -29,8 +29,8 @@ public class Enemy extends ImageView {
 	}
 	
 	public void moveTowards(Player p) {
-		double px = p.getLayoutX()+400;
-		double py = p.getLayoutY()+600;
+		double px = p.getLayoutX();
+		double py = p.getLayoutY();
 		
 		double ex = this.getLayoutX();
 		double ey = this.getLayoutY();

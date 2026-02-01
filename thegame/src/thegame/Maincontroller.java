@@ -118,8 +118,10 @@ public class Maincontroller extends Main{
     	player=new Player();
     	
     	arenaPane.getChildren().add(player);
-    	player.setTranslateX(arenaLeft+1000);
-    	player.setTranslateY(arenaTop+900);
+    	//player.setTranslateX(arenaLeft+1000);
+    	//player.setTranslateY(arenaTop+900);
+    	player.setLayoutX(player.getLayoutX() + 1000);
+    	player.setLayoutY(player.getLayoutY() + 900);
     	player.setVisible(true);
     	player.setScaleX(1);
     	player.setScaleY(1);
