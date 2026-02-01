@@ -24,7 +24,7 @@ public class Enemy extends ImageView {
 			case 1: this.setImage(new Image(getClass().getResource("/images/glass-pane-1.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
 			case 2: this.setImage(new Image(getClass().getResource("/images/glass-pane-2.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
 			case 3: this.setImage(new Image(getClass().getResource("/images/glass-pane-3.png").toExternalForm())); this.setScaleX(0.5); this.setScaleY(0.5); break;
-			default: this.setImage(new Image(getClass().getResource("/images/tux-left.png").toExternalForm())); break;
+			default: this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm())); break;
 		}
 	}
 	
