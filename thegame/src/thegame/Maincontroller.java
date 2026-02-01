@@ -135,7 +135,6 @@ public class Maincontroller extends Main{
     }
     public void LevelUP() {
     	if (enemiesleft!=0) return;
-    	int pos=15;
     	if (currentlevel==0) {
     		currentlevel++;
     		enemiesleft=currentlevel+2;
@@ -148,13 +147,19 @@ public class Maincontroller extends Main{
     	enemiesleft=currentlevel+2;
     	gameloop.stop();
     	txtCompleted.setVisible(true);
-    	TranslateTransition wait=new TranslateTransition(Duration.seconds(4));
+    	TranslateTransition wait=new TranslateTransition(Duration.seconds(3));
     	wait.setOnFinished((event)->{
-    		gameloop.start();
     		for (int i=0;i<enemiesleft;i++) {
+
+    	    	int pos=15;
     			Enemy e=new Enemy();
+    			e.setLayoutX(arenaLeft+pos);
+    			e.setLayoutY(arenaTop);
     			arenaPane.getChildren().add(e);
+    			pos+=15;
     		}
+    		txtCompleted.setVisible(false);
+    		gameloop.start();
     	});
     	wait.play();
     	
@@ -260,7 +265,7 @@ public class Maincontroller extends Main{
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
 						die(e);
-						enemiesleft--;
+						enemiesleft--;	
 							
 					}
 				}
@@ -268,7 +273,14 @@ public class Maincontroller extends Main{
 		}
     	
     }
-    
+    private void clearProjectiles() {
+    	for (Node n : arenaPane.getChildren()) {
+    		if (n instanceof Projectile p) {
+    			arenaPane.getChildren().remove(p);
+    		}
+			
+		}
+    }
     private void playerCollision(Node n) {
     	if (n instanceof Player) {
     		ArrayList<Enemy> elist=new ArrayList<Enemy>();
@@ -348,7 +360,7 @@ public class Maincontroller extends Main{
     
 	public void useCommand(String command) {
 		String[] sections = command.split(" ");
-		switch (sections[0]) {
+		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
 				if (player.current == null) return;
 				if (sections.length > 1 && sections[1].equals("rf")) {
