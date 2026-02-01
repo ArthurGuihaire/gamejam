@@ -69,6 +69,7 @@ public class Maincontroller extends Main{
 	
 	private int boostFrames = 0;
 	private boolean boost = false;
+	private boolean freeze=false;
 	
     ArrayList<String> keyInput = new ArrayList<>();
     
@@ -185,10 +186,7 @@ public class Maincontroller extends Main{
 	    	txtCompleted.setVisible(true);    	clearProjectiles();
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
-	    	if (currentlevel==2) {
-	    		arenaPane.getChildren().add(new Boss());
-	    		enemiesleft++;
-	    	}
+	    	
 	    	if (currentlevel > 8) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
 	    	}
@@ -196,6 +194,10 @@ public class Maincontroller extends Main{
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
 		    		generateEnemies();
+		    		if (currentlevel==2) {
+			    		arenaPane.getChildren().add(new Boss());
+			    		enemiesleft++;
+			    	}
 		    		gameloop.start();
 		    		txtLevel.setText("Level "+currentlevel);
 		    	});
@@ -269,6 +271,7 @@ public class Maincontroller extends Main{
     			p.move();
     		}
     		if (n instanceof Enemy e) {
+    			if (freeze!=true)
     			e.moveTowards(player);
     		}
     	}
@@ -577,6 +580,10 @@ public class Maincontroller extends Main{
 					manaRegen = 0.16;
 					break;
 				}
+			}
+			case ("freeze"):{
+				this.freeze=!this.freeze;
+				break;
 			}
 			case ("null"):{
 				mana.setWidth(maxMana);
