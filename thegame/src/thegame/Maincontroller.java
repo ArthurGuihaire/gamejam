@@ -104,7 +104,7 @@ public class Maincontroller extends Main{
     			{	crosshair.setLayoutX(mouse.getSceneX()-25);
     			crosshair.setLayoutY(mouse.getSceneY()-25);}
     		}
-    		
+
     	});
     	//gameLoop();
     	//setupKeyPressHandlers();
