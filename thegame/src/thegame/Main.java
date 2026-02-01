@@ -38,8 +38,8 @@ public static Scene s;
 		
 	}
 	public static void switchScene() {
-		FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));
-		newscene.setController(new Maincontroller());
+		FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/openingcutscene.fxml"));
+		newscene.setController(new Cutscenecontroller());
 		try {
 			Parent newp=newscene.load();
 			s.setRoot(newp);
