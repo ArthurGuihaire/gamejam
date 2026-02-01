@@ -27,7 +27,7 @@ public static Scene s;
 			
 			s=new Scene(root,1800,900);
 			primaryStage.setScene(s);
-			
+			primaryStage.setTitle("sound-file-test");
 			primaryStage.show();
 			primaryStage.setAlwaysOnTop(true);
 			primaryStage.setAlwaysOnTop(false);

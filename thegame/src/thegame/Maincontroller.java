@@ -146,8 +146,8 @@ public class Maincontroller extends Main{
     	}else if (enemiesleft==0){
     	currentlevel++;
     	enemiesleft=currentlevel+2;
-    	gameloop.stop();
     	txtCompleted.setVisible(true);
+    	gameloop.stop();
     	TranslateTransition wait=new TranslateTransition(Duration.seconds(3));
     	wait.setOnFinished((event)->{
     		for (int i=0;i<enemiesleft;i++) {
@@ -155,12 +155,14 @@ public class Maincontroller extends Main{
     	    	int pos=15;
     			Enemy e=new Enemy();
     			arenaPane.getChildren().add(e);
+    			System.out.println("newer enemy");
     			pos+=15;
     		}
     		txtCompleted.setVisible(false);
     		gameloop.start();
     	});
-    	wait.play();
+    	wait.playFromStart();
+    	
     	
     			
     }}
