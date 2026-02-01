@@ -207,7 +207,7 @@ public class Maincontroller extends Main{
 		e.setLayoutY(e.getLayoutY() + Math.random() * 500);
 		arenaPane.getChildren().add(e);
 		e.setLayoutX(e.getLayoutX()+pos);
-		System.out.println("newer enemy");
+		//System.out.println("newer enemy");
 		pos+=30;
 	}
     }
