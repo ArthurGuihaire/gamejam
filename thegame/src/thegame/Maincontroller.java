@@ -387,10 +387,10 @@ public class Maincontroller extends Main{
 			}
 			case ("shred"): {
 				if (player.current != null) {
-					Projectile p = new Projectile("shred", player.current.getLayoutX() - 240, player.current.getLayoutY() - 330, player);
+					Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
 					arenaPane.getChildren().add(p);
-					p.setLayoutX(player.getLayoutX()+150);
-					p.setLayoutY(player.getLayoutY()-100);
+					p.setLayoutX(player.getLayoutX()-150);
+					p.setLayoutY(player.getLayoutY()+100);
 				}
 				else {
 					Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
