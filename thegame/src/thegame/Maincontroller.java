@@ -60,6 +60,8 @@ public class Maincontroller extends Main{
 	private int boostFrames = 0;
 	private boolean boost = false;
 	
+	private int waitDelay = -1;
+	
     ArrayList<String> keyInput = new ArrayList<>();
     
     @FXML
@@ -144,6 +146,38 @@ public class Maincontroller extends Main{
     			arenaPane.getChildren().add(e);
     			System.out.println("new enemy!");
     		}
+    	}else if (enemiesleft==0){
+	    	currentlevel++;
+	    	enemiesleft=currentlevel+2;
+	    	txtCompleted.setVisible(true);
+	    	gameloop.stop();
+	    	ArrayList<Node> al= new ArrayList<Node>();
+	    	for (Node n : arenaPane.getChildren()) {
+	    		al.add(n);
+	    		if (n instanceof Enemy || n instanceof Projectile) {
+	    			Platform.runLater(() -> al.remove(n));
+	    		}
+	    	}
+	    	arenaPane.getChildren().clear();
+	    	arenaPane.getChildren().addAll(al);
+	    	
+	    	waitDelay = 180;
+    	}
+    }
+    
+    private void startEverything() {
+		for (int i=0;i<enemiesleft;i++) {
+	    	int pos=15;
+			Enemy e=new Enemy();
+			arenaPane.getChildren().add(e);
+			System.out.println("newer enemy");
+			pos+=15;
+		}
+		txtCompleted.setVisible(false);
+		gameloop.start();
+    }
+    
+    
     		
     		gameloop.start();
     	}else if (enemiesleft==0&&currentlevel>0){
@@ -238,6 +272,10 @@ public class Maincontroller extends Main{
     	enemyCollision();
     	projectileCollision();
     	LevelUP();
+    	
+    	if (waitDelay-- == 0) {
+    		startEverything();
+    	}
     }
     
     private void removeDirection(String key) {
