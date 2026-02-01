@@ -63,8 +63,9 @@ public class Projectile extends ImageView {
 			maxpierce=1;
 			break;
 		case "tree":
+			this.projectilespeed = 0.5;
 			this.type = "tree";
-			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
+			this.setImage(new Image(getClass().getResource("/images/tree.png").toExternalForm()));
 			this.setScaleX(1);
 			this.setScaleY(1);
 			System.out.println("TREE");
@@ -89,8 +90,8 @@ public class Projectile extends ImageView {
 					
 					double dist = dx*dx+dy*dy;
 					
-					if (dist < 100) {
-						emy.speed = 0.5;
+					if (dist < 100000) {
+						emy.speed = 0.0;
 						emy.speedTimer = 600;
 					}
 				}

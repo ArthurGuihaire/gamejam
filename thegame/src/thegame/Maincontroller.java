@@ -305,10 +305,13 @@ public class Maincontroller extends Main{
 			if (idk instanceof Projectile p) {
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e&&!p.isDead()) {
-						kill(e);
-						p.pierced++;
-						if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p));
-						p.treeDie(arenaPane);
+						if (p.type == "tree")
+							p.treeDie(arenaPane);
+						else {
+							kill(e);
+							p.pierced++;
+							if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p));
+						}
 					}
 				}
 			}
