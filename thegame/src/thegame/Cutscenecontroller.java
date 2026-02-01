@@ -20,13 +20,13 @@ public class Cutscenecontroller extends Main {
 	
 	@FXML
 	public void initialize() {
-		TranslateTransition ts=new TranslateTransition(Duration.seconds(2.5), windows);
+		TranslateTransition ts=new TranslateTransition(Duration.seconds(2.8), windows);
 		ts.setByX(-220);
-		TranslateTransition runaway=new TranslateTransition(Duration.seconds(4), windows);
-		runaway.setByX(4000);
+		TranslateTransition runaway=new TranslateTransition(Duration.seconds(3.5), windows);
+		runaway.setByX(3500);
 
-		TranslateTransition comelinux=new TranslateTransition(Duration.seconds(4), archlinux);
-		comelinux.setByX(4000);
+		TranslateTransition comelinux=new TranslateTransition(Duration.seconds(3.5), archlinux);
+		comelinux.setByX(3500);
 		runaway
 		.setOnFinished((event)->{
 
