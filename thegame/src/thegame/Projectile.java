@@ -47,7 +47,7 @@ public class Projectile extends ImageView {
 			
 			projectilespeed=0.7;
 			maxtime=240;
-			maxpierce=3;
+			maxpierce=4;
 			break;
 			
 		case "magick":

@@ -185,6 +185,10 @@ public class Maincontroller extends Main{
 	    	txtCompleted.setVisible(true);    	clearProjectiles();
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
+	    	if (currentlevel==2) {
+	    		arenaPane.getChildren().add(new Boss());
+	    		enemiesleft++;
+	    	}
 	    	if (currentlevel > 8) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
 	    	}
@@ -327,6 +331,8 @@ public class Maincontroller extends Main{
 						if (p.type == "tree")
 							p.treeDie(arenaPane);
 						else {
+							if (e instanceof Boss b) {
+								b.health-=100; if (b.health<=0) kill(b);}else
 							kill(e);
 							p.pierced++;
 							if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p));
@@ -444,6 +450,7 @@ public class Maincontroller extends Main{
 							s.setToX(0.0);
 							s.setToY(0.0);
 							s.setOnFinished((event) -> {
+								this.kill(n);
 								this.kill(n);
 							});
 							s.playFromStart();
@@ -564,7 +571,7 @@ public class Maincontroller extends Main{
 					boost = true;
 					boostFrames = 1000;
 					player.speedBoost = 1.5;
-					manaRegen = 1.2/10;
+					manaRegen = 0.16;
 					break;
 				}
 			}
