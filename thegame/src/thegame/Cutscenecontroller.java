@@ -29,8 +29,8 @@ public class Cutscenecontroller extends Main {
 		comelinux.setByX(3500);
 		runaway.setOnFinished((event)->{
 
-			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/openingcutscene.fxml"));
-			newscene.setController(new Cutscenecontroller());
+			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/tutorial.fxml"));
+			newscene.setController(new Tutorialcontroller());
 			try {
 				Parent newp=newscene.load();
 				s.setRoot(newp);
