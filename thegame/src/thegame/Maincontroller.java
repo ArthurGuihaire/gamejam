@@ -417,6 +417,7 @@ public class Maincontroller extends Main{
 						cmdLine.setText("Error: not enough mana");
 						break;
 					}
+					soundPlayer.playSound(7);
 					for (Node n : arenaPane.getChildren()) {
 						if (n instanceof Enemy e) {
 							ScaleTransition s = new ScaleTransition(Duration.seconds(1.0), e);

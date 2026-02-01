@@ -68,6 +68,7 @@ public class Projectile extends ImageView {
 			this.projectilespeed = 0.5;
 			this.type = "tree";
 			this.setImage(new Image(getClass().getResource("/images/tree.png").toExternalForm()));
+			Maincontroller.soundPlayer.playSound(6);
 			this.setScaleX(1);
 			this.setScaleY(1);
 			System.out.println("TREE");
