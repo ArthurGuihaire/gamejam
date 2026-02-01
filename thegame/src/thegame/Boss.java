@@ -4,12 +4,14 @@ import javafx.scene.image.Image;
 
 public class Boss extends Enemy {
 	
-	int health=500;
-	int dmg=100;
-	double speed=0.5;
-	double default_speed=0.5;
 	
 	Boss(){
+		
+		damage=100;
+		health=500;
+
+		speed=0.5;
+		defaultSpeed=0.5;
 		this.setImage(new Image(getClass().getResource("/images/windows.png").toExternalForm()));
 		this.setScaleX(2);
 		this.setScaleY(2);

@@ -469,8 +469,8 @@ public class Maincontroller extends Main{
 					soundPlayer.playSound(10);
 					if (player.current.health <= 0) {
 						kill(player.current);
-						player.current = null;
-					}
+					}player.current = null;
+					
 					
 					mana.setWidth(mana.getWidth() + 50);
 				}
