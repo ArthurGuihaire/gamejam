@@ -526,6 +526,9 @@ clearProjectiles();
 		}
 	}
 
+				enemiesleft--;
+		}
+	}
 	public void die(Enemy e) {
 		double direction= (Math.random()*120);
 		//System.out.println(direction);
@@ -583,7 +586,7 @@ clearProjectiles();
 		rt3.play();
 		
 		e.setVisible(false);
-		kill(e);
+		e.setDead(true);
 		
 		
 		
