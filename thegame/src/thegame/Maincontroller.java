@@ -512,14 +512,24 @@ public class Maincontroller extends Main{
 					if (mana.getWidth() > 0.32 * maxMana) {
 						if (player.current != null) {
 							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
-							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999; mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}
+							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999;
+							soundPlayer.playSound(9);
+							mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}else {
+								int sound=(int)(Math.random()*3+3-1);
+								Maincontroller.soundPlayer.playSound(sound);
+							}
 							arenaPane.getChildren().add(p);
 							p.setLayoutX(player.getLayoutX()-30);
 							p.setLayoutY(player.getLayoutY()+15);
 						}
 						else {
 							Projectile p = new Projectile("shred", crosshair.getLayoutX() - 130, crosshair.getLayoutY() - 200, player);
-							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999; mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}
+							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999;
+							soundPlayer.playSound(9);
+							mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}else {
+								int sound=(int)(Math.random()*3+3-1);
+								Maincontroller.soundPlayer.playSound(sound);
+							}
 							p.setLayoutX(player.getLayoutX()-30);
 							p.setLayoutY(player.getLayoutY()+15);
 							arenaPane.getChildren().add(p);
