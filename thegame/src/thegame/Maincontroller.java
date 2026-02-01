@@ -139,7 +139,7 @@ public class Maincontroller extends Main{
     	
     }
     public void LevelUP() {		
-    	System.out.println("current level:"+currentlevel);
+    	//System.out.println("current level:"+currentlevel);
     	if (enemiesleft!=0) return;
     	if (currentlevel==0) {
     		gameloop.stop();
@@ -148,12 +148,12 @@ public class Maincontroller extends Main{
     		for (int i=0;i<enemiesleft;i++) {
     			Enemy e=new Enemy();
     			arenaPane.getChildren().add(e);
-    			System.out.println("new enemy!");
+    			//System.out.println("new enemy!");
 
     		}    		gameloop.start();
     	}else if (enemiesleft==0&&currentlevel>0){
     		gameloop.stop();
-    		System.out.println("stop");
+    		//System.out.println("stop");
     	currentlevel++;
     	enemiesleft=currentlevel+2;
     	txtCompleted.setVisible(true);
@@ -173,7 +173,7 @@ public class Maincontroller extends Main{
     	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
     	
     	tt.setOnFinished((event)->{
-    		System.out.println("finsihed tineinbe");
+    		//System.out.println("finsihed tineinbe");
 
     		txtCompleted.setVisible(false);
     		generateEnemies();
