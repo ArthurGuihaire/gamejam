@@ -28,6 +28,6 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="79.0" layoutX="151.0" layoutY="794.0" stroke="BLACK" strokeType="INSIDE" width="457.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="75.0" layoutX="150.0" layoutY="798.0" stroke="TRANSPARENT" strokeType="INSIDE" width="454.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fc8ff" height="75.0" layoutX="153.0" layoutY="796.0" stroke="TRANSPARENT" strokeType="INSIDE" width="454.0" />
    </children>
 </Pane>
