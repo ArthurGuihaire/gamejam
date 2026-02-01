@@ -223,6 +223,16 @@ public class Maincontroller extends Main{
 		removeDeadPeople();
     }
     
+    private void projectileCollision() {
+    	ArrayList<Projectile> pls=new ArrayList<>();
+    	for (Node idk : arenaPane.getChildren()) {
+			if (idk instanceof Projectile p) {
+				//if (p.getLayoutX()<arenaLeft||p.getLayoutY()<arenaTop||p.getLayoutX()>arenaPane.getWidth()+arenaLeft||p.getLayoutY()>arenaPane.getHeight()+arenaTop);
+			}
+		}
+    	
+    }
+    
     private void playerCollision(Node n) {
     	if (n instanceof Player) {
     		ArrayList<Enemy> elist=new ArrayList<Enemy>();
@@ -342,8 +352,9 @@ public class Maincontroller extends Main{
 			case ("shred"): {
 				if (player.current != null) {
 					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY());
-					p.setLayoutX(player.getLayoutX());
 					arenaPane.getChildren().add(p);
+					p.setLayoutX(player.getLayoutX());
+					p.setLayoutY(player.getLayoutY());
 				}
 				else {
 					Projectile p = new Projectile("shred", crosshair.getLayoutX(), crosshair.getLayoutY());
