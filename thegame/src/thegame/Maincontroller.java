@@ -194,7 +194,7 @@ public class Maincontroller extends Main{
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
 		    		generateEnemies();
-		    		if (currentlevel==8||currentlevel==2) {
+		    		if (currentlevel==8) {
 			    		arenaPane.getChildren().add(new Boss());
 			    		enemiesleft++;
 			    	}
