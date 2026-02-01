@@ -141,6 +141,7 @@ public class Maincontroller extends Main{
     		for (int i=0;i<enemiesleft;i++) {
     			Enemy e=new Enemy();
     			arenaPane.getChildren().add(e);
+    			System.out.println("new enemy!");
     		}
     	}else if (enemiesleft==0){
     	currentlevel++;
