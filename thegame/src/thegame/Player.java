@@ -19,19 +19,19 @@ public class Player extends ImageView {
 	}
 	
 	public void moveRight() {
-		this.setLayoutX(this.getLayoutX()+5);
+		this.setLayoutX(this.getLayoutX()+4*speedBoost);
 		
 	}
 	public void moveLeft() {
-		this.setLayoutX(this.getLayoutX()-5);
+		this.setLayoutX(this.getLayoutX()-4*speedBoost);
 		
 	}
 	public void moveUp() {
-		this.setLayoutY(this.getLayoutY()-5);
+		this.setLayoutY(this.getLayoutY()-4*speedBoost);
 		
 	}
 	public void moveDown() {
-		this.setLayoutY(this.getLayoutY()+5);
+		this.setLayoutY(this.getLayoutY()+4*speedBoost);
 		
 	}
 }
