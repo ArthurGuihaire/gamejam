@@ -31,9 +31,11 @@ public class Projectile extends ImageView {
 	}
 	
 	
-	private void move() {
+	public void move() {
 		Math.sqrt(Math.pow(xDestination-this.getLayoutX(),2)+Math.pow(yDestination-this.getLayoutY(), 2));
+		this.setRotate(Math.toDegrees(Math.atan(xDestination-this.getLayoutX())));
 		this.setLayoutX(this.getLayoutX()+(xDestination-this.getLayoutX()));
+		this.setLayoutY(this.getLayoutY()+(xDestination-this.getLayoutY()));
 	}
 	
 }

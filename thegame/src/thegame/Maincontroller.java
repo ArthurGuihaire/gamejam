@@ -174,6 +174,9 @@ public class Maincontroller extends Main{
     	}
     	
     	for (Node n : arenaPane.getChildren()) {
+    		if (n instanceof Projectile p) {
+    			p.move();
+    		}
     		if (n instanceof Enemy e) {
     			e.moveTowards(player);
     		}
@@ -205,7 +208,7 @@ public class Maincontroller extends Main{
     private void analyseDirection() {
     	if (ymove==1&&xmove==0) player.setImage(new Image(this.getClass().getResource("/images/tux-down.png").toExternalForm()));
     	if (ymove==1&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/tux-down-right.png").toExternalForm()));
-    	if (ymove==0&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/purple-laser.png").toExternalForm()));
+    	if (ymove==0&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/tux-right.png").toExternalForm()));
     	if (ymove==-1&&xmove==1) player.setImage(new Image(this.getClass().getResource("/images/tux-up-right.png").toExternalForm()));
     	if (ymove==-1&&xmove==0) player.setImage(new Image(this.getClass().getResource("/images/tux-up.png").toExternalForm()));
     	if (ymove==-1&&xmove==-1) player.setImage(new Image(this.getClass().getResource("/images/tux-up-left.png").toExternalForm()));
@@ -323,7 +326,7 @@ public class Maincontroller extends Main{
 					player.previous = player.current;
 					player.current = candidate;
 				}
-			}
+			} break;
 			case ("magick"): {
 				if (player.current == null) return;
 				
@@ -332,10 +335,11 @@ public class Maincontroller extends Main{
 	
 				player.current.damage -= 10;
 				Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY());
-			}
+			} break;
 			case ("shred"): {
 				if (player.current != null) {
 					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY());
+					arenaPane.getChildren().add(p);
 				}
 				else {
 					Projectile p = new Projectile("shred", 1000, 1000);
