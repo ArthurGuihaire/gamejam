@@ -9,6 +9,10 @@ public class Enemy extends ImageView {
 	int health = 100;
 	int damage = 30;
 	boolean dead=false;
+	double speed = 1.0;
+	double defaultSpeed = 1.0;
+	
+	public int speedTimer = 0;
 	
 	public boolean isDead() {
 		return dead;
@@ -29,6 +33,9 @@ public class Enemy extends ImageView {
 	}
 	
 	public void moveTowards(Player p) {
+		if (speedTimer-- == 0) {
+			speed = defaultSpeed;
+		}
 		double px = p.getLayoutX();
 		double py = p.getLayoutY();
 		
@@ -39,7 +46,7 @@ public class Enemy extends ImageView {
 		double dy = py - ey;
 		
 		double distance = Math.sqrt(dx*dx+dy*dy);
-		this.setLayoutX(ex + dx / distance);
-		this.setLayoutY(ey + dy / distance);
+		this.setLayoutX(ex + dx * speed / distance);
+		this.setLayoutY(ey + dy * speed / distance);
 	}
 }

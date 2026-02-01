@@ -23,8 +23,6 @@ public class Projectile extends ImageView {
 	int maxpierce;
 	boolean dead=false;
 	
-	public int treeNumber;
-	
 	/**
 	 * Creates a new Projectile object. Projectiles are fired from commands, so 
 	 * @param cmd the command that will be firing the Projectile.
@@ -82,11 +80,7 @@ public class Projectile extends ImageView {
 		double minDistance2 = Double.MAX_VALUE;
 
 		
-		
-		if (type.equals("tree") && treeNumber < 3) {
-			
-			Enemy e1 = null;
-			Enemy e2 = null;
+		if (type.equals("tree")) {
 			System.out.println("TREE DIE");
 			
 			for (Node n : arenaPane.getChildren()) {
@@ -96,31 +90,11 @@ public class Projectile extends ImageView {
 					
 					double dist = dx*dx+dy*dy;
 					
-					if (dist < minDistance1) {
-						e2 = e1;
-						e1 = emy;
-						minDistance2 = minDistance1;
-						minDistance1 = dist;
-					}
-					else if (dist < minDistance2) {
-						e2 = emy;
-						minDistance2 = dist;
+					if (dist < 100) {
+						emy.speed = 0.5;
+						emy.speedTimer = 600;
 					}
 				}
-			}
-			
-			if (e1 != null) {
-				Projectile p1 = new Projectile("tree", e1.getLayoutX() - 110, e1.getLayoutY() - 200, this);
-				Platform.runLater(() -> arenaPane.getChildren().add(p1));
-				p1.setLayoutX(this.getLayoutX()-30);
-				p1.setLayoutY(this.getLayoutY()+15);
-				p1.treeNumber = this.treeNumber + 1;
-				
-				Projectile p2 = new Projectile("tree", e2.getLayoutX() - 110, e2.getLayoutY() - 200, this);
-				Platform.runLater(() -> arenaPane.getChildren().add(p2));
-				p2.setLayoutX(this.getLayoutX()-30);
-				p2.setLayoutY(this.getLayoutY()+15);
-				p2.treeNumber = this.treeNumber + 1;
 			}
 		}
 	}
