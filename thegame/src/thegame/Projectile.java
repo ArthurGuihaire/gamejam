@@ -14,6 +14,9 @@ public class Projectile extends ImageView {
 	double projectilespeed;
 	private double dx, dy;
 	
+	private boolean isTree;
+	public int treeNumber;
+	
 	/**
 	 * Creates a new Projectile object. Projectiles are fired from commands, so 
 	 * @param cmd the command that will be firing the Projectile.
@@ -39,17 +42,25 @@ public class Projectile extends ImageView {
 			System.out.println("MAGICK");
 			projectilespeed=2;
 			break;
+		case "tree":
+			System.out.println("TREE");
+			this.isTree = true;
+			this.setImage(new Image(getClass().getResource("/images/sawblade.png").toExternalForm()));
+			break;
 		}
 
 		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
 		if (dx < 0) this.setRotate(this.getRotate() + 180);
 	}
 
+	public void treeDie() {
+		if (isTree && treeNumber < 3) {
+			System.out.println("TREE DIE");
+		}
+	}
 
 	public void move() {
 		this.setLayoutX(this.getLayoutX() + dx * 10*projectilespeed);
 		this.setLayoutY(this.getLayoutY() + dy * 10*projectilespeed);
-		
-		
 	}
 }

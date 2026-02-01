@@ -45,7 +45,7 @@ public class Maincontroller extends Main{
 	@FXML
 	Rectangle mana;
 	
-	final int maxMana = 454;
+	final static int maxMana = 454;
 	
 	Player player;
 	
@@ -157,15 +157,14 @@ public class Maincontroller extends Main{
     	currentlevel++;
     	enemiesleft=currentlevel+2;
     	txtCompleted.setVisible(true);
-    	ArrayList<Node> al= new ArrayList<Node>();
-    	for (Node n : arenaPane.getChildren()) {
-    		al.add(n);
+  
+    	ObservableList<Node> al= arenaPane.getChildren();
+    	
+    	for (Node n : al) {
     		if (n instanceof Enemy || n instanceof Projectile) {
     			Platform.runLater(() -> al.remove(n));
     		}	
     	}
-    	arenaPane.getChildren().clear();
-    	arenaPane.getChildren().addAll(al);
 
     	txtCompleted.setVisible(true);
 
@@ -248,8 +247,8 @@ public class Maincontroller extends Main{
     	LevelUP();
     	
     	//mana.setScaleX(mana.getScaleX()+0.001);
-    	if (mana.getWidth() < this.maxMana)
-    		mana.setWidth(mana.getWidth() + 1);
+    	if (mana.getWidth() < maxMana)
+    		mana.setWidth(mana.getWidth() + 0.03);
     }
     
     private void removeDirection(String key) {
@@ -405,6 +404,8 @@ public class Maincontroller extends Main{
 						player.current = null;
 					}
 				}
+				
+				mana.setWidth(mana.getWidth() + 10);
 			}
 			
 			case ("cd"): {
@@ -447,19 +448,32 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("shred"): {
-				if (player.current != null) {
-					Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
-					arenaPane.getChildren().add(p);
-					p.setLayoutX(player.getLayoutX()-30);
-					p.setLayoutY(player.getLayoutY()+15);
-				}
-				else {
-					Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
-					p.setLayoutX(player.getLayoutX()-30);
-					p.setLayoutY(player.getLayoutY()+15);
-					arenaPane.getChildren().add(p);
+				if (mana.getWidth() > 0.2 * maxMana) {
+					if (player.current != null) {
+						Projectile p = new Projectile("shred", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
+						arenaPane.getChildren().add(p);
+						p.setLayoutX(player.getLayoutX()-30);
+						p.setLayoutY(player.getLayoutY()+15);
+					}
+					else {
+						Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
+						p.setLayoutX(player.getLayoutX()-30);
+						p.setLayoutY(player.getLayoutY()+15);
+						arenaPane.getChildren().add(p);
+					}
+					
+					mana.setWidth(mana.getWidth() - 0.2 * maxMana);
 				}
 				break;
+			}
+			case ("tree"): {
+				if (mana.getWidth() > 0.12 * maxMana && player.current != null) {
+					Projectile p = new Projectile("tree", player.current.getLayoutX() - 110, player.current.getLayoutY() - 200, player);
+					arenaPane.getChildren().add(p);
+					p.setLayoutX(player.getLayoutX()-30);
+					p.setLayoutY(player.getLayoutY()+15);
+					p.treeNumber = 1;
+				}
 			}
 			case ("java"): {
 				boost = true;
