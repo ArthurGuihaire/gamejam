@@ -315,6 +315,7 @@ public class Maincontroller extends Main{
 				player.current.setScaleY(0.6);
 	
 				player.current.damage -= 10;
+				Projectile p=new Projectile("magick");
 			}
 			case ("shred"): {
 				Projectile p = new Projectile("shred");
