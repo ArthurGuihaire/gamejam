@@ -48,6 +48,7 @@ public class Maincontroller extends Main{
 	Rectangle mana;
 	
 	final static int maxMana = 454;
+	private double manaRegen = 0.07;
 	
 	Player player;
 	
@@ -227,6 +228,7 @@ public class Maincontroller extends Main{
     	if (boost && boostFrames-- <= 0) {
     		boost = false;
     		player.speedBoost = 1.0;
+			manaRegen = 0.07;
     	}
     	
     	if (player.moveMode) {
@@ -265,7 +267,7 @@ public class Maincontroller extends Main{
     	
     	//mana.setScaleX(mana.getScaleX()+0.001);
     	if (mana.getWidth() < maxMana)
-    		mana.setWidth(mana.getWidth() + 0.07);
+    		mana.setWidth(mana.getWidth() + manaRegen);
     }
     
     private void removeDirection(String key) {
@@ -539,6 +541,7 @@ public class Maincontroller extends Main{
 					boost = true;
 					boostFrames = 1000;
 					player.speedBoost = 1.5;
+					manaRegen = 1.2;
 					break;
 				}
 			}
