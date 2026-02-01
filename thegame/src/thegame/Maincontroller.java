@@ -194,7 +194,7 @@ public class Maincontroller extends Main{
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
 		    		generateEnemies();
-		    		if (currentlevel==2) {
+		    		if (currentlevel==8||currentlevel==2) {
 			    		arenaPane.getChildren().add(new Boss());
 			    		enemiesleft++;
 			    	}
@@ -577,8 +577,9 @@ public class Maincontroller extends Main{
 					boostFrames = 1000;
 					player.speedBoost = 1.5;
 					manaRegen = 0.16;
-					break;
 				}
+
+				break;
 			}
 			case ("freeze"):{
 				this.freeze=!this.freeze;
