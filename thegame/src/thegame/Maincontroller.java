@@ -266,56 +266,61 @@ public class Maincontroller extends Main{
     
 	public void useCommand(String command) {
 		String[] sections = command.split(" ");
-		if (sections[0].equals("rm")) {
-			if (player.current == null) return;
-			if (sections[1].equals("rf")) {
-				//remove recursive force!!!
-			}
-			else {
-				player.current.health -= Player.RM_DAMAGE;
-				if (player.current.health <= 0) {
-					die(player.current);
-					player.current = null;
+		switch (sections[0]) {
+			case ("rm"): {
+				if (player.current == null) return;
+				if (sections[1].equals("rf")) {
+					//remove recursive force!!!
 				}
-			}
-		}
-		
-		else if (sections[0].equals("cd")) {
-			if (sections[1].equals("-")) {
-				player.current = player.previous;
-				player.previous = null;
-			}
-			else {
-				Enemy candidate = null;
-				double mouseX = 400.0;
-				double mouseY = 400.0;
-				for (Node n : arenaPane.getChildren()) {
-					double minDistanceSquared = Double.MAX_VALUE;
-					if (n instanceof Enemy emy) {
-						double x = emy.getLayoutX();
-						double y = emy.getLayoutY();
-						
-						double distanceSquared = (x-mouseX) * (x-mouseX) + (y-mouseY) * (y-mouseY);
-						if (distanceSquared < minDistanceSquared) {
-							minDistanceSquared = distanceSquared;
-							candidate = emy;
-						}
+				else {
+					player.current.health -= Player.RM_DAMAGE;
+					if (player.current.health <= 0) {
+						die(player.current);
+						player.current = null;
 					}
 				}
+			}
+			
+			case ("cd"): {
+				if (sections[1].equals("-")) {
+					player.current = player.previous;
+					player.previous = null;
+				}
+				else {
+					Enemy candidate = null;
+					double mouseX = 400.0;
+					double mouseY = 400.0;
+					for (Node n : arenaPane.getChildren()) {
+						double minDistanceSquared = Double.MAX_VALUE;
+						if (n instanceof Enemy emy) {
+							double x = emy.getLayoutX();
+							double y = emy.getLayoutY();
+							
+							double distanceSquared = (x-mouseX) * (x-mouseX) + (y-mouseY) * (y-mouseY);
+							if (distanceSquared < minDistanceSquared) {
+								minDistanceSquared = distanceSquared;
+								candidate = emy;
+							}
+						}
+					}
+					
+					player.previous = player.current;
+					player.current = candidate;
+				}
+			}
+			case ("magick"): {
+				if (player.current == null) return;
 				
-				player.previous = player.current;
-				player.current = candidate;
+				player.current.setScaleX(0.6);
+				player.current.setScaleY(0.6);
+	
+				player.current.damage -= 10;
+			}
+			case ("shred"): {
+				Projectile p = new Projectile("shred");
+				break;
 			}
 		}
-		else if (sections[0].equals("magick")) {
-			if (player.current == null) return;
-			
-			player.current.setScaleX(0.6);
-			player.current.setScaleY(0.6);
-
-			player.current.damage -= 10;
-		}
-		
 	}
 	
 
@@ -333,7 +338,7 @@ public class Maincontroller extends Main{
 		gs3.setLayoutX(e.getLayoutX() + amount); gs3.setLayoutY(e.getLayoutY() + amount);
 		
 		Platform.runLater(() -> arenaPane.getChildren().addAll(gs1,gs2,gs3));
-		
+
 		TranslateTransition tt1=new TranslateTransition(Duration.seconds(0.5), gs1);
 		tt1.setInterpolator(Interpolator.EASE_IN);
 		RotateTransition rt1=new RotateTransition(Duration.seconds(0.5), gs1); rt1.setByAngle(720);
