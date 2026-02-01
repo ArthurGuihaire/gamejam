@@ -2,6 +2,7 @@ package thegame;
 
 import java.util.LinkedList;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,9 +15,9 @@ public class Projectile extends ImageView {
 	 * Creates a new Projectile object. Projectiles are fired from commands, so 
 	 * @param cmd the command that will be firing the Projectile.
 	 */
-	Projectile(String cmd/*,LinkedList<ImageView> X*/,double x, double y){
-		dx = x - this.getLayoutX();
-		dy = y - this.getLayoutY();		
+	Projectile(String cmd/*,LinkedList<ImageView> X*/,double x, double y,Node owner){
+		dx = x - owner.getLayoutX();
+		dy = y - owner.getLayoutY();		
 		double distance = Math.sqrt(dx*dx+dy*dy);
 		
 		dx /= distance;
@@ -33,14 +34,14 @@ public class Projectile extends ImageView {
 			break;
 		}
 
-		this.setRotate(Math.toDegrees(Math.atan(dy / dx)));
+		this.setRotate(Math.toDegrees(Math.atan(y / x)));
 		if (dx < 0) this.setRotate(this.getRotate() + 180);
 	}
 
 
 	public void move() {
-		this.setLayoutX(this.getLayoutX() - dx);
-		this.setLayoutY(this.getLayoutY() - dy);
+		this.setLayoutX(this.getLayoutX() + dx);
+		this.setLayoutY(this.getLayoutY() + dy);
 	}
 	
 }

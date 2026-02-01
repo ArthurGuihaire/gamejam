@@ -24,7 +24,7 @@ import java.util.*;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.input.*;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.*;
 
 public class Maincontroller extends Main{
 	@FXML
@@ -40,6 +40,9 @@ public class Maincontroller extends Main{
 	@FXML
 	TextField cmdLine;
 	
+	@FXML
+	Text txtCompleted;
+	
 	Player player;
 	
 	private Scene mainScene;
@@ -49,6 +52,8 @@ public class Maincontroller extends Main{
 	public static int arenaLeft;
 	public static int arenaTop;
 	
+	public int currentlevel=0;
+	public int enemiesleft=0;
 
 	int xmove=0;
 	int ymove=0;
@@ -58,13 +63,13 @@ public class Maincontroller extends Main{
 	
     ArrayList<String> keyInput = new ArrayList<>();
     
-    
-    
     @FXML
     public void initialize() {
     	arenaLeft=(int)arena.getLayoutX()-685;
     	arenaTop=(int)arena.getLayoutY()-385;
     	cmdLine.setDisable(true);
+    	txtCompleted.setVisible(false);
+    	
 
     	mainScene=this.btnButton.getScene();
     	mainScene=arena.getScene();
@@ -127,6 +132,19 @@ public class Maincontroller extends Main{
     	player.setScaleY(1);
     	
     }
+    public void LevelUP() {
+    	if (enemiesleft!=0) return;
+    	currentlevel++;
+    	enemiesleft=currentlevel+2;
+    	gameloop.stop();
+    	txtCompleted.setVisible(true);
+    	TranslateTransition wait=new TranslateTransition(Duration.seconds(4));
+    	wait.setOnFinished((event)->{
+    		
+    	});
+    	
+    	
+    }
     
     
     private void gameLoop() {
@@ -179,6 +197,7 @@ public class Maincontroller extends Main{
     	//System.out.println(keyInput);
     	
     	enemyCollision();
+    	projectileCollision();
     }
     
     private void removeDirection(String key) {
@@ -218,10 +237,17 @@ public class Maincontroller extends Main{
     }
     
     private void projectileCollision() {
-    	ArrayList<Projectile> pls=new ArrayList<>();
+    	ArrayList<Node> pls=new ArrayList<>();
+    	pls.addAll(arenaPane.getChildren());
     	for (Node idk : arenaPane.getChildren()) {
 			if (idk instanceof Projectile p) {
-				//if (p.getLayoutX()<arenaLeft||p.getLayoutY()<arenaTop||p.getLayoutX()>arenaPane.getWidth()+arenaLeft||p.getLayoutY()>arenaPane.getHeight()+arenaTop);
+		
+				for (Node node : pls) {
+					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
+						die(e);
+							
+					}
+				}
 			}
 		}
     	
@@ -356,19 +382,19 @@ public class Maincontroller extends Main{
 				player.current.setScaleY(0.6);
 	
 				player.current.damage -= 10;
-				Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY());
+				Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY(),player);
 				arenaPane.getChildren().add(p);
 				break;
 			}
 			case ("shred"): {
 				if (player.current != null) {
-					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY());
+					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY(),player);
 					arenaPane.getChildren().add(p);
 					p.setLayoutX(player.getLayoutX());
 					p.setLayoutY(player.getLayoutY());
 				}
 				else {
-					Projectile p = new Projectile("shred", crosshair.getLayoutX(), crosshair.getLayoutY());
+					Projectile p = new Projectile("shred", crosshair.getLayoutX(), crosshair.getLayoutY(),player);
 					p.setLayoutY(player.getLayoutY());
 					arenaPane.getChildren().add(p);
 				}
