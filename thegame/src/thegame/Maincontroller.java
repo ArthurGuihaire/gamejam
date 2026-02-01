@@ -466,6 +466,7 @@ public class Maincontroller extends Main{
 				}
 				else {
 					player.current.health -= Player.RM_DAMAGE * 100;
+					soundPlayer.playSound(10);
 					if (player.current.health <= 0) {
 						kill(player.current);
 						player.current = null;
