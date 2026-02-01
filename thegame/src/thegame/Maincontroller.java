@@ -359,8 +359,8 @@ public class Maincontroller extends Main{
     	
     	Platform.runLater(() -> nodes.remove(player));
     	gameloop.stop();
-    	initialize();
-    	btnButton.fire();
+    	//initialize();
+    	//btnButton.fire();
     	System.out.println("DIEEE");
     	//Platform.runLater(() -> nodes.add(player));
     	FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));

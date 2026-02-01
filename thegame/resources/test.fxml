@@ -21,7 +21,6 @@
             <Line endX="50.0" />
          </children>
       </StackPane>
-      <TextField fx:id="cmdLine" layoutX="673.0" layoutY="793.0" prefHeight="84.0" prefWidth="455.0" />
       <Text fx:id="txtCompleted" layoutX="696.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL COMPLETED" wrappingWidth="420.80340576171875">
          <font>
             <Font size="50.0" />
@@ -29,5 +28,6 @@
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="79.0" layoutX="151.0" layoutY="794.0" stroke="BLACK" strokeType="INSIDE" width="457.0" />
       <Rectangle fx:id="mana" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ff" height="75.0" layoutX="153.0" layoutY="796.0" stroke="TRANSPARENT" strokeType="INSIDE" width="454.0" />
+      <TextField fx:id="cmdLine" layoutX="673.0" layoutY="805.0" prefHeight="63.0" prefWidth="455.0" />
    </children>
 </Pane>
