@@ -20,7 +20,7 @@ public class Projectile extends ImageView {
 	int maxtime;
 	
 	int pierced=0;
-	int maxpierce;
+	int maxpierce=1;
 	boolean dead=false;
 	
 	/**
@@ -65,10 +65,10 @@ public class Projectile extends ImageView {
 		case "tree":
 			this.type = "tree";
 			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
-			this.setScaleX(0.1);
-			this.setScaleY(0.1);
+			this.setScaleX(1);
+			this.setScaleY(1);
 			System.out.println("TREE");
-			
+			maxpierce=1;
 			maxtime=300;
 			break;
 		}
