@@ -15,9 +15,10 @@ public class Projectile extends ImageView {
 		switch (cmd.toLowerCase().trim()) {
 		case "shred":
 			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
+			System.out.println("SHREDDING");
 			break;
 		case "magick":
-			System.out.println("thats crazy");
+			System.out.println("MAGICK");
 			break;
 		}
 	}

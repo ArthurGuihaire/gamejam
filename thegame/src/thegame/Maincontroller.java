@@ -168,7 +168,7 @@ public class Maincontroller extends Main{
     	}
 
     	analyseDirection();
-    	System.out.println(keyInput);
+    	//System.out.println(keyInput);
     	
     	enemyCollision();
     }
@@ -234,13 +234,18 @@ public class Maincontroller extends Main{
             }
             if (code.equals("CONTROL")) {
             	player.moveMode = !player.moveMode;
-            	
+            	cmdLine.setDisable(false);
             }
         });
 
         this.mainScene.setOnKeyReleased((KeyEvent e) ->{
             String code = e.getCode().toString();
             removeDirection(code);
+            if (code.equals("ENTER")) {
+            	String currentcmd=cmdLine.getText();
+            	cmdLine.clear();
+            	this.useCommand(currentcmd);
+            }
             keyInput.remove(code);
         });
     }
