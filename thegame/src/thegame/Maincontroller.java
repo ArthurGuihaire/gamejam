@@ -348,21 +348,8 @@ public class Maincontroller extends Main{
     }
     
     private void playerDie() {
-    	ObservableList<Node> nodes = arenaPane.getChildren();
-    	int i = 0;
-    	for (Node n : nodes) {
-    		if (n instanceof Enemy e) {
-    			e.setDead(true);
-    		}
-    		i++;
-    	}
+    	arenaPane.getChildren().clear();
     	
-    	Platform.runLater(() -> nodes.remove(player));
-    	gameloop.stop();
-    	//initialize();
-    	//btnButton.fire();
-    	System.out.println("DIEEE");
-    	//Platform.runLater(() -> nodes.add(player));
     	FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/test.fxml"));
 		newscene.setController(new Maincontroller());
 		try {
