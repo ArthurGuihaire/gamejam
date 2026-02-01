@@ -250,12 +250,11 @@ clearProjectiles();
     	
     	enemyCollision();
     	projectileCollision();
-    	updateProjectileTimers();
     	LevelUP();
     	
     	//mana.setScaleX(mana.getScaleX()+0.001);
     	if (mana.getWidth() < maxMana)
-    		mana.setWidth(mana.getWidth() + 0.07);
+    		mana.setWidth(mana.getWidth() + 0.03);
     }
     
     private void removeDirection(String key) {
@@ -301,9 +300,9 @@ clearProjectiles();
 			if (idk instanceof Projectile p) {
 				for (Node node : pls) {
 					if (p.getBoundsInParent().intersects(node.getBoundsInParent())&&node instanceof Enemy e) {
-						kill(e);
-						if (p.type.equals("magick")) Platform.runLater(()->kill(p));
-							
+						die(e);
+						if (p.type.equals("magick")) Platform.runLater(()->arenaPane.getChildren().remove(p));
+							enemiesleft--;
 					}
 				}
 			}
@@ -314,7 +313,7 @@ clearProjectiles();
     	for (Node n : arenaPane.getChildren()) {
     		if (n instanceof Projectile p) {
     			p.treeDie(arenaPane);
-    			Platform.runLater(()->kill(p));
+    			Platform.runLater(()->arenaPane.getChildren().remove(p));
     		}
 			
 		}
@@ -407,7 +406,8 @@ clearProjectiles();
 				else {
 					player.current.health -= Player.RM_DAMAGE * 100;
 					if (player.current.health <= 0) {
-						kill(player.current);
+						die(player.current);
+						player.current = null;
 					}
 				}
 				
@@ -498,36 +498,7 @@ clearProjectiles();
 		}
 	}
 	
-	public void updateProjectileTimers() {
-		ArrayList<Projectile> al=new ArrayList<Projectile>();
-		for (Node projectile : arenaPane.getChildren()) {
-			if (projectile instanceof Projectile p){
-				al.add(p);
-			}
-		}
-		for (Projectile projectile : al) {
-			projectile.timeexisting+=1;
-			if (projectile.timeexisting>projectile.maxtime) projectile.setDead(true);
-			
-		}
-		
-	}
-	
-	public void kill(Node n) {
-		
-		if (n instanceof Projectile p) {
-			p.setDead(true);
-				arenaPane.getChildren().remove(p);
-		}else if (n instanceof Enemy e) {
-			e.setDead(true);
-				die(e);
 
-				enemiesleft--;	
-		}
-	
-	}
-	
-	
 	public void die(Enemy e) {
 		double direction= (Math.random()*120);
 		//System.out.println(direction);
@@ -595,10 +566,7 @@ clearProjectiles();
 	public void removeDeadPeople() {
 		ArrayList<Node> nodes = new ArrayList<>(arenaPane.getChildren());
 		for (Node n : nodes) {
-			if (n instanceof Projectile p) {
-				if (p.isDead())
-					arenaPane.getChildren().remove(p);
-			}else if (n instanceof Enemy e) {
+			if (n instanceof Enemy e) {
 				if (e.isDead())
 				arenaPane.getChildren().remove(e);
 			}

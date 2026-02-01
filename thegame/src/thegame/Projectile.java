@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -101,16 +102,16 @@ public class Projectile extends ImageView {
 			
 			if (e1 != null) {
 				Projectile p1 = new Projectile("tree", e1.getLayoutX() - 110, e1.getLayoutY() - 200, this);
-				arenaPane.getChildren().add(p1);
+				Platform.runLater(() -> arenaPane.getChildren().add(p1));
 				p1.setLayoutX(this.getLayoutX()-30);
 				p1.setLayoutY(this.getLayoutY()+15);
-				p1.treeNumber = 1;
+				p1.treeNumber = this.treeNumber + 1;
 				
 				Projectile p2 = new Projectile("tree", e2.getLayoutX() - 110, e2.getLayoutY() - 200, this);
-				arenaPane.getChildren().add(p2);
+				Platform.runLater(() -> arenaPane.getChildren().add(p2));
 				p2.setLayoutX(this.getLayoutX()-30);
 				p2.setLayoutY(this.getLayoutY()+15);
-				p2.treeNumber = 1;
+				p2.treeNumber = this.treeNumber + 1;
 			}
 		}
 	}
