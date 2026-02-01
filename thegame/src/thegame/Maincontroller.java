@@ -143,6 +143,7 @@ public class Maincontroller extends Main{
     			Enemy e=new Enemy();
     			arenaPane.getChildren().add(e);
     			System.out.println("new enemy!");
+
     		}    		gameloop.start();
     	}else if (enemiesleft==0&&currentlevel>0){
     		gameloop.stop();
