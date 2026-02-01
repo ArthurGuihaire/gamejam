@@ -15,6 +15,11 @@ public class Projectile extends ImageView {
 	String type="";
 	double projectilespeed;
 	private double dx, dy;
+	double timeexisting=0;
+	int maxtime;
+	
+	int maxpierce;
+	boolean dead=false;
 	
 	public int treeNumber;
 	
@@ -39,6 +44,7 @@ public class Projectile extends ImageView {
 			rt.setByAngle(360*20);
 			rt.play();
 			System.out.println("SHREDDING"); projectilespeed=0.7;
+			maxtime=240;
 			break;
 			
 		case "magick":
@@ -46,11 +52,13 @@ public class Projectile extends ImageView {
 			this.setImage(new Image(getClass().getResource("/images/fireball.png").toExternalForm()));
 			System.out.println("MAGICK");
 			projectilespeed=2;
+			maxtime=180;
 			break;
 		case "tree":
 			this.type = "tree";
 			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
 			System.out.println("TREE");
+			maxtime=300;
 			break;
 		}
 
@@ -106,6 +114,14 @@ public class Projectile extends ImageView {
 			}
 		}
 	}
+	
+	public void setDead(boolean b) {
+		this.dead=b;
+	}
+	public boolean isDead() {
+		return this.dead;
+	}
+	
 
 	public void move() {
 		this.setLayoutX(this.getLayoutX() + dx * 10*projectilespeed);
