@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Boss extends Enemy {
 	
-	int health=10000;
+	int health=100;
 	int dmg=100;
 	double speed=0.5;
 	double default_speed=0.5;

@@ -332,11 +332,7 @@ public class Maincontroller extends Main{
 							p.treeDie(arenaPane);
 						else {
 							if (e instanceof Boss b) {
-								b.health-=100; if (b.health<=0) kill(b);
-								System.out.println(b.health);
-								kill(p);
-							}
-							else
+								b.health-=1; kill(p); if (b.health<=0) kill(b);}else
 							kill(e);
 							p.pierced++;
 							if (p.pierced>=p.maxpierce)Platform.runLater(()->kill(p));
@@ -439,10 +435,6 @@ public class Maincontroller extends Main{
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
 				if (player.current == null) return;
-				if (player.current instanceof Boss) {
-					player.current.health -= 1;
-					return;
-				}
 				if (sections.length > 1 && sections[1].equals("-rf") && currentlevel > 3) {
 					if (this.mana.getWidth() < maxMana * 0.95) {
 						cmdLine.setText("Error: not enough mana");
@@ -458,7 +450,7 @@ public class Maincontroller extends Main{
 							s.setToX(0.0);
 							s.setToY(0.0);
 							s.setOnFinished((event) -> {
-								die(e);
+								this.kill(n);
 								this.kill(n);
 							});
 							s.playFromStart();
@@ -475,7 +467,6 @@ public class Maincontroller extends Main{
 					
 					mana.setWidth(mana.getWidth() + 50);
 				}
-				
 			}
 			break;
 			case ("cd"): {
