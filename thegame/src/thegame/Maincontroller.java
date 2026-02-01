@@ -284,11 +284,11 @@ public class Maincontroller extends Main{
 		switch (sections[0]) {
 			case ("rm"): {
 				if (player.current == null) return;
-				if (sections[1].equals("rf")) {
+				if (sections.length > 1 && sections[1].equals("rf")) {
 					//remove recursive force!!!
 				}
 				else {
-					player.current.health -= Player.RM_DAMAGE;
+					player.current.health -= Player.RM_DAMAGE * 100;
 					if (player.current.health <= 0) {
 						die(player.current);
 						player.current = null;
@@ -303,8 +303,8 @@ public class Maincontroller extends Main{
 				}
 				else {
 					Enemy candidate = null;
-					double mouseX = 400.0;
-					double mouseY = 400.0;
+					double mouseX = crosshair.getLayoutX()+25;
+					double mouseY = crosshair.getLayoutX()+25;
 					for (Node n : arenaPane.getChildren()) {
 						double minDistanceSquared = Double.MAX_VALUE;
 						if (n instanceof Enemy emy) {
@@ -330,10 +330,15 @@ public class Maincontroller extends Main{
 				player.current.setScaleY(0.6);
 	
 				player.current.damage -= 10;
-				Projectile p=new Projectile("magick");
+				Projectile p = new Projectile("magick", player.current.getLayoutX(), player.current.getLayoutY());
 			}
 			case ("shred"): {
-				Projectile p = new Projectile("shred");
+				if (player.current != null) {
+					Projectile p = new Projectile("shred", player.current.getLayoutX(), player.current.getLayoutY());
+				}
+				else {
+					Projectile p = new Projectile("shred", 1000, 1000);
+				}
 				break;
 			}
 			case ("java"): {
