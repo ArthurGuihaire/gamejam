@@ -13,7 +13,11 @@ public class Projectile extends ImageView {
 	 */
 	Projectile(String cmd/*,LinkedList<ImageView> X*/){
 		switch (cmd.toLowerCase().trim()) {
-		case "shred": this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
+		case "shred":
+			this.setImage(new Image(getClass().getResource("/images/purple-laser.png").toExternalForm()));
+			break;
+		case "magick":
+			System.out.println("thats crazy");
 			break;
 		}
 	}
