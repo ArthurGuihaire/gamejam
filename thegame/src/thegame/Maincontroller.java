@@ -2,11 +2,9 @@ package thegame;
 
 import java.util.ArrayList;
 
-import thegame.Main;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,13 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
-import java.nio.channels.Pipe.SourceChannel;
-import java.util.*;
-import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
@@ -190,6 +183,7 @@ public class Maincontroller extends Main{
 	    	
 	    	if (currentlevel > 8) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
+	    		soundPlayer.playSound(12);
 	    	}
 	    	else {
 		    	tt.setOnFinished((event)->{
@@ -443,18 +437,18 @@ public class Maincontroller extends Main{
 		String[] sections = command.split(" ");
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
-				if (player.current == null) return;
+				if (player.current == null) {cmdLine.setText("Error: target is null, try using cd first");return;}
 				if (sections.length > 1 && sections[1].equals("-rf") &&( currentlevel > 3||admin)) {
 					if (this.mana.getWidth() < maxMana * 0.95) {
 						cmdLine.setText("Error: not enough mana");
 						break;
 					}
 					int sound=(int)(Math.random()*2+7);
-					Maincontroller.soundPlayer.playSound(sound);
+					//System.out.println("REMOVE RECURSIVE FORCE");
 					
 					soundPlayer.playSound(sound);
 					for (Node n : arenaPane.getChildren()) {
-						if (n instanceof Boss b) continue;
+						if (n instanceof Boss) continue;
 						if (n instanceof Enemy e) {
 							ScaleTransition s = new ScaleTransition(Duration.seconds(1.0), e);
 							s.setToX(0.0);
@@ -469,6 +463,7 @@ public class Maincontroller extends Main{
 				}
 				else {
 					player.current.health -= 100;
+					//System.out.println("REMOVE");
 					soundPlayer.playSound(10);
 					if (player.current.health <= 0) {
 						kill(player.current);
@@ -598,8 +593,8 @@ public class Maincontroller extends Main{
 			case "ice":
 			case ("freeze"):{
 				this.freeze=!this.freeze;
-				break;
 			}
+			break;
 			case ("null"):{
 				mana.setWidth(maxMana);
 				
@@ -611,7 +606,6 @@ public class Maincontroller extends Main{
 	}
 	
 	public void updateProjectileTimers() {
-		ArrayList<Projectile> al=new ArrayList<Projectile>();
 		for (Node projectile : arenaPane.getChildren()) {
 			if (projectile instanceof Projectile p){
 			p.timeexisting+=1;

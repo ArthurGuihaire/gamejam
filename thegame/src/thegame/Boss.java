@@ -9,7 +9,7 @@ public class Boss extends Enemy {
 		speed = 0.6;
 		defaultSpeed = 0.6;
 		damage=100;
-		health=500;
+		health=900;
 
 		speed=0.5;
 		defaultSpeed=0.5;

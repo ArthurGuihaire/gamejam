@@ -5,9 +5,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -15,7 +12,7 @@ public class Main extends Application{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("hi");
+		//System.out.println("hi");
 		launch(args);
 	}
 	public static boolean linuxmode=false;
