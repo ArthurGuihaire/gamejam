@@ -9,9 +9,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
@@ -22,7 +24,7 @@ import javafx.scene.text.*;
 
 public class Maincontroller extends Main{
 	@FXML
-	Rectangle arena;
+	Rectangle arena,blurfixer;
 	@FXML
 	Pane arenaPane;
 	@FXML
@@ -35,7 +37,7 @@ public class Maincontroller extends Main{
 	TextField cmdLine;
 	
 	@FXML
-	Text txtCompleted,txtLevel;
+	Text txtCompleted,txtLevel,txtNewCommand;
 	
 	@FXML
 	Rectangle mana;
@@ -64,6 +66,7 @@ public class Maincontroller extends Main{
 	private boolean boost = false;
 	private boolean freeze=false;
 	private boolean admin=false;
+	private boolean blurbool=false;
 	
     ArrayList<String> keyInput = new ArrayList<>();
     
@@ -73,6 +76,7 @@ public class Maincontroller extends Main{
     	arenaTop=(int)arena.getLayoutY();
     	cmdLine.setDisable(true);
     	txtCompleted.setVisible(false);
+    	txtNewCommand.setVisible(false);
     	
     	mana.setWidth(maxMana);
 
@@ -177,22 +181,31 @@ public class Maincontroller extends Main{
 	    		}
 	    	}
 	
-	    	txtCompleted.setVisible(true);    	clearProjectiles();
+	    	txtCompleted.setVisible(true);
+	    	txtNewCommand.setVisible(true);
+	    	decideNewCommand();
+	    	clearProjectiles();
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
 	    	
-	    	if (currentlevel > 8) {
+	    	if (currentlevel > 9) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
 	    		soundPlayer.playSound(12);
 	    	}
 	    	else {
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
+			    	txtNewCommand.setVisible(false);
 		    		generateEnemies();
 		    		if (currentlevel==2) {
-			    		arenaPane.getChildren().add(new Boss());
+		    			Boss bee=new Boss();
+		    			bee.setLayoutX(arenaLeft);
+		    			bee.setLayoutY(arenaTop);
+			    		arenaPane.getChildren().add(bee);
 			    		enemiesleft++;
 			    	}
+
+		    		crosshair.toFront();
 		    		gameloop.start();
 		    		txtLevel.setText("Level "+currentlevel);
 		    	});
@@ -203,16 +216,28 @@ public class Maincontroller extends Main{
     
     private void generateEnemies() {
     int pos=15;
-	for (int i=0;i<enemiesleft;i++) {
-
-		Enemy e=new Enemy();    			
-		e.setLayoutY(e.getLayoutY() + Math.random() * 500);
-		arenaPane.getChildren().add(e);
-		e.setLayoutX(e.getLayoutX()+pos);
-		//System.out.println("newer enemy");
-		pos+=30;
-	}
+		for (int i=0;i<enemiesleft;i++) {
+			Enemy e=new Enemy();    			
+			e.setLayoutY(e.getLayoutY() + Math.random() * 500);
+			arenaPane.getChildren().add(e);
+			e.setLayoutX(e.getLayoutX()+pos);
+			//System.out.println("newer enemy");
+			pos+=30;
+		}
     }
+    
+    private void decideNewCommand() {
+    	switch (currentlevel) {
+    	case 2: txtNewCommand.setText("New command: tree");break;
+    	case 3: txtNewCommand.setText("New command: shred"); break;
+    	case 4: txtNewCommand.setText("New command: java"); break;
+    	case 5: txtNewCommand.setText("New command: shred -f"); break;
+    	case 6: txtNewCommand.setText("New command: rm -rf"); break;
+    	default: txtNewCommand.setText("");
+    	}
+    }
+    
+    
     private void gameLoop() { 
     	if(Main.linuxmode) {
     		gameloop=new AnimationTimer() {
@@ -234,8 +259,15 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
-    	mainScene=this.btnButton.getScene();
     	removeDeadPeople();
+    	if (blurbool==true) {
+    		blurfixer.setLayoutX(blurfixer.getLayoutX()+1);
+    		blurbool=false;
+    	}else {
+    		blurfixer.setLayoutX(blurfixer.getLayoutX()-1);
+    		blurbool=true;
+    	}
+    	
     	
     	if (boost && boostFrames-- <= 0) {
     		boost = false;
@@ -438,7 +470,7 @@ public class Maincontroller extends Main{
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
 				if (player.current == null) {cmdLine.setText("Error: target is null, try using cd first");return;}
-				if (sections.length > 1 && sections[1].equals("-rf") &&( currentlevel > 3||admin)) {
+				if (sections.length > 1 && sections[1].equals("-rf") &&( currentlevel > 4||admin)) {
 					if (this.mana.getWidth() < maxMana * 0.95) {
 						cmdLine.setText("Error: not enough mana");
 						break;
@@ -499,6 +531,15 @@ public class Maincontroller extends Main{
 					
 					player.previous = player.current;
 					player.current = candidate;
+					if (!(player.current.getEffect() instanceof DropShadow)) {
+						for (Node n : arenaPane.getChildren()) {
+							if (n instanceof Enemy e)
+								e.setEffect(null);
+						}
+						DropShadow ds=new DropShadow();
+						ds.setColor(Color.ORANGE);
+						ds.setHeight(10); ds.setWidth(10); ds.setSpread(1);
+					player.current.setEffect(ds); /*System.out.println("drop");*/}
 				}
 				break;
 			}
@@ -530,7 +571,7 @@ public class Maincontroller extends Main{
 				break;	
 			}
 			case ("shred"): {
-				if (currentlevel > 1||admin) {
+				if (currentlevel > 2||admin) {
 					if (mana.getWidth() > 0.32 * maxMana) {
 						if (player.current != null) {
 							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
@@ -567,6 +608,7 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("tree"): {
+				if (currentlevel <=1&&!admin)break;
 				if (mana.getWidth() < 0.12 * maxMana) {
 					cmdLine.setText("Error: not enough mana");
 					break;
@@ -582,7 +624,7 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("java"): {
-				if (currentlevel > 2||admin) {
+				if (currentlevel > 3||admin) {
 					boost = true;
 					boostFrames = 900;
 					player.speedBoost = 1.5;

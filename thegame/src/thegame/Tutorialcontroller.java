@@ -17,12 +17,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.util.Duration;
@@ -540,6 +542,16 @@ public class Tutorialcontroller extends Main{
 							
 							player.previous = player.current;
 							player.current = candidate;
+							if (player.current==null)break;
+							if (!(player.current.getEffect() instanceof DropShadow)) {
+								for (Node n : arenaPane.getChildren()) {
+									if (n instanceof Enemy e)
+										e.setEffect(null);
+								}
+								DropShadow ds=new DropShadow();
+								ds.setColor(Color.ORANGE);
+								ds.setHeight(10); ds.setWidth(10); ds.setSpread(1);
+							player.current.setEffect(ds); /*System.out.println("drop");*/}
 						}
 						break;
 					}
