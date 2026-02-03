@@ -548,12 +548,13 @@ public class Tutorialcontroller extends Main{
 							cmdLine.setText("Error: target is null, try using cd first");
 							break;
 						}
-						
+						mana.setWidth(mana.getWidth()-20);
 						player.current.setScaleX(0.35);
 						player.current.setScaleY(0.35);
 			
 						player.current.damage -= 10;
 						Projectile p = new Projectile("magick", player.current.getLayoutX()- 40, player.current.getLayoutY()-80,player);
+						p.pierced++;
 						arenaPane.getChildren().add(p);
 
 						p.setLayoutX(player.getLayoutX()+30);

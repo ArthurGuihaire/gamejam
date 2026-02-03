@@ -6,16 +6,14 @@ public class Boss extends Enemy {
 	
 	
 	Boss(){
-		speed = 0.6;
-		defaultSpeed = 0.6;
 		damage=100;
 		health=900;
 
-		speed=0.5;
-		defaultSpeed=0.5;
+		speed=0.7;
+		defaultSpeed=0.7;
 		this.setImage(new Image(getClass().getResource("/images/windows.png").toExternalForm()));
-		this.setScaleX(2);
-		this.setScaleY(2);
+		this.setScaleX(2.4);
+		this.setScaleY(2.4);
 	}
 
 }

@@ -20,13 +20,19 @@ public class Cutscenecontroller extends Main {
 	
 	@FXML
 	public void initialize() {
+		TranslateTransition ohno=new TranslateTransition(Duration.seconds(0.3),windows);
+		ohno.setOnFinished((event)->{
+			Sounds bob=new Sounds();
+			bob.playSound(13);
+		});
+		
 		TranslateTransition ts=new TranslateTransition(Duration.seconds(2.8), windows);
 		ts.setByX(-220);
-		TranslateTransition runaway=new TranslateTransition(Duration.seconds(3.5), windows);
-		runaway.setByX(3500);
+		TranslateTransition runaway=new TranslateTransition(Duration.seconds(3.3), windows);
+		runaway.setByX(3300);
 
-		TranslateTransition comelinux=new TranslateTransition(Duration.seconds(3.5), archlinux);
-		comelinux.setByX(3500);
+		TranslateTransition comelinux=new TranslateTransition(Duration.seconds(3.3), archlinux);
+		comelinux.setByX(3300);
 		runaway.setOnFinished((event)->{
 
 			FXMLLoader newscene=new FXMLLoader(Main.class.getResource("/tutorial.fxml"));
@@ -47,7 +53,7 @@ public class Cutscenecontroller extends Main {
 			comelinux.play();
 			
 		});
-
+		ohno.play();
 		ts.play();
 	}
 }

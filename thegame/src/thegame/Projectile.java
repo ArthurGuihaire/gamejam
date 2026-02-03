@@ -83,6 +83,7 @@ public class Projectile extends ImageView {
 			
 			for (Node n : arenaPane.getChildren()) {
 				if (n instanceof Enemy emy) {
+					if (emy instanceof Boss) continue;
 					double dx = n.getLayoutX() - this.getLayoutX();
 					double dy = n.getLayoutY() - this.getLayoutY();
 					

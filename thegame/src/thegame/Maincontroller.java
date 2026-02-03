@@ -189,7 +189,7 @@ public class Maincontroller extends Main{
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
 		    		generateEnemies();
-		    		if (currentlevel==8) {
+		    		if (currentlevel==2) {
 			    		arenaPane.getChildren().add(new Boss());
 			    		enemiesleft++;
 			    	}
@@ -507,10 +507,20 @@ public class Maincontroller extends Main{
 					cmdLine.setText("Error: target is null, try using cd first");
 					break;
 				}
-				
+				if (mana.getWidth()<20) {
+					cmdLine.setText("Error: not enough mana");
+				}
+
+				mana.setWidth(mana.getWidth()-20);
+				if (!(player.current instanceof Boss)) {
 				player.current.setScaleX(0.35);
 				player.current.setScaleY(0.35);
-	
+				}
+				else if (player.current instanceof Boss) {
+					player.current.setScaleX(1.5);
+					player.current.setScaleY(1.5);
+				}
+				
 				player.current.damage -= 10;
 				Projectile p = new Projectile("magick", player.current.getLayoutX()- 110, player.current.getLayoutY()-80,player);
 				arenaPane.getChildren().add(p);
@@ -574,9 +584,10 @@ public class Maincontroller extends Main{
 			case ("java"): {
 				if (currentlevel > 2||admin) {
 					boost = true;
-					boostFrames = 1000;
+					boostFrames = 900;
 					player.speedBoost = 1.5;
-					manaRegen = 0.16;
+					manaRegen = 0.18;
+					soundPlayer.playSound(14);
 				}
 
 				break;

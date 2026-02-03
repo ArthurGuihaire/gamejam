@@ -20,10 +20,12 @@ public class Sounds {
 		this.load("/sounds/remove.wav");
 		this.load("/sounds/chmod.wav");
 		this.load("/sounds/sound-file-test.wav");
+		this.load("/sounds/oh-no.wav");
+		this.load("/sounds/java.wav");
 		
 	}
 	// just cuz we kinda recorded our sounds loud
-	private static final double BASE_SOUND=0.4;
+	private static final double BASE_SOUND=0.35;
 	static double counter=0;
 	
 	
@@ -44,7 +46,7 @@ public class Sounds {
 //		System.out.println(toplay.getPriority());
 //		System.out.println();
 
-		if (index!=1) {
+		if (index!=1&&index<=11) {
 		double randomrate=Math.random()*0.25+0.88;	
 			
 		toplay.play(BASE_SOUND, 0, randomrate, 1, 0);
