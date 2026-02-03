@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="arenaPane" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="arenaPane" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle fx:id="topblack" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="-11.0" stroke="BLACK" strokeType="INSIDE" width="1823.0" />
       <Rectangle fx:id="arena" arcHeight="5.0" arcWidth="5.0" fill="#00ffe733" height="725.0" layoutX="100.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" />
@@ -23,7 +23,7 @@
       <TextField fx:id="cmdLine" layoutX="673.0" layoutY="793.0" prefHeight="84.0" prefWidth="455.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="79.0" layoutX="151.0" layoutY="794.0" stroke="BLACK" strokeType="INSIDE" width="457.0" />
       <Rectangle fx:id="mana" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ff" height="75.0" layoutX="153.0" layoutY="796.0" stroke="TRANSPARENT" strokeType="INSIDE" width="454.0" />
-      <Text fx:id="txtCompleted" layoutX="541.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! This is the tutorial. Press the &quot;start&quot; button to start." textAlignment="CENTER" wrappingWidth="730.8034057617188">
+      <Text fx:id="txtCompleted" layoutX="541.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! This is the tutorial. Press the &quot;start&quot; button to start." textAlignment="CENTER" wrappingWidth="755.8034057617188">
          <font>
             <Font size="50.0" />
          </font>
