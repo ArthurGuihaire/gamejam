@@ -42,7 +42,7 @@ public class Maincontroller extends Main{
 	@FXML
 	Rectangle mana;
 	
-	private long long_value = 0;
+	private long first_value = -1;
 		
 	final static int maxMana = 454;
 	private double manaRegen = 0.07;
@@ -130,8 +130,6 @@ public class Maincontroller extends Main{
 
     	initPlayer();		
 		setupKeyPressHandlers();
-		
-		txtTimer.setText(long_value + "");
 		
     	gameLoop();
     }
@@ -256,7 +254,11 @@ public class Maincontroller extends Main{
     			public void handle(long arg0) {
     				update();
     				update();
-    				long_value += arg0;
+    				if (first_value == -1) {
+    					first_value = arg0;
+    				}
+    				
+    				txtTimer.setText((arg0 - first_value) / 1_000_000_000.0 + "");
     			}
     		};
     	}else
@@ -264,7 +266,11 @@ public class Maincontroller extends Main{
 			@Override
 			public void handle(long args) {
 		        update();
-		        long_value += args;
+				if (first_value == -1) {
+					first_value = args;
+				}
+				
+				txtTimer.setText((args - first_value) / 1_000_000_000.0 + "");
 			}
 		}; 
 		gameloop.start();
@@ -314,8 +320,6 @@ public class Maincontroller extends Main{
     			e.moveTowards(player);
     		}
     	}
-    	
-    	txtTimer.setText(long_value / 1_000_000_000.0 + "");
 
     	//System.out.println(keyInput);
     	
