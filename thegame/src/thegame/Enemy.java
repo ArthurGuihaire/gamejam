@@ -1,10 +1,7 @@
 package thegame;
 
-import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-
 public class Enemy extends ImageView {
 	int health = 100;
 	int damage = 30;

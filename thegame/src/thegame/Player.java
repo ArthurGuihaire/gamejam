@@ -1,7 +1,6 @@
 package thegame;
 
 import javafx.scene.image.*;
-import javafx.scene.layout.*;
 
 public class Player extends ImageView {
 	int health;

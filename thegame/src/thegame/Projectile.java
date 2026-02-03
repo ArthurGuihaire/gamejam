@@ -1,7 +1,5 @@
 package thegame;
 
-import java.util.LinkedList;
-
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
@@ -43,7 +41,7 @@ public class Projectile extends ImageView {
 			rt.setInterpolator(Interpolator.LINEAR);
 			rt.setByAngle(360*20);
 			rt.play();
-			System.out.println("SHREDDING");
+			//System.out.println("SHREDDING");
 			
 			projectilespeed=0.7;
 			maxtime=240;
@@ -53,7 +51,7 @@ public class Projectile extends ImageView {
 		case "magick":
 			this.type="magick";
 			this.setImage(new Image(getClass().getResource("/images/fireball.png").toExternalForm()));
-			System.out.println("MAGICK");
+			//System.out.println("MAGICK");
 			
 			Maincontroller.soundPlayer.playSound(5);
 			
@@ -69,7 +67,7 @@ public class Projectile extends ImageView {
 			Maincontroller.soundPlayer.playSound(6);
 			this.setScaleX(1);
 			this.setScaleY(1);
-			System.out.println("TREE");
+			//System.out.println("TREE");
 			maxpierce=1;
 			maxtime=300;
 			break;
@@ -81,10 +79,11 @@ public class Projectile extends ImageView {
 
 	public void treeDie(Pane arenaPane) {
 		if (type.equals("tree")) {
-			System.out.println("TREE DIE");
+			//System.out.println("TREE DIE");
 			
 			for (Node n : arenaPane.getChildren()) {
 				if (n instanceof Enemy emy) {
+					if (emy instanceof Boss) continue;
 					double dx = n.getLayoutX() - this.getLayoutX();
 					double dy = n.getLayoutY() - this.getLayoutY();
 					

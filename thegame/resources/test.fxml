@@ -9,8 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="arenaPane" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="arenaPane" prefHeight="900.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Rectangle fx:id="blurfixer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="900.0" layoutY="13.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1878.0" />
       <Rectangle fx:id="topblack" arcHeight="5.0" arcWidth="5.0" height="13.0" layoutX="-11.0" stroke="BLACK" strokeType="INSIDE" width="1823.0" />
       <Rectangle fx:id="arena" arcHeight="5.0" arcWidth="5.0" fill="#00ffe733" height="725.0" layoutX="100.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="1600.0" />
       <Button fx:id="btnButton" layoutX="1377.0" layoutY="814.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="63.0" text="start" />
@@ -24,6 +25,11 @@
       <Text fx:id="txtCompleted" layoutX="696.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL COMPLETED" wrappingWidth="420.80340576171875">
          <font>
             <Font size="50.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtNewCommand" layoutX="696.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New command:" wrappingWidth="537.8034057617188">
+         <font>
+            <Font size="40.0" />
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="79.0" layoutX="151.0" layoutY="794.0" stroke="BLACK" strokeType="INSIDE" width="457.0" />

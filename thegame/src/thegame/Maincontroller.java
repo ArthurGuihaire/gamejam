@@ -2,34 +2,29 @@ package thegame;
 
 import java.util.ArrayList;
 
-import thegame.Main;
 import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
-import java.nio.channels.Pipe.SourceChannel;
-import java.util.*;
-import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 
 public class Maincontroller extends Main{
 	@FXML
-	Rectangle arena;
+	Rectangle arena,blurfixer;
 	@FXML
 	Pane arenaPane;
 	@FXML
@@ -42,7 +37,7 @@ public class Maincontroller extends Main{
 	TextField cmdLine;
 	
 	@FXML
-	Text txtCompleted,txtLevel;
+	Text txtCompleted,txtLevel,txtNewCommand;
 	
 	@FXML
 	Rectangle mana;
@@ -71,6 +66,7 @@ public class Maincontroller extends Main{
 	private boolean boost = false;
 	private boolean freeze=false;
 	private boolean admin=false;
+	private boolean blurbool=false;
 	
     ArrayList<String> keyInput = new ArrayList<>();
     
@@ -80,6 +76,9 @@ public class Maincontroller extends Main{
     	arenaTop=(int)arena.getLayoutY();
     	cmdLine.setDisable(true);
     	txtCompleted.setVisible(false);
+    	txtNewCommand.setVisible(false);
+    	txtCompleted.toFront();
+    	txtNewCommand.toFront();
     	
     	mana.setWidth(maxMana);
 
@@ -138,7 +137,6 @@ public class Maincontroller extends Main{
 
     	player.setScaleX(0.4);
     	player.setScaleY(0.4);
-    	
     	arenaPane.getChildren().add(player);
     	//player.setTranslateX(arenaLeft+1000);
     	//player.setTranslateY(arenaTop+900);
@@ -184,21 +182,36 @@ public class Maincontroller extends Main{
 	    		}
 	    	}
 	
-	    	txtCompleted.setVisible(true);    	clearProjectiles();
+	    	txtCompleted.setVisible(true);
+	    	txtNewCommand.setVisible(true);
+	    	decideNewCommand();
+	    	clearProjectiles();
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
 	    	
-	    	if (currentlevel > 8) {
+	    	if (currentlevel > 10) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
+	    		TranslateTransition win=new TranslateTransition(Duration.seconds(1.2),player);
+	    		win.setOnFinished((event)->{
+	    		soundPlayer.playSound(12);});
+	    		win.play();
 	    	}
 	    	else {
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
+			    	txtNewCommand.setVisible(false);
+			    	player.setLayoutX(arena.getLayoutX() + 1000);
+			    	player.setLayoutY(arena.getLayoutY() + 400);
 		    		generateEnemies();
-		    		if (currentlevel==8) {
-			    		arenaPane.getChildren().add(new Boss());
+		    		if (currentlevel==10) {
+		    			Boss bee=new Boss();
+		    			bee.setLayoutX(arenaLeft);
+		    			bee.setLayoutY(arenaTop);
+			    		arenaPane.getChildren().add(bee);
 			    		enemiesleft++;
 			    	}
+
+		    		crosshair.toFront();
 		    		gameloop.start();
 		    		txtLevel.setText("Level "+currentlevel);
 		    	});
@@ -209,16 +222,28 @@ public class Maincontroller extends Main{
     
     private void generateEnemies() {
     int pos=15;
-	for (int i=0;i<enemiesleft;i++) {
-
-		Enemy e=new Enemy();    			
-		e.setLayoutY(e.getLayoutY() + Math.random() * 500);
-		arenaPane.getChildren().add(e);
-		e.setLayoutX(e.getLayoutX()+pos);
-		//System.out.println("newer enemy");
-		pos+=30;
-	}
+		for (int i=0;i<enemiesleft;i++) {
+			Enemy e=new Enemy();    			
+			e.setLayoutY(e.getLayoutY() + Math.random() * 500);
+			arenaPane.getChildren().add(e);
+			e.setLayoutX(e.getLayoutX()+pos);
+			//System.out.println("newer enemy");
+			pos+=30;
+		}
     }
+    
+    private void decideNewCommand() {
+    	switch (currentlevel) {
+    	case 2: txtNewCommand.setText("New command: tree");break;
+    	case 3: txtNewCommand.setText("New command: shred"); break;
+    	case 4: txtNewCommand.setText("New command: java"); break;
+    	case 5: txtNewCommand.setText("New command: shred -f"); break;
+    	case 6: txtNewCommand.setText("New command: rm -rf"); break;
+    	default: txtNewCommand.setText("");
+    	}
+    }
+    
+    
     private void gameLoop() { 
     	if(Main.linuxmode) {
     		gameloop=new AnimationTimer() {
@@ -240,8 +265,15 @@ public class Maincontroller extends Main{
     }
     
     private void update() {
-    	mainScene=this.btnButton.getScene();
     	removeDeadPeople();
+    	if (blurbool==true) {
+    		blurfixer.setLayoutX(blurfixer.getLayoutX()+1);
+    		blurbool=false;
+    	}else {
+    		blurfixer.setLayoutX(blurfixer.getLayoutX()-1);
+    		blurbool=true;
+    	}
+    	
     	
     	if (boost && boostFrames-- <= 0) {
     		boost = false;
@@ -337,6 +369,8 @@ public class Maincontroller extends Main{
 							p.treeDie(arenaPane);
 						else {
 							if (e instanceof Boss b) {
+								if (player.current!=null)
+								player.current.setEffect(null);
 								b.health-=100; if (b.health<=0) kill(b);
 								kill(p);
 							}
@@ -443,18 +477,18 @@ public class Maincontroller extends Main{
 		String[] sections = command.split(" ");
 		switch (sections[0].toLowerCase().trim()) {
 			case ("rm"): {
-				if (player.current == null) return;
-				if (sections.length > 1 && sections[1].equals("-rf") &&( currentlevel > 3||admin)) {
+				if (player.current == null) {cmdLine.setText("Error: target is null, try using cd first");return;}
+				if (sections.length > 1 && sections[1].equals("-rf") &&( currentlevel > 4||admin)) {
 					if (this.mana.getWidth() < maxMana * 0.95) {
 						cmdLine.setText("Error: not enough mana");
 						break;
 					}
 					int sound=(int)(Math.random()*2+7);
-					Maincontroller.soundPlayer.playSound(sound);
+					//System.out.println("REMOVE RECURSIVE FORCE");
 					
 					soundPlayer.playSound(sound);
 					for (Node n : arenaPane.getChildren()) {
-						if (n instanceof Boss b) continue;
+						if (n instanceof Boss) continue;
 						if (n instanceof Enemy e) {
 							ScaleTransition s = new ScaleTransition(Duration.seconds(1.0), e);
 							s.setToX(0.0);
@@ -469,6 +503,8 @@ public class Maincontroller extends Main{
 				}
 				else {
 					player.current.health -= 100;
+					player.current.setEffect(null);
+					//System.out.println("REMOVE");
 					soundPlayer.playSound(10);
 					if (player.current.health <= 0) {
 						kill(player.current);
@@ -504,6 +540,15 @@ public class Maincontroller extends Main{
 					
 					player.previous = player.current;
 					player.current = candidate;
+					if (!(player.current.getEffect() instanceof DropShadow)) {
+						for (Node n : arenaPane.getChildren()) {
+							if (n instanceof Enemy e)
+								e.setEffect(null);
+						}
+						DropShadow ds=new DropShadow();
+						ds.setColor(Color.ORANGE);
+						ds.setHeight(10); ds.setWidth(10); ds.setSpread(1);
+					player.current.setEffect(ds); /*System.out.println("drop");*/}
 				}
 				break;
 			}
@@ -512,10 +557,20 @@ public class Maincontroller extends Main{
 					cmdLine.setText("Error: target is null, try using cd first");
 					break;
 				}
-				
+				if (mana.getWidth()<20) {
+					cmdLine.setText("Error: not enough mana");
+				}
+
+				mana.setWidth(mana.getWidth()-20);
+				if (!(player.current instanceof Boss)) {
 				player.current.setScaleX(0.35);
 				player.current.setScaleY(0.35);
-	
+				}
+				else if (player.current instanceof Boss) {
+					player.current.setScaleX(1.5);
+					player.current.setScaleY(1.5);
+				}
+				
 				player.current.damage -= 10;
 				Projectile p = new Projectile("magick", player.current.getLayoutX()- 110, player.current.getLayoutY()-80,player);
 				arenaPane.getChildren().add(p);
@@ -525,11 +580,13 @@ public class Maincontroller extends Main{
 				break;	
 			}
 			case ("shred"): {
-				if (currentlevel > 1||admin) {
+				if (currentlevel > 2||admin) {
 					if (mana.getWidth() > 0.32 * maxMana) {
 						if (player.current != null) {
 							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
-							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999;
+							if (sections.length>1&&sections[1].equals("-f")) {
+								if (mana.getWidth()<0.98*maxMana) {cmdLine.setText("Error: not enough mana"); break;}
+								p.pierced=-999;
 							soundPlayer.playSound(9);
 							mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}else {
 								int sound=(int)(Math.random()*3+3-1);
@@ -562,6 +619,7 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("tree"): {
+				if (currentlevel <=1&&!admin)break;
 				if (mana.getWidth() < 0.12 * maxMana) {
 					cmdLine.setText("Error: not enough mana");
 					break;
@@ -577,11 +635,12 @@ public class Maincontroller extends Main{
 				break;
 			}
 			case ("java"): {
-				if (currentlevel > 2||admin) {
+				if (currentlevel > 3||admin) {
 					boost = true;
-					boostFrames = 1000;
+					boostFrames = 900;
 					player.speedBoost = 1.5;
-					manaRegen = 0.16;
+					manaRegen = 0.18;
+					soundPlayer.playSound(14);
 				}
 
 				break;
@@ -598,8 +657,8 @@ public class Maincontroller extends Main{
 			case "ice":
 			case ("freeze"):{
 				this.freeze=!this.freeze;
-				break;
 			}
+			break;
 			case ("null"):{
 				mana.setWidth(maxMana);
 				
@@ -611,7 +670,6 @@ public class Maincontroller extends Main{
 	}
 	
 	public void updateProjectileTimers() {
-		ArrayList<Projectile> al=new ArrayList<Projectile>();
 		for (Node projectile : arenaPane.getChildren()) {
 			if (projectile instanceof Projectile p){
 			p.timeexisting+=1;

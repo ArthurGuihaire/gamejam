@@ -1,6 +1,5 @@
 package thegame;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
@@ -18,12 +17,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.util.Duration;
@@ -67,11 +68,8 @@ public class Tutorialcontroller extends Main{
 	int ymove=0;
 	
 	private int tutorialcounter=0;
-	private int tutoriallimit=1;
 	private boolean spawnenemies=false;
 	private boolean cdflag=false;
-	private boolean rmflag=false;
-	private boolean magickflag=false;
 	private boolean moveflag=false;
 	private String prevcmd="";
 	private String currcmd="";
@@ -83,7 +81,7 @@ public class Tutorialcontroller extends Main{
     
 
 		public void initialize() {
-			System.out.println("in tutorial");
+			//System.out.println("in tutorial");
 			arenaLeft=(int)arena.getLayoutX();
 	    	arenaTop=(int)arena.getLayoutY();
 	    	cmdLine.setDisable(true);
@@ -192,7 +190,7 @@ public class Tutorialcontroller extends Main{
 					
 						Parent newp=newscene.load();
 						s.setRoot(newp);
-					
+					//System.out.println("end of tutorial");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -340,7 +338,7 @@ public class Tutorialcontroller extends Main{
 				e.setLayoutY(e.getLayoutY() + Math.random() * 500);
 				arenaPane.getChildren().add(e);
 				e.setLayoutX(e.getLayoutX()+pos);
-				System.out.println("newer enemy");
+				//System.out.println("newer enemy");
 				pos+=30;
 			}
 		    }
@@ -428,18 +426,16 @@ public class Tutorialcontroller extends Main{
 		    
 		    private void playerDie() {
 		    	ObservableList<Node> nodes = arenaPane.getChildren();
-		    	int i = 0;
 		    	for (Node n : nodes) {
 		    		if (n instanceof Enemy e) {
 		    			e.setDead(true);
 		    		}
-		    		i++;
 		    	}
 		    	
 		    	Platform.runLater(() -> nodes.remove(player));
 		    	gameloop.stop();
 		    	btnButton.fire();
-		    	System.out.println("DIEEE");
+		    	//System.out.println("DIEEE");
 		    }
 		    
 		    private void setupKeyPressHandlers() {
@@ -493,7 +489,7 @@ public class Tutorialcontroller extends Main{
 				currcmd=sections[0].toLowerCase().trim();
 				switch (sections[0].toLowerCase().trim()) {
 					case ("rm"): {
-						if (player.current == null) return;
+						if (player.current == null) {/*cmdLine.setText("Error: target is null, try using cd first");*/return;}
 						if (sections.length > 1 && sections[1].equals("-rf") && this.mana.getWidth() >= maxMana * 0.98) {
 							for (Node n : arenaPane.getChildren()) {
 								if (n instanceof Enemy e) {
@@ -510,6 +506,8 @@ public class Tutorialcontroller extends Main{
 						}
 						else {
 							player.current.health -= 100;
+							//System.out.println("REMOVE");
+							soundPlayer.playSound(10);
 							if (player.current.health <= 0) {
 								kill(player.current);
 								player.current = null;
@@ -544,6 +542,16 @@ public class Tutorialcontroller extends Main{
 							
 							player.previous = player.current;
 							player.current = candidate;
+							if (player.current==null)break;
+							if (!(player.current.getEffect() instanceof DropShadow)) {
+								for (Node n : arenaPane.getChildren()) {
+									if (n instanceof Enemy e)
+										e.setEffect(null);
+								}
+								DropShadow ds=new DropShadow();
+								ds.setColor(Color.ORANGE);
+								ds.setHeight(10); ds.setWidth(10); ds.setSpread(1);
+							player.current.setEffect(ds); /*System.out.println("drop");*/}
 						}
 						break;
 					}
@@ -552,12 +560,13 @@ public class Tutorialcontroller extends Main{
 							cmdLine.setText("Error: target is null, try using cd first");
 							break;
 						}
-						
+						mana.setWidth(mana.getWidth()-20);
 						player.current.setScaleX(0.35);
 						player.current.setScaleY(0.35);
 			
 						player.current.damage -= 10;
 						Projectile p = new Projectile("magick", player.current.getLayoutX()- 40, player.current.getLayoutY()-80,player);
+						p.pierced++;
 						arenaPane.getChildren().add(p);
 
 						p.setLayoutX(player.getLayoutX()+30);
@@ -572,6 +581,7 @@ public class Tutorialcontroller extends Main{
 								arenaPane.getChildren().add(p);
 								p.setLayoutX(player.getLayoutX()-30);
 								p.setLayoutY(player.getLayoutY()+15);
+								soundPlayer.playSound(3);
 							}
 							else {
 								Projectile p = new Projectile("shred", crosshair.getLayoutX() - 240, crosshair.getLayoutY() - 330, player);
@@ -579,6 +589,7 @@ public class Tutorialcontroller extends Main{
 								p.setLayoutX(player.getLayoutX()-30);
 								p.setLayoutY(player.getLayoutY()+15);
 								arenaPane.getChildren().add(p);
+								soundPlayer.playSound(3);
 							}
 							
 							
@@ -612,7 +623,6 @@ public class Tutorialcontroller extends Main{
 			}
 			
 			public void updateProjectileTimers() {
-				ArrayList<Projectile> al=new ArrayList<Projectile>();
 				for (Node projectile : arenaPane.getChildren()) {
 					if (projectile instanceof Projectile p){
 					p.timeexisting+=1;
