@@ -77,6 +77,8 @@ public class Maincontroller extends Main{
     	cmdLine.setDisable(true);
     	txtCompleted.setVisible(false);
     	txtNewCommand.setVisible(false);
+    	txtCompleted.toFront();
+    	txtNewCommand.toFront();
     	
     	mana.setWidth(maxMana);
 
@@ -135,7 +137,6 @@ public class Maincontroller extends Main{
 
     	player.setScaleX(0.4);
     	player.setScaleY(0.4);
-    	
     	arenaPane.getChildren().add(player);
     	//player.setTranslateX(arenaLeft+1000);
     	//player.setTranslateY(arenaTop+900);
@@ -188,16 +189,21 @@ public class Maincontroller extends Main{
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
 	    	
-	    	if (currentlevel > 9) {
+	    	if (currentlevel > 10) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
-	    		soundPlayer.playSound(12);
+	    		TranslateTransition win=new TranslateTransition(Duration.seconds(1.2),player);
+	    		win.setOnFinished((event)->{
+	    		soundPlayer.playSound(12);});
+	    		win.play();
 	    	}
 	    	else {
 		    	tt.setOnFinished((event)->{
 		    		txtCompleted.setVisible(false);
 			    	txtNewCommand.setVisible(false);
+			    	player.setLayoutX(arena.getLayoutX() + 1000);
+			    	player.setLayoutY(arena.getLayoutY() + 400);
 		    		generateEnemies();
-		    		if (currentlevel==2) {
+		    		if (currentlevel==10) {
 		    			Boss bee=new Boss();
 		    			bee.setLayoutX(arenaLeft);
 		    			bee.setLayoutY(arenaTop);
@@ -363,6 +369,8 @@ public class Maincontroller extends Main{
 							p.treeDie(arenaPane);
 						else {
 							if (e instanceof Boss b) {
+								if (player.current!=null)
+								player.current.setEffect(null);
 								b.health-=100; if (b.health<=0) kill(b);
 								kill(p);
 							}
@@ -495,6 +503,7 @@ public class Maincontroller extends Main{
 				}
 				else {
 					player.current.health -= 100;
+					player.current.setEffect(null);
 					//System.out.println("REMOVE");
 					soundPlayer.playSound(10);
 					if (player.current.health <= 0) {
@@ -575,7 +584,9 @@ public class Maincontroller extends Main{
 					if (mana.getWidth() > 0.32 * maxMana) {
 						if (player.current != null) {
 							Projectile p = new Projectile("shred", player.current.getLayoutX() - 130, player.current.getLayoutY() - 200, player);
-							if (sections.length>1&&sections[1].equals("-f")&&mana.getWidth()>0.98*maxMana) {p.pierced=-999;
+							if (sections.length>1&&sections[1].equals("-f")) {
+								if (mana.getWidth()<0.98*maxMana) {cmdLine.setText("Error: not enough mana"); break;}
+								p.pierced=-999;
 							soundPlayer.playSound(9);
 							mana.setWidth(mana.getWidth()-(0.98-0.32)*maxMana);}else {
 								int sound=(int)(Math.random()*3+3-1);
