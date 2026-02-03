@@ -12,7 +12,6 @@ public class MainMenucontroller extends Main {
 	@FXML
 	Ellipse circleBelly,linuxmode;
 	
-	
 	@FXML
 	public void initialize() {
 		btnStart.setOnAction((event)->{
@@ -27,7 +26,4 @@ public class MainMenucontroller extends Main {
 	});
 		
 	}
-	
-	
-	
 }
