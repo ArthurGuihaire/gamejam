@@ -442,7 +442,7 @@ public class Maincontroller extends Main{
             	addDirection(code);
                 keyInput.add(code);
             }
-            if (code.equals("CONTROL")) {
+            if (code.equals("SHIFT")) {
             	player.moveMode =false;
             	cmdLine.setDisable(false);
             	cmdLine.requestFocus();
