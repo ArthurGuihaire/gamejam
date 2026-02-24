@@ -69,7 +69,9 @@ public class Maincontroller extends Main{
 	private boolean freeze=false;
 	private boolean admin=false;
 	private boolean blurbool=false;
+	private boolean yowedoingendlessnow=false;
 	
+	private String defaulttxtcompleted="";
     ArrayList<String> keyInput = new ArrayList<>();
     
     @FXML
@@ -93,6 +95,7 @@ public class Maincontroller extends Main{
     		setScene(btnButton.getScene());
     		soundPlayer.playSound(0);
     		btnButton.setDisable(true);
+    		defaulttxtcompleted=txtCompleted.getText();
     	});
     	
     	btnEnemy.setOnAction((event)->{
@@ -190,34 +193,46 @@ public class Maincontroller extends Main{
 	    	clearProjectiles();
 	    	gameloop.stop();
 	    	TranslateTransition tt=new TranslateTransition(Duration.seconds(3),player);
+	    	tt.setOnFinished((event)->{
+	    		txtCompleted.setVisible(false);
+		    	txtNewCommand.setVisible(false);
+		    	player.setLayoutX(arena.getLayoutX() + 1000);
+		    	player.setLayoutY(arena.getLayoutY() + 400);
+	    		generateEnemies();
+
+	    		crosshair.toFront();
+	    		gameloop.start();
+	    		txtLevel.setText("Level "+currentlevel);
+	    		txtCompleted.setText(defaulttxtcompleted);
+	    		
+	    	});
+
 	    	
-	    	if (currentlevel > 10) {
+	    	if (currentlevel > 10&&yowedoingendlessnow==false) {
 	    		txtCompleted.setText("Congruatulations, you've rescued arch linux by hunting all the linux commands!");
 	    		TranslateTransition win=new TranslateTransition(Duration.seconds(1.2),player);
 	    		win.setOnFinished((event)->{
 	    		soundPlayer.playSound(12);});
 	    		win.play();
-	    	}
-	    	else {
-		    	tt.setOnFinished((event)->{
-		    		txtCompleted.setVisible(false);
-			    	txtNewCommand.setVisible(false);
-			    	player.setLayoutX(arena.getLayoutX() + 1000);
-			    	player.setLayoutY(arena.getLayoutY() + 400);
-		    		generateEnemies();
-		    		if (currentlevel==10) {
-		    			Boss bee=new Boss();
-		    			bee.setLayoutX(arenaLeft);
-		    			bee.setLayoutY(arenaTop);
-			    		arenaPane.getChildren().add(bee);
-			    		enemiesleft++;
-			    	}
+	    		
+	    		btnEnemy.setText("Endless mode?");
+	    		btnEnemy.setOnAction((event)->{
+	    		yowedoingendlessnow=true;
+	    		tt.playFrom(Duration.seconds(2.4));
+	    		
+		    		// resetting btnEnemy's function
+		    		btnEnemy.setOnAction((bvent)->{
+		        		Enemy en=new Enemy();
+		        		arenaPane.getChildren().add(en);
+		        		crosshair.toFront();
+		        		
+		        	});
 
-		    		crosshair.toFront();
-		    		gameloop.start();
-		    		txtLevel.setText("Level "+currentlevel);
-		    	});
-		    	tt.playFromStart();
+	        		btnEnemy.setText("New enemy");
+	    		});
+	    		
+	    	}
+	    	else {		    	tt.playFromStart();
 	    	}
 	    }
     }
@@ -232,6 +247,15 @@ public class Maincontroller extends Main{
 			//System.out.println("newer enemy");
 			pos+=30;
 		}
+
+		if (currentlevel%10==0) {
+			for (int i=0;i<(currentlevel/10);i++) {
+			Boss bee=new Boss();
+			bee.setLayoutX(arenaLeft);
+			bee.setLayoutY(arenaTop);
+    		arenaPane.getChildren().add(bee);
+    		enemiesleft++;}
+    	}
     }
     
     private void decideNewCommand() {
@@ -552,6 +576,7 @@ public class Maincontroller extends Main{
 					
 					player.previous = player.current;
 					player.current = candidate;
+					if (player.current==null) cmdLine.setText("Error: no targets available"); else
 					if (!(player.current.getEffect() instanceof DropShadow)) {
 						for (Node n : arenaPane.getChildren()) {
 							if (n instanceof Enemy e)
