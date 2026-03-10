@@ -252,7 +252,7 @@ public class Maincontroller extends Main{
 			for (int i=0;i<(currentlevel/10);i++) {
 			Boss bee=new Boss();
 			bee.setLayoutX(arenaLeft);
-			bee.setLayoutY(arenaTop);
+			bee.setLayoutY(arenaTop+i*20);
     		arenaPane.getChildren().add(bee);
     		enemiesleft++;}
     	}
